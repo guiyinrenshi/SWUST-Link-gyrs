@@ -34,13 +34,16 @@ class DuifeneCoursePage extends StatelessWidget {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: Color(int.parse(course.backgroundColor.replaceAll("#", "0xFF"))),
+                  color: Color((course.courseName.hashCode) | 0xFF000000),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Center(
-                  child: Text(
-                    course.courseName[0],
-                    style: TextStyle(color: Color(int.parse(course.color.replaceAll("#", "0xFF")))),
+                alignment: Alignment.center,
+                child: Text(
+                  course.courseName[0], // 使用文字的首字母作为图标
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24,
                   ),
                 ),
               ),

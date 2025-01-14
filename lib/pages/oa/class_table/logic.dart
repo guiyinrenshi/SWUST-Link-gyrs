@@ -87,16 +87,6 @@ class ClassTableLogic extends GetxController {
         .toList();
   }
 
-  Color _generateRandomColor() {
-    final random = Random();
-    return Color.fromRGBO(
-      random.nextInt(256),
-      random.nextInt(256),
-      random.nextInt(256),
-      1.0,
-    );
-  }
-
   Color getCourseColor(String className) {
     if (!state.courseColors.containsKey(className)) {
       final index = state.courseColors.length % state.predefinedColors.length;
@@ -158,7 +148,14 @@ class ClassTableLogic extends GetxController {
 
     // 根据指定周数计算对应周的周一日期
     final daysToAdd = (week - 1) * 7;
-    return firstMonday.add(Duration(days: daysToAdd));
+    final targetDate = firstMonday.add(Duration(days: daysToAdd));
+
+    // 如果计算结果早于第一天，返回第一天的周一
+    if (targetDate.isBefore(firstMonday)) {
+      return firstMonday;
+    }
+
+    return targetDate;
   }
 
 // 设置当前周
