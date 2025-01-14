@@ -1,0 +1,96 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import 'logic.dart';
+import 'state.dart';
+
+class ClassScorePage extends StatelessWidget {
+  ClassScorePage({Key? key}) : super(key: key);
+
+  final ClassScoreLogic logic = Get.put(ClassScoreLogic());
+  final ClassScoreState state = Get.find<ClassScoreLogic>().state;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Row(children: [
+          Expanded(child: Text("成绩查询"),),
+          IconButton(onPressed: logic.getScore, icon: Icon(Icons.refresh))
+        ],),
+      ),
+      body: Column(
+        children: [
+          Obx(() => Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              '当前学期平均绩点: ${state.averageGPA.value.toStringAsFixed(3)}',
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          )),
+          Obx(() {
+            final semesters = logic.state.scores
+                .map((course) => course.semester)
+                .toSet()
+                .toList();
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: DropdownButton<String>(
+                value: state.selectedSemester.value.isNotEmpty
+                    ? state.selectedSemester.value
+                    : null,
+                hint: Text("选择学期"),
+                items: semesters
+                    .map((semester) => DropdownMenuItem(
+                          value: semester,
+                          child: Text(semester),
+                        ))
+                    .toList(),
+                onChanged: (value) {
+                  if (value != null) {
+                    logic.updateSelectedSemester(value);
+                  }
+                },
+                isExpanded: true,
+              ),
+            );
+          }),
+          Expanded(
+            child: Obx(() {
+              return ListView.builder(
+                itemCount: state.displayList.length,
+                itemBuilder: (context, index) {
+                  final course = state.displayList[index];
+
+                  // 动态生成随机背景颜色
+                  final randomColor =
+                      Color((course.name.hashCode) | 0xFF000000);
+
+                  return ListTile(
+                    leading: CircleAvatar(
+                      backgroundColor: randomColor,
+                      child: Text(
+                        course.name[0],
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    title: Text(course.name),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("${course.courseNature} - ${course.credit} 学分"),
+                        if (course.retakeScore.isNotEmpty) // 检查补考数据是否存在
+                          Text("补考: ${course.retakeScore}"),
+                      ],
+                    ),
+                    trailing: Text("正考: ${course.examScore}"),
+                  );
+                },
+              );
+            }),
+          ),
+        ],
+      ),
+    );
+  }
+}
