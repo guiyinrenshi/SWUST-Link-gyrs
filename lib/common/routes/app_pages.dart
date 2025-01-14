@@ -7,13 +7,12 @@ import 'package:swust_link/pages/app/oa/class_table/view.dart';
 import 'package:swust_link/pages/common/coming_soon/view.dart';
 import 'package:swust_link/pages/common/markdown_temple/view.dart';
 
+import 'package:swust_link/pages/app/tool_app/variable_name/view.dart';
 
 import 'package:swust_link/pages/main/view.dart';
 import 'package:swust_link/pages/mine/about/view.dart';
 import 'package:swust_link/pages/mine/login/view.dart';
 import 'package:swust_link/pages/mine/params_setting/view.dart';
-
-
 
 part 'app_routes.dart';
 
@@ -28,6 +27,7 @@ class AppPages {
       GetPage(name: AppRoutes.DUIFENE_PAPER, page: () => DuifenePaperPage()),
       GetPage(name: AppRoutes.CLASS_TABLE, page: () => ClassTablePage()),
       GetPage(name: AppRoutes.PARAMS_SETTING, page: () => Params_settingPage()),
+      GetPage(name: AppRoutes.VARIABLE_NAME, page: () => VariableNamePage()),
       GetPage(
           name: AppRoutes.PRIVACY_AND_PROTOCOL,
           page: () => MarkdownTemplePage(
