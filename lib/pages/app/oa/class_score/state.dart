@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:swust_link/common/entity/score.dart';
+import 'package:swust_link/common/entity/oa/score.dart';
 import 'package:swust_link/spider/class_score.dart';
 
 class ClassScoreState {

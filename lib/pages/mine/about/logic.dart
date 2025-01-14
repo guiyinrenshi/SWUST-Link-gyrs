@@ -38,19 +38,8 @@ class AboutLogic extends GetxController {
     if (await canLaunchUrl(Uri.parse(url))) {
       await launchUrl(Uri.parse(url));
     } else {
-      Get.dialog(
-        AlertDialog(
-          title: Text("打开QQ失败"),
-          content: Text("请确保你的QQ已经安装!" ),
-          actions: [
-            TextButton(
-                onPressed: () {
-                  Get.back();
-                },
-                child: Text("取消")),
-          ],
-        ),
-      );
+      Get.snackbar("错误", "未检测到 QQ 应用，请安装后重试。");
+
     }
   }
 }

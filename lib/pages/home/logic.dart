@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:swust_link/common/entity/oa/course.dart';
 import 'package:swust_link/pages/home/state.dart';
 import 'package:swust_link/spider/class_table.dart';
 import 'package:http/http.dart' as http;

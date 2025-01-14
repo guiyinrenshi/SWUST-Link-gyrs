@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 
 class CourseScore {
   final String semester; // 学期，如 2024-2025-春

@@ -4,6 +4,8 @@ import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:logger/logger.dart';
+import 'package:swust_link/common/entity/duifene/course.dart';
+import 'package:swust_link/common/entity/duifene/paper.dart';
 
 class DuiFenE {
   late Dio dio;
@@ -163,85 +165,3 @@ class DuiFenE {
   }
 }
 
-class Course {
-  final String termID;
-  final String termName;
-  final String termStatus;
-  final String courseID;
-  final String courseName;
-  final String backgroundColor;
-  final String color;
-  final String isCanel;
-  final String createrID;
-  final String createrDate;
-  final String updaterDate;
-  final String tClassID;
-  final String className;
-
-  Course({
-    required this.termID,
-    required this.termName,
-    required this.termStatus,
-    required this.courseID,
-    required this.courseName,
-    required this.backgroundColor,
-    required this.color,
-    required this.isCanel,
-    required this.createrID,
-    required this.createrDate,
-    required this.updaterDate,
-    required this.tClassID,
-    required this.className,
-  });
-
-  factory Course.fromJson(Map<String, dynamic> json) {
-    String backgroundColor =
-        json['BackgroundColor'] == '#fff' ? '#e0e0e0' : json['BackgroundColor'];
-    String color = json['Color'] == '#fff' ? '#e0e0e0' : json['Color'];
-
-    return Course(
-      termID: json['TermID'],
-      termName: json['TermName'],
-      termStatus: json['TermStatus'],
-      courseID: json['CourseID'],
-      courseName: json['CourseName'],
-      backgroundColor: backgroundColor,
-      color: color,
-      isCanel: json['IsCanel'],
-      createrID: json['CreaterID'],
-      createrDate: json['CreaterDate'],
-      updaterDate: json['UpdaterDate'],
-      tClassID: json['TClassID'],
-      className: json['ClassName'],
-    );
-  }
-}
-
-class Paper {
-  final String histPaperID;
-  final String name;
-  final String createDate;
-  final String endDate;
-  final String myScore;
-  final String myDoneDate;
-
-  Paper({
-    required this.histPaperID,
-    required this.name,
-    required this.createDate,
-    required this.endDate,
-    required this.myScore,
-    required this.myDoneDate,
-  });
-
-  factory Paper.fromJson(Map<String, dynamic> json) {
-    return Paper(
-      histPaperID: json['HistPaperID'],
-      name: json['Name'],
-      createDate: json['CreateDate'],
-      endDate: json['EndDate'],
-      myScore: json['MyScore'],
-      myDoneDate: json['MyDoneDate'],
-    );
-  }
-}

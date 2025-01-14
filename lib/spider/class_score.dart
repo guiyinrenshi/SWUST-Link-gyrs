@@ -3,7 +3,7 @@ import 'package:html/parser.dart';
 import 'package:logger/logger.dart';
 import 'package:swust_link/spider/oa_auth.dart';
 
-import '../common/entity/score.dart';
+import '../common/entity/oa/score.dart';
 
 class ClassScore {
   late OAAuth oa;

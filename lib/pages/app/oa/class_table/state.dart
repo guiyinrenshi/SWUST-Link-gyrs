@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:swust_link/spider/class_table.dart';
+import 'package:swust_link/common/entity/oa/course.dart';
 
 class ClassTableState {
   late UndergraduateClassTable undergraduateClassTable;
