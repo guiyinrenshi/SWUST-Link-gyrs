@@ -116,7 +116,7 @@ class UndergraduateClassTable {
           colIndex++; // 移动到下一个列索引
         }
       }
-
+      Logger().i(courses);
       return courses;
     } catch (e) {
       print("Error parsing class table: $e");

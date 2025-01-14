@@ -33,7 +33,7 @@ class HitokotoPage extends StatelessWidget {
                     "一言",
                     style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                   )),
-                  IconButton(onPressed: logic.getHitokoto, icon: Icon(Icons.refresh))
+                  // IconButton(onPressed: logic.getHitokoto, icon: Icon(Icons.refresh))
                 ],
               ),
               SizedBox(height: 10,),

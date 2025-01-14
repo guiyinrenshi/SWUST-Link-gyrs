@@ -8,10 +8,10 @@ class AboutLogic extends GetxController {
   final AboutState state = AboutState();
 
   @override
-  void onInit() {
+  void onInit() async {
     // TODO: implement onInit
     super.onInit();
-    _fetchAppInfo();
+    await _fetchAppInfo();
   }
 
   Future<void> _fetchAppInfo() async {

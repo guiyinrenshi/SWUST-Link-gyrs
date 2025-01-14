@@ -17,35 +17,55 @@ class AboutPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('关于我们'),
       ),
-      body: Padding(
+      body: SingleChildScrollView(child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(children: [
-              Expanded(child: Center(
-                child:ClipRRect(
-                  borderRadius: BorderRadius.circular(20), // 圆角半径
-                  child: Image.asset(
-                    "assets/app.png",
-                    width: 100, // 图片宽度
-                    height: 100, // 图片高度
-                    fit: BoxFit.cover, // 图片填充模式
-                  ),
-                ),
-              ))
-            ],),
-            SizedBox(height: 25,)
-            ,
-            Row(children: [Expanded(child: Text(
-              state.appName.value,
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-            textAlign: TextAlign.center,),)],),
-            Row(children: [
-              Expanded(child: Text(
-                  "版本号: ${state.version.value}+${state.buildNumber.value}"
-              ,textAlign: TextAlign.center,))
-            ],),
+            Row(
+              children: [
+                Expanded(
+                    child: Center(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20), // 圆角半径
+                        child: Image.asset(
+                          "assets/app.png",
+                          width: 100, // 图片宽度
+                          height: 100, // 图片高度
+                          fit: BoxFit.cover, // 图片填充模式
+                        ),
+                      ),
+                    ))
+              ],
+            ),
+            SizedBox(
+              height: 25,
+            ),
+            Obx(
+                  () => Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      state.appName.value,
+                      style:
+                      TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Obx(
+                  () => Row(
+                children: [
+                  Expanded(
+                      child: Text(
+                        "版本号: ${state.version.value}+${state.buildNumber.value}",
+                        textAlign: TextAlign.center,
+                      ))
+                ],
+              ),
+            ),
             SizedBox(height: 16),
             Text(
               "关于应用",
@@ -62,16 +82,18 @@ class AboutPage extends StatelessWidget {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 5),
-
             Text(
               "信安2303 SiberianHusky",
+              style: TextStyle(fontSize: 14),
+            ),
+            Text(
+              "卓软2201 Player877",
               style: TextStyle(fontSize: 14),
             ),
             Text(
               "软件2305 TsMinato",
               style: TextStyle(fontSize: 14),
             ),
-
             SizedBox(height: 16),
             Text(
               "联系我们",
@@ -107,7 +129,7 @@ class AboutPage extends StatelessWidget {
             ),
           ],
         ),
-      ),
+      ),)
     );
   }
 }

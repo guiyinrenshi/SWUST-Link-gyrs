@@ -79,13 +79,27 @@ class ClassTableLogic extends GetxController {
   }
 
 
-  List<Course> get filteredCourses {
-    return state.courses
-        .where((course) =>
-            state.currentWeek.value >= int.parse(course.startTime) &&
-            state.currentWeek.value <= int.parse(course.endTime))
-        .toList();
+  // List<Course> get filteredCourses {
+  //   return state.courses
+  //       .where((course) =>
+  //           state.currentWeek.value >= int.parse(course.startTime) &&
+  //           state.currentWeek.value <= int.parse(course.endTime))
+  //       .toList();
+  // }
+  List<List<Course>> get filteredCourses {
+    final groupedCourses = <String, List<Course>>{};
+
+    for (var course in state.courses) {
+      if (state.currentWeek.value >= int.parse(course.startTime) &&
+          state.currentWeek.value <= int.parse(course.endTime)) {
+        final key = "${course.weekDay}-${course.session}";
+        groupedCourses.putIfAbsent(key, () => []).add(course);
+      }
+    }
+
+    return groupedCourses.values.toList();
   }
+
 
   Color getCourseColor(String className) {
     if (!state.courseColors.containsKey(className)) {
