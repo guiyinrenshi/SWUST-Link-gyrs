@@ -91,18 +91,27 @@ class ClassScoreLogic extends GetxController {
       return [];
     }
   }
-
-  Future<void> getScore() async {
-    state.scores.value = await loadCoursesFromLocal();
-    updateSelectedSemester(state.scores.first.semester);
+  Future<void> loadFromLocal() async{
     try{
-      state.scores.value = await state.classScore.getScoreList();
-      await saveCoursesToLocal(state.scores);
-      updateSelectedSemester(state.scores.first.semester);
-    } catch(e){
       state.scores.value = await loadCoursesFromLocal();
       updateSelectedSemester(state.scores.first.semester);
-      Get.snackbar("获取失败", "请刷新重试或检查网络连接! 已从缓存加载数据! ");
+    } catch(e){
+      Get.snackbar("获取缓存失败", "本地暂无分数缓存信息! ");
+    }
+  }
+
+  Future<void> getScore() async {
+    loadCoursesFromLocal();
+    try{
+      var data =  await state.classScore.getScoreList();
+      if (data.isNotEmpty){
+        state.scores.value = data;
+        await saveCoursesToLocal(state.scores);
+        updateSelectedSemester(state.scores.first.semester);
+      }
+    } catch(e){
+      Get.snackbar("获取失败", "请刷新重试或检查网络连接! ");
+      loadCoursesFromLocal();
     }
 
   }

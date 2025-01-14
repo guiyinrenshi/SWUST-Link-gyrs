@@ -7,7 +7,6 @@ import '../common/entity/score.dart';
 
 class ClassScore {
   late OAAuth oa;
-  var isLogin = false;
 
   ClassScore(String username, String password) {
     oa = OAAuth(
@@ -22,16 +21,10 @@ class ClassScore {
         "https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=studentProfile:courseMark";
 
     // 登录校验
-    if (!isLogin) {
-      isLogin = await oa.login();
+    if(!await oa.login()){
+      return [];
     }
-
-    if (!isLogin) {
-      throw Exception("Login failed");
-    }
-
     final res = await oa.dio.get(url);
-
     return extractCourses(res.data);
   }
 
