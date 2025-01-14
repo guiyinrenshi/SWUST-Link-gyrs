@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:swust_link/common/routes/app_pages.dart';
 
 class AppState {
