@@ -6,7 +6,7 @@ import 'logic.dart';
 import 'state.dart';
 
 class VariableNamePage extends StatelessWidget {
-  VariableNamePage({Key? key}) : super(key: key);
+  VariableNamePage({super.key});
 
   final VariableNameLogic logic = Get.put(VariableNameLogic());
   final VariableNameState state = Get.find<VariableNameLogic>().state;
@@ -50,11 +50,11 @@ class VariableNamePage extends StatelessWidget {
                   onTap: () {
                     // 选择并复制文本
                     Clipboard.setData(ClipboardData(
-                        text: state.variableNameAupper.value ?? ''));
+                        text: state.variableNameAupper.value));
                     Get.snackbar('复制成功', '变量名已复制到剪贴板');
                   },
                   controller: TextEditingController(
-                      text: state.variableNameAupper.value ?? ''),
+                      text: state.variableNameAupper.value),
                 )),
             SizedBox(height: 16),
             Obx(() => TextField(
@@ -66,11 +66,11 @@ class VariableNamePage extends StatelessWidget {
                   onTap: () {
                     // 选择并复制文本
                     Clipboard.setData(ClipboardData(
-                        text: state.variableNameAlower.value ?? ''));
+                        text: state.variableNameAlower.value));
                     Get.snackbar('复制成功', '变量名已复制到剪贴板');
                   },
                   controller: TextEditingController(
-                      text: state.variableNameAlower.value ?? ''),
+                      text: state.variableNameAlower.value),
                 )),
             SizedBox(height: 16),
             Obx(() => TextField(
@@ -82,11 +82,11 @@ class VariableNamePage extends StatelessWidget {
                   onTap: () {
                     // 选择并复制文本
                     Clipboard.setData(ClipboardData(
-                        text: state.variableNameSupper.value ?? ''));
+                        text: state.variableNameSupper.value));
                     Get.snackbar('复制成功', '变量名已复制到剪贴板');
                   },
                   controller: TextEditingController(
-                      text: state.variableNameSupper.value ?? ''),
+                      text: state.variableNameSupper.value),
                 )),
             SizedBox(height: 16),
             Obx(() => TextField(
@@ -98,11 +98,11 @@ class VariableNamePage extends StatelessWidget {
                   onTap: () {
                     // 选择并复制文本
                     Clipboard.setData(ClipboardData(
-                        text: state.variableNameSlower.value ?? ''));
+                        text: state.variableNameSlower.value));
                     Get.snackbar('复制成功', '变量名已复制到剪贴板');
                   },
                   controller: TextEditingController(
-                      text: state.variableNameSlower.value ?? ''),
+                      text: state.variableNameSlower.value),
                 )),
             SizedBox(height: 16),
             Obx(() => TextField(
@@ -114,11 +114,11 @@ class VariableNamePage extends StatelessWidget {
                   onTap: () {
                     // 选择并复制文本
                     Clipboard.setData(ClipboardData(
-                        text: state.variableNameUnderline.value ?? ''));
+                        text: state.variableNameUnderline.value));
                     Get.snackbar('复制成功', '变量名已复制到剪贴板');
                   },
                   controller: TextEditingController(
-                      text: state.variableNameUnderline.value ?? ''),
+                      text: state.variableNameUnderline.value),
                 )),
             SizedBox(height: 16),
             Center(
