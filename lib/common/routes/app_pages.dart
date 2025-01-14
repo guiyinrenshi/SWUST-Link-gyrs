@@ -1,16 +1,19 @@
 import 'package:get/get.dart';
+import 'package:swust_link/pages/app/duifene/duifene_course/view.dart';
+import 'package:swust_link/pages/app/duifene/duifene_paper/view.dart';
+import 'package:swust_link/pages/app/duifene/duifene_work/view.dart';
+import 'package:swust_link/pages/app/oa/class_score/view.dart';
+import 'package:swust_link/pages/app/oa/class_table/view.dart';
 import 'package:swust_link/pages/common/coming_soon/view.dart';
 import 'package:swust_link/pages/common/markdown_temple/view.dart';
-import 'package:swust_link/pages/duifene/duifene_course/view.dart';
-import 'package:swust_link/pages/duifene/duifene_paper/view.dart';
-import 'package:swust_link/pages/duifene/duifene_work/view.dart';
+
 
 import 'package:swust_link/pages/main/view.dart';
 import 'package:swust_link/pages/mine/about/view.dart';
 import 'package:swust_link/pages/mine/login/view.dart';
 import 'package:swust_link/pages/mine/params_setting/view.dart';
-import 'package:swust_link/pages/oa/class_score/view.dart';
-import 'package:swust_link/pages/oa/class_table/view.dart';
+
+
 
 part 'app_routes.dart';
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:swust_link/pages/web/web_view.dart';
 import 'package:swust_link/spider/duifene.dart';
 
 import 'logic.dart';

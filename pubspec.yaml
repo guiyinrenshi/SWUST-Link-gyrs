@@ -1,5 +1,5 @@
 name: swust_link
-description: "A new Flutter project."
+description: "西南科技大学移动教务通。"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -47,7 +47,6 @@ dependencies:
   dio: ^5.7.0
   dio_cookie_manager: ^3.1.1 # latest version
   shared_preferences: ^2.3.5
-  webview_flutter: ^4.10.0
   path_provider: ^2.1.5
   cached_network_image: ^3.4.1
   http: ^1.2.2
