@@ -40,7 +40,7 @@ class Params_settingPage extends StatelessWidget {
               ))
         ],
       )),
-      body: Padding(
+      body:SingleChildScrollView(child:  Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,7 +81,7 @@ class Params_settingPage extends StatelessWidget {
                   style: TextStyle(fontSize: 16),
                 ),
                 Obx(
-                  () => Switch(
+                      () => Switch(
                     value: state.isAutoQueryEnabled.value,
                     onChanged: (value) {
                       state.isAutoQueryEnabled.value = value;
@@ -105,7 +105,7 @@ class Params_settingPage extends StatelessWidget {
             ),
           ],
         ),
-      ),
+      ),)
     );
   }
 }

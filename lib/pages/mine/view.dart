@@ -30,6 +30,13 @@ class MinePage extends StatelessWidget {
           leading: Icon(Icons.settings),
         ),
         ListTile(
+          title: Text("更新日志"),
+          onTap: () {
+            Get.toNamed(AppRoutes.MAIN + AppRoutes.UPDATE_LOGS);
+          },
+          leading: Icon(Icons.text_snippet_outlined),
+        ),
+        ListTile(
           title: Text("隐私与协议"),
           onTap: () {
             Get.toNamed(AppRoutes.MAIN + AppRoutes.PRIVACY_AND_PROTOCOL);

@@ -13,4 +13,5 @@ abstract class AppRoutes{
   static const ABOUT = "/mine/about";
   static const CLASS_SCORE = "/app/score";
   static const COMING_SOON = "/coming_soon";
+  static const UPDATE_LOGS = "/mine/update";
 }

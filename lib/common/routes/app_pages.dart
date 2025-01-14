@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
-import 'package:swust_link/pages/coming_soon/view.dart';
+import 'package:swust_link/pages/common/coming_soon/view.dart';
+import 'package:swust_link/pages/common/markdown_temple/view.dart';
 import 'package:swust_link/pages/duifene/duifene_course/view.dart';
 import 'package:swust_link/pages/duifene/duifene_paper/view.dart';
 import 'package:swust_link/pages/duifene/duifene_work/view.dart';
@@ -8,7 +9,6 @@ import 'package:swust_link/pages/main/view.dart';
 import 'package:swust_link/pages/mine/about/view.dart';
 import 'package:swust_link/pages/mine/login/view.dart';
 import 'package:swust_link/pages/mine/params_setting/view.dart';
-import 'package:swust_link/pages/mine/privacy_and_protocol/view.dart';
 import 'package:swust_link/pages/oa/class_score/view.dart';
 import 'package:swust_link/pages/oa/class_table/view.dart';
 
@@ -27,10 +27,14 @@ class AppPages {
       GetPage(name: AppRoutes.PARAMS_SETTING, page: () => Params_settingPage()),
       GetPage(
           name: AppRoutes.PRIVACY_AND_PROTOCOL,
-          page: () => PrivacyAndProtocolPage()),
+          page: () => MarkdownTemplePage(
+              "隐私与协议", "assets/privacy_and_protocol_state.md")),
       GetPage(name: AppRoutes.CLASS_SCORE, page: () => ClassScorePage()),
       GetPage(name: AppRoutes.ABOUT, page: () => AboutPage()),
-      GetPage(name: AppRoutes.COMING_SOON, page: () => ComingSoonPage())
+      GetPage(name: AppRoutes.COMING_SOON, page: () => ComingSoonPage()),
+      GetPage(
+          name: AppRoutes.UPDATE_LOGS,
+          page: () => MarkdownTemplePage("更新日志", "assets/update.md"))
     ])
   ];
 }
