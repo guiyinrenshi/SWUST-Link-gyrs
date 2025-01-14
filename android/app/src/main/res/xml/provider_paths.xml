@@ -1,0 +1,8 @@
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 允许访问私有目录 -->
+    <files-path name="files" path="." />
+    <!-- 允许访问 app_flutter 目录 -->
+    <files-path name="flutter" path="app_flutter/" />
+    <!-- 如果需要访问外部存储 -->
+    <external-path name="external_files" path="." />
+</paths>

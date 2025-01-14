@@ -67,6 +67,11 @@ class AboutPage extends StatelessWidget {
                     ],
                   ),
                 ),
+                SizedBox(height: 5),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [TextButton(onPressed: logic.checkNew, child: Text("检查更新"))],
+                ),
                 SizedBox(height: 16),
                 Text(
                   "关于应用",

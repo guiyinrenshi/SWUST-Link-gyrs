@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:swust_link/common/entity/account.dart';
 import 'package:image/image.dart' as image_lib;
+import 'package:swust_link/common/routes/app_pages.dart';
 
 import 'state.dart';
 
@@ -10,8 +11,6 @@ class LoginLogic extends GetxController {
   final LoginState state = LoginState();
 
   LoginLogic();
-
-
 
   @override
   Future<void> onInit() async {
@@ -47,20 +46,33 @@ class LoginLogic extends GetxController {
     Get.dialog(
       AlertDialog(
         title: Text(res ? "登录成功" : "登录失败"),
-        content: Text(res ? "测试登录成功！" : "用户名或密码错误！"),
+        content: Text(res ? "测试登录成功!保存信息后即代表您同意了隐私与协议!" : "用户名或密码错误！"),
         actions: [
-          TextButton(onPressed: (){
-            Get.back();
-          }, child: Text("取消")),
-          res? TextButton(
-            onPressed: () {
-              Get.back();
-              saveUseInfo();
-            },
-            child: Text("保存信息"),
-          ): TextButton(onPressed: (){
-            Get.back();
-          }, child: Text("确定")) ,
+          res
+              ? TextButton(
+                  onPressed: () {
+                    Get.toNamed(
+                        AppRoutes.MAIN + AppRoutes.PRIVACY_AND_PROTOCOL);
+                  },
+                  child: Text("隐私与协议"))
+              : TextButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  child: Text("取消")),
+          res
+              ? TextButton(
+                  onPressed: () {
+                    Get.back();
+                    saveUseInfo();
+                  },
+                  child: Text("保存信息"),
+                )
+              : TextButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  child: Text("确定")),
         ],
       ),
     );
@@ -72,7 +84,6 @@ class LoginLogic extends GetxController {
         prefs.getString('${state.currentPlatform}username');
     final String? password =
         prefs.getString('${state.currentPlatform}password');
-
 
     if (username != null && password != null) {
       state.usernameController.value.text = username;
@@ -90,7 +101,7 @@ class LoginLogic extends GetxController {
         '${state.account.platformCode}password', state.account.password);
     Get.dialog(AlertDialog(
       title: Text("保存成功"),
-      content: Text("保存${state.username.value}登录信息成功, 后续无需再次登录！"),
+      content: Text("保存${state.username.value}登录信息成功, 后续无需再次登录!"),
       actions: [
         TextButton(
           onPressed: () {
