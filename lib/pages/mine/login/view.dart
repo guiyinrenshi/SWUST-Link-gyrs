@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:swust_link/common/entity/account.dart';
+import 'package:swust_link/common/routes/app_pages.dart';
 
 import 'logic.dart';
 import 'state.dart';
@@ -112,6 +113,19 @@ class LoginPage extends StatelessWidget {
                     )
                   ],
                 ),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextButton(
+                        onPressed: () {
+                          Get.toNamed(AppRoutes.MAIN+AppRoutes.LOGIN_TIP);
+                        },
+                        child: Text("登录说明,百度翻译必看"))
+                  ],
+                )
               ]),
             )));
   }
