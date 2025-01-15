@@ -6,7 +6,8 @@ import 'logic.dart';
 import 'state.dart';
 
 class Class_cardComponent extends StatelessWidget {
-  Class_cardComponent(List<Course> todayCourseList ,{Key? key}) : super(key: key){
+  Class_cardComponent(List<Course> todayCourseList, {Key? key})
+      : super(key: key) {
     state.todayCourseList.value = todayCourseList;
   }
 
@@ -16,11 +17,18 @@ class Class_cardComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration:  BoxDecoration(
-        color: Colors.white,
-
-        borderRadius: BorderRadius.circular(20),
-      ),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.shade300,
+              blurRadius: 10,
+              spreadRadius: 2,
+              offset: Offset(0, 4),
+            ),
+          ]
+          ),
       child: Padding(
         padding: EdgeInsets.all(20),
         child: Column(
@@ -30,12 +38,18 @@ class Class_cardComponent extends StatelessWidget {
                 Expanded(
                     child: Obx(
                         () => Text(state.time.value >= 0 ? "下一课程:" : "当前课程"))),
-                Expanded(child: Obx(() => Text(state.time.value >= 0
-                    ? "${logic.formatTime(state.time.value)} 后上课"
-                    : "正在上课中",textAlign: TextAlign.right,)))
+                Expanded(
+                    child: Obx(() => Text(
+                          state.time.value >= 0
+                              ? "${logic.formatTime(state.time.value)} 后上课"
+                              : "正在上课中",
+                          textAlign: TextAlign.right,
+                        )))
               ],
             ),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
             Row(
               children: [
                 Expanded(
@@ -43,15 +57,27 @@ class Class_cardComponent extends StatelessWidget {
                           state.className.value,
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 30, ),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30,
+                          ),
                         )))
               ],
             ),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
             Row(
               children: [
-                Icon(Icons.class_, size: 30,color: Colors.blue[200],),
-                Expanded(child: Obx(()=>Text(state.placeName.value,textAlign: TextAlign.right,)))
+                Icon(
+                  Icons.class_,
+                  size: 30,
+                  color: Colors.blue[200],
+                ),
+                Expanded(
+                    child: Obx(() => Text(
+                          state.placeName.value,
+                          textAlign: TextAlign.right,
+                        )))
               ],
             )
           ],

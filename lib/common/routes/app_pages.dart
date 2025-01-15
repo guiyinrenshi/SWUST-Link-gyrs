@@ -4,6 +4,7 @@ import 'package:swust_link/pages/app/duifene/duifene_paper/view.dart';
 import 'package:swust_link/pages/app/duifene/duifene_work/view.dart';
 import 'package:swust_link/pages/app/oa/class_score/view.dart';
 import 'package:swust_link/pages/app/oa/class_table/view.dart';
+import 'package:swust_link/pages/app/oa/evaluate_online/view.dart';
 import 'package:swust_link/pages/app/oa/exam/view.dart';
 import 'package:swust_link/pages/common/coming_soon/view.dart';
 import 'package:swust_link/pages/common/markdown_temple/view.dart';
@@ -46,7 +47,10 @@ class AppPages {
           name: AppRoutes.UPDATE_LOGS,
           page: () => MarkdownTemplePage("更新日志", "assets/update.md")),
       GetPage(name: AppRoutes.EXAM, page: () => ExamPage()),
-      GetPage(name: AppRoutes.LOGIN_TIP, page: () => MarkdownTemplePage("登录说明","assets/login_tip.md"))
+      GetPage(
+          name: AppRoutes.LOGIN_TIP,
+          page: () => MarkdownTemplePage("登录说明", "assets/login_tip.md")),
+      GetPage(name: AppRoutes.EVALUATE_ONLINE, page: () => EvaluateOnlinePage())
     ])
   ];
 }
