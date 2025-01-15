@@ -45,7 +45,8 @@ class AppPages {
       GetPage(
           name: AppRoutes.UPDATE_LOGS,
           page: () => MarkdownTemplePage("更新日志", "assets/update.md")),
-      GetPage(name: AppRoutes.EXAM, page: () => ExamPage())
+      GetPage(name: AppRoutes.EXAM, page: () => ExamPage()),
+      GetPage(name: AppRoutes.LOGIN_TIP, page: () => MarkdownTemplePage("登录说明","assets/login_tip.md"))
     ])
   ];
 }
