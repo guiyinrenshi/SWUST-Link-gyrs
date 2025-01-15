@@ -10,5 +10,6 @@ class VariableNameState {
   var variableNameAlower = ''.obs;
   var variableNameSupper = ''.obs;
   var variableNameSlower = ''.obs;
-  var variableNameUnderline = ''.obs;
+  var variableNameUpperUnderline = ''.obs;
+  var variableNameLowerUnderline = ''.obs;
 }

@@ -106,19 +106,35 @@ class VariableNamePage extends StatelessWidget {
                 )),
             SizedBox(height: 16),
             Obx(() => TextField(
+              readOnly: true,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: '全大写 + 下划线',
+              ),
+              onTap: () {
+                // 选择并复制文本
+                Clipboard.setData(
+                    ClipboardData(text: state.variableNameUpperUnderline.value));
+                Get.snackbar('复制成功', '变量名已复制到剪贴板');
+              },
+              controller: TextEditingController(
+                  text: state.variableNameUpperUnderline.value),
+            )),
+            SizedBox(height: 16),
+            Obx(() => TextField(
                   readOnly: true,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: '匈牙利(下划线)',
+                    labelText: '全小写 + 下划线',
                   ),
                   onTap: () {
                     // 选择并复制文本
                     Clipboard.setData(
-                        ClipboardData(text: state.variableNameUnderline.value));
+                        ClipboardData(text: state.variableNameLowerUnderline.value));
                     Get.snackbar('复制成功', '变量名已复制到剪贴板');
                   },
                   controller: TextEditingController(
-                      text: state.variableNameUnderline.value),
+                      text: state.variableNameLowerUnderline.value),
                 )),
             SizedBox(height: 16),
             Row(children: [

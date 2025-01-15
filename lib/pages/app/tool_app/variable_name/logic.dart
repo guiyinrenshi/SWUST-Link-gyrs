@@ -66,7 +66,9 @@ class VariableNameLogic extends GetxController {
               result.replaceAll(RegExp(r'\s+'), '').toUpperCase();
           state.variableNameAlower.value =
               result.replaceAll(RegExp(r'\s+'), '').toLowerCase();
-          state.variableNameUnderline.value =
+          state.variableNameUpperUnderline.value =
+              result.replaceAll(RegExp(r'\s+'), '_').toUpperCase();
+          state.variableNameLowerUnderline.value =
               result.replaceAll(RegExp(r'\s+'), '_').toLowerCase();
           state.variableNameSupper.value = result
               .split(' ')
