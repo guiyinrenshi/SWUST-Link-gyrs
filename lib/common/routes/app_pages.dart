@@ -8,7 +8,7 @@ import 'package:swust_link/pages/app/oa/exam/view.dart';
 import 'package:swust_link/pages/common/coming_soon/view.dart';
 import 'package:swust_link/pages/common/markdown_temple/view.dart';
 
-
+import 'package:swust_link/pages/app/tool_app/variable_name/view.dart';
 import 'package:swust_link/pages/main/view.dart';
 import 'package:swust_link/pages/mine/about/view.dart';
 import 'package:swust_link/pages/mine/login/view.dart';
