@@ -4,10 +4,10 @@ import 'package:swust_link/pages/app/duifene/duifene_paper/view.dart';
 import 'package:swust_link/pages/app/duifene/duifene_work/view.dart';
 import 'package:swust_link/pages/app/oa/class_score/view.dart';
 import 'package:swust_link/pages/app/oa/class_table/view.dart';
+import 'package:swust_link/pages/app/oa/exam/view.dart';
 import 'package:swust_link/pages/common/coming_soon/view.dart';
 import 'package:swust_link/pages/common/markdown_temple/view.dart';
 
-import 'package:swust_link/pages/app/tool_app/variable_name/view.dart';
 
 import 'package:swust_link/pages/main/view.dart';
 import 'package:swust_link/pages/mine/about/view.dart';
@@ -25,7 +25,14 @@ class AppPages {
       GetPage(name: AppRoutes.DUIFENE_WORK, page: () => DuifeneWorkPage()),
       GetPage(name: AppRoutes.DUIFENE_COURSE, page: () => DuifeneCoursePage()),
       GetPage(name: AppRoutes.DUIFENE_PAPER, page: () => DuifenePaperPage()),
-      GetPage(name: AppRoutes.CLASS_TABLE, page: () => ClassTablePage()),
+      GetPage(
+          name: AppRoutes.CLASS_TABLE,
+          page: () => ClassTablePage("课程表",
+              "https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=studentPortal:courseTable")),
+      GetPage(
+          name: AppRoutes.CHOOSE_CLSS_TABLE,
+          page: () => ClassTablePage("选课课表",
+              "https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=chooseCourse:courseTable")),
       GetPage(name: AppRoutes.PARAMS_SETTING, page: () => Params_settingPage()),
       GetPage(name: AppRoutes.VARIABLE_NAME, page: () => VariableNamePage()),
       GetPage(
@@ -37,7 +44,8 @@ class AppPages {
       GetPage(name: AppRoutes.COMING_SOON, page: () => ComingSoonPage()),
       GetPage(
           name: AppRoutes.UPDATE_LOGS,
-          page: () => MarkdownTemplePage("更新日志", "assets/update.md"))
+          page: () => MarkdownTemplePage("更新日志", "assets/update.md")),
+      GetPage(name: AppRoutes.EXAM, page: () => ExamPage())
     ])
   ];
 }

@@ -1,10 +1,7 @@
-import 'package:dio/dio.dart';
 import 'package:html/parser.dart';
 import 'package:logger/logger.dart';
 import 'package:swust_link/common/entity/oa/course.dart';
-import 'package:swust_link/spider/duifene.dart';
 import 'package:swust_link/spider/oa_auth.dart';
-import 'package:swust_link/spider/parse_utils.dart';
 
 class UndergraduateClassTable {
   late OAAuth oa;
@@ -34,9 +31,7 @@ class UndergraduateClassTable {
   //   Logger().i(out);
   // }
 
-  Future<List<Course>> parseClassTable() async {
-    const String url = "https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=chooseCourse:courseTable";
-
+  Future<List<Course>> parseClassTable(String url) async {
     try {
       // 发起 GET 请求获取课程表 HTML
       final response = await oa.dio.get(url);

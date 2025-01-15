@@ -15,4 +15,7 @@ abstract class AppRoutes{
   static const VARIABLE_NAME = '/app/tool_app/variable_name';
   static const COMING_SOON = "/coming_soon";
   static const UPDATE_LOGS = "/mine/update";
+  static const CHOOSE_CLSS_TABLE = "/app/choose/class/table";
+
+  static const EXAM = "/app/exam";
 }

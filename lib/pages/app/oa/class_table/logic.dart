@@ -17,12 +17,6 @@ import 'state.dart';
 class ClassTableLogic extends GetxController {
   final ClassTableState state = ClassTableState();
 
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    super.onInit();
-    loadClassTable();
-  }
 
   Future<void> loadClassTable() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -43,7 +37,7 @@ class ClassTableLogic extends GetxController {
       state.courses.value = await loadCoursesFromLocal();
       if (await state.undergraduateClassTable.login()) {
         state.courses.value =
-            await state.undergraduateClassTable.parseClassTable();
+            await state.undergraduateClassTable.parseClassTable(state.url.value);
         await saveCoursesToLocal(state.courses);
       } else {
         if (state.courses.isEmpty) {
@@ -114,8 +108,7 @@ class ClassTableLogic extends GetxController {
     try {
       // 获取应用的文档目录
       final directory = await getApplicationDocumentsDirectory();
-      final filePath = "${directory.path}/courses.json";
-
+      final filePath = "${directory.path}/${state.title.value}-courses.json";
       // 将课程数据转为 JSON 字符串
       final jsonString =
           jsonEncode(courses.map((course) => course.toJson()).toList());
@@ -133,7 +126,7 @@ class ClassTableLogic extends GetxController {
   Future<List<Course>> loadCoursesFromLocal() async {
     try {
       final directory = await getApplicationDocumentsDirectory();
-      final filePath = "${directory.path}/courses.json";
+      final filePath = "${directory.path}/${state.title.value}-courses.json";
 
       final file = File(filePath);
 

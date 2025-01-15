@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:swust_link/components/class_card/view.dart';
+import 'package:swust_link/components/duifene_sign/view.dart';
 import 'package:swust_link/components/hitokoto/view.dart';
 
 import '../../components/today_class_list/view.dart';
@@ -15,9 +16,10 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-
-        child: Padding(
+    return
+      SingleChildScrollView(
+        child:
+        Padding(
           padding: EdgeInsets.all(8),
           child: Column(
             children: [
@@ -39,6 +41,15 @@ class HomePage extends StatelessWidget {
               Row(
                 children: [
                   Expanded(child: HitokotoPage())
+                ],
+              ),
+              SizedBox(height: 10,),
+              Row(
+                children: [
+                  Expanded(
+                      child:
+                      DuifeneSignComponent()
+                  )
                 ],
               )
             ],

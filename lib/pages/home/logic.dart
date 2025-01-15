@@ -33,7 +33,7 @@ class HomeLogic extends GetxController {
   Future<List<Course>> loadCoursesFromLocal() async {
     try {
       final directory = await getApplicationDocumentsDirectory();
-      final filePath = "${directory.path}/courses.json";
+      final filePath = "${directory.path}/课程表-courses.json";
 
       final file = File(filePath);
 

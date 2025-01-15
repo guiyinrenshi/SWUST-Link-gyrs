@@ -13,4 +13,4 @@
 - 如您在条款更新后继续使用本程序，即视为您接受更新后的条款。
 ## 5. 联系方式:
 - 邮箱：3088506834@qq.com
-- QQ群: [950969163](https://qm.qq.com/cgi-bin/qm/qr?k=K6LQYQAjc1RCphZt7yTaUfyjXryfL7aE&jump_from=webapi&authKey=tRC1FN6IlPWhLB1MNHKGfvrw8UP6tvHQU1+KY8o2rL+RkQMhFBaTAAcTKWaNypQA)
+- QQ群: 950969163
