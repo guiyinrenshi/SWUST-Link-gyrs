@@ -18,4 +18,5 @@ abstract class AppRoutes{
   static const CHOOSE_CLSS_TABLE = "/app/choose/class/table";
   static const EXAM = "/app/exam";
   static const LOGIN_TIP = "/mine/login/tip";
+  static const EVALUATE_ONLINE = "/app/evaluate/online";
 }

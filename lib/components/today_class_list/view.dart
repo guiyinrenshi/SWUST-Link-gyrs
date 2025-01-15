@@ -20,6 +20,14 @@ class TodayClassListPage extends StatelessWidget {
         color: Colors.white,
         // 圆角
         borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.shade300,
+              blurRadius: 10,
+              spreadRadius: 2,
+              offset: Offset(0, 4),
+            ),
+          ]
       ),
       child: Padding(
           padding: const EdgeInsets.all(16.0),
