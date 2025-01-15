@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:swust_link/common/routes/app_pages.dart';
 
 class AppState {
@@ -32,7 +31,7 @@ class AppState {
     {
       "label": "实用",
       "children": [
-        {"route": AppRoutes.MAIN + AppRoutes.COMING_SOON, "text": "起个变量名"},
+        {"route": AppRoutes.MAIN + AppRoutes.VARIABLE_NAME, "text": "起个变量名"},
       ]
     }
   ];
