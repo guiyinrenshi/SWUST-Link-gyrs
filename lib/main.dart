@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:swust_link/common/routes/app_pages.dart';
@@ -10,6 +12,18 @@ void main() async {
     debug: true, // 设置为 true 以启用调试日志
     ignoreSsl: true, // 如果需要忽略 SSL 验证
   );
+  if(window.physicalSize.isEmpty){
+    window.onMetricsChanged = (){
+      //在回调中，size仍然有可能是0
+      if(!window.physicalSize.isEmpty){
+        window.onMetricsChanged = null;
+        runApp(const MyApp());
+      }
+    };
+  } else{
+    //如果size非0，则直接runApp
+    runApp(const MyApp());
+  }
   runApp(const MyApp());
 }
 
