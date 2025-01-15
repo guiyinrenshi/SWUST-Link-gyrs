@@ -5,7 +5,6 @@ import 'package:crypto/crypto.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:swust_link/common/routes/app_pages.dart';
@@ -38,7 +37,6 @@ class VariableNameLogic extends GetxController {
         ],
       ));
     } else {
-      Logger().i("已保存的密钥: $appID, $key");
     }
   }
 
@@ -47,8 +45,6 @@ class VariableNameLogic extends GetxController {
     final String? appID = prefs.getString('2username');
     final String? key = prefs.getString('2password');
     if (appID != null && key != null) {
-      Logger().i("Press");
-      Logger().i("InputText: $inputText");
       String salt = _generateSalt(10);
       String query = inputText;
       String sign = generateSign(appID, key, query, salt);
@@ -62,7 +58,6 @@ class VariableNameLogic extends GetxController {
       final response = await http.get(Uri.parse(url));
       String logInfo = "";
       if (response.statusCode == 200) {
-        Logger().i("获取到返回信息${response.body}");
         var responseBody = json.decode(response.body);
         if (!responseBody.containsKey("error_code")) {
           String result = responseBody["trans_result"][0]["dst"];
@@ -86,13 +81,6 @@ class VariableNameLogic extends GetxController {
           state.variableNameSlower.value =
               temp[0].toLowerCase() + temp.substring(1);
           update();
-          Logger().i("翻译结果：$result");
-          Logger().i("variableNameAupper：${state.variableNameAupper.value}");
-          Logger().i("variableNameAlower：${state.variableNameAlower.value}");
-          Logger().i("variableNameSupper：${state.variableNameSupper.value}");
-          Logger().i("variableNameSlower：${state.variableNameSlower.value}");
-          Logger()
-              .i("variableNameUnderline：${state.variableNameUnderline.value}");
         } else {
           if (responseBody["error_code"] == "52001") {
             logInfo = "请求超时，检查请求query是否超长，以及原文或译文参数是否支持";

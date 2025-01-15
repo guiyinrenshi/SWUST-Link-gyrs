@@ -49,8 +49,8 @@ class VariableNamePage extends StatelessWidget {
                   ),
                   onTap: () {
                     // 选择并复制文本
-                    Clipboard.setData(ClipboardData(
-                        text: state.variableNameAupper.value));
+                    Clipboard.setData(
+                        ClipboardData(text: state.variableNameAupper.value));
                     Get.snackbar('复制成功', '变量名已复制到剪贴板');
                   },
                   controller: TextEditingController(
@@ -65,8 +65,8 @@ class VariableNamePage extends StatelessWidget {
                   ),
                   onTap: () {
                     // 选择并复制文本
-                    Clipboard.setData(ClipboardData(
-                        text: state.variableNameAlower.value));
+                    Clipboard.setData(
+                        ClipboardData(text: state.variableNameAlower.value));
                     Get.snackbar('复制成功', '变量名已复制到剪贴板');
                   },
                   controller: TextEditingController(
@@ -81,8 +81,8 @@ class VariableNamePage extends StatelessWidget {
                   ),
                   onTap: () {
                     // 选择并复制文本
-                    Clipboard.setData(ClipboardData(
-                        text: state.variableNameSupper.value));
+                    Clipboard.setData(
+                        ClipboardData(text: state.variableNameSupper.value));
                     Get.snackbar('复制成功', '变量名已复制到剪贴板');
                   },
                   controller: TextEditingController(
@@ -97,8 +97,8 @@ class VariableNamePage extends StatelessWidget {
                   ),
                   onTap: () {
                     // 选择并复制文本
-                    Clipboard.setData(ClipboardData(
-                        text: state.variableNameSlower.value));
+                    Clipboard.setData(
+                        ClipboardData(text: state.variableNameSlower.value));
                     Get.snackbar('复制成功', '变量名已复制到剪贴板');
                   },
                   controller: TextEditingController(
@@ -113,23 +113,33 @@ class VariableNamePage extends StatelessWidget {
                   ),
                   onTap: () {
                     // 选择并复制文本
-                    Clipboard.setData(ClipboardData(
-                        text: state.variableNameUnderline.value));
+                    Clipboard.setData(
+                        ClipboardData(text: state.variableNameUnderline.value));
                     Get.snackbar('复制成功', '变量名已复制到剪贴板');
                   },
                   controller: TextEditingController(
                       text: state.variableNameUnderline.value),
                 )),
             SizedBox(height: 16),
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  // 生成变量名的逻辑
-                  logic.getVariableName(inputController.text);
-                },
-                child: Text('生成'),
-              ),
-            ),
+            Row(children: [
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {
+                    // 生成变量名的逻辑
+                    logic.getVariableName(inputController.text);
+                  },
+                  style: ButtonStyle(
+                    shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10))),
+                    backgroundColor: WidgetStateProperty.all(Colors.blue),
+                  ),
+                  child: Text(
+                    "生成",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              )
+            ]),
           ],
         ),
       ),
