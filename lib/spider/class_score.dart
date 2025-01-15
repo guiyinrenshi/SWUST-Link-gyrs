@@ -1,6 +1,5 @@
 import 'package:html/dom.dart';
 import 'package:html/parser.dart';
-import 'package:logger/logger.dart';
 import 'package:swust_link/spider/oa_auth.dart';
 
 import '../common/entity/oa/score.dart';

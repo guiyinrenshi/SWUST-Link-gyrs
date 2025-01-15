@@ -9,7 +9,7 @@ class AppState {
         {"route": AppRoutes.MAIN + AppRoutes.CLASS_TABLE, "text": "课程表"},
         {"route": AppRoutes.MAIN + AppRoutes.CHOOSE_CLSS_TABLE, "text": "选课课表"},
         {"route": AppRoutes.MAIN + AppRoutes.CLASS_SCORE, "text": "成绩查询"},
-        {"route": AppRoutes.MAIN + AppRoutes.COMING_SOON, "text": "考试查询"},
+        {"route": AppRoutes.MAIN + AppRoutes.EXAM, "text": "考试查询"},
         {"route": AppRoutes.MAIN + AppRoutes.COMING_SOON, "text": "教育评价"},
         // {"route": AppRoutes.MAIN + AppRoutes.COMING_SOON, "text": "教育评价"},
       ]
