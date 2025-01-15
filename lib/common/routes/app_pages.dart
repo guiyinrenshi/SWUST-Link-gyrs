@@ -26,7 +26,8 @@ class AppPages {
       GetPage(name: AppRoutes.DUIFENE_WORK, page: () => DuifeneWorkPage()),
       GetPage(name: AppRoutes.DUIFENE_COURSE, page: () => DuifeneCoursePage()),
       GetPage(name: AppRoutes.DUIFENE_PAPER, page: () => DuifenePaperPage()),
-      GetPage(name: AppRoutes.CLASS_TABLE, page: () => ClassTablePage()),
+      GetPage(name: AppRoutes.CLASS_TABLE, page: () => ClassTablePage("课程表","https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=studentPortal:courseTable")),
+      GetPage(name: AppRoutes.CHOOSE_CLSS_TABLE, page: () => ClassTablePage("选课课表","https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=chooseCourse:courseTable")),
       GetPage(name: AppRoutes.PARAMS_SETTING, page: () => Params_settingPage()),
       GetPage(
           name: AppRoutes.PRIVACY_AND_PROTOCOL,

@@ -34,9 +34,7 @@ class UndergraduateClassTable {
   //   Logger().i(out);
   // }
 
-  Future<List<Course>> parseClassTable() async {
-    const String url = "https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=chooseCourse:courseTable";
-
+  Future<List<Course>> parseClassTable(String url) async {
     try {
       // 发起 GET 请求获取课程表 HTML
       final response = await oa.dio.get(url);
