@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:swust_link/common/routes/app_pages.dart';
 
@@ -27,7 +28,7 @@ class AppPage extends StatelessWidget {
                 child: Text(
                   section['label'] as String,
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 18.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -51,11 +52,11 @@ class AppPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          height: 48,
-                          width: 48,
+                          height: 48.h,
+                          width: 48.w,
                           decoration: BoxDecoration(
                             color: Color((app['text'].hashCode) | 0xFF000000),
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(8.r),
                           ),
                           alignment: Alignment.center,
                           child: Text(
@@ -63,7 +64,7 @@ class AppPage extends StatelessWidget {
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
-                              fontSize: 24,
+                              fontSize: 24.sp,
                             ),
                           ),
                         ),

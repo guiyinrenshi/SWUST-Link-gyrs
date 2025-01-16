@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'logic.dart';
@@ -15,7 +16,7 @@ class DuifeneSignComponent extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(20.r),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.shade300,
@@ -45,11 +46,11 @@ class DuifeneSignComponent extends StatelessWidget {
             Row(
               children: [
                 Container(
-                  height: 48,
-                  width: 48,
+                  height: 48.h,
+                  width: 48.w,
                   decoration: BoxDecoration(
                     color: Colors.redAccent,
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(8.r),
                   ),
                   alignment: Alignment.center,
                   child: Text(
@@ -57,7 +58,7 @@ class DuifeneSignComponent extends StatelessWidget {
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 24,
+                      fontSize: 24.sp,
                     ),
                   ),
                 ),
@@ -68,20 +69,20 @@ class DuifeneSignComponent extends StatelessWidget {
                     decoration: InputDecoration(
                       labelText: "请输入签到码",
                       labelStyle: TextStyle(
-                        fontSize: 16,
+                        fontSize: 16.sp,
                         color: Colors.grey.shade600,
                       ),
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(8.r),
                         borderSide: BorderSide(
                           color: Colors.grey.shade400,
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(8.r),
                         borderSide: BorderSide(
                           color: Colors.redAccent,
-                          width: 2,
+                          width: 2.w,
                         ),
                       ),
                       contentPadding: EdgeInsets.symmetric(
@@ -104,14 +105,14 @@ class DuifeneSignComponent extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       // primary: Colors.redAccent,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(8.r),
                       ),
                       padding: EdgeInsets.symmetric(vertical: 14),
                     ),
                     child: Text(
                       "提交签到",
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 16.sp,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

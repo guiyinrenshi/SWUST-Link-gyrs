@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:swust_link/common/entity/oa/course.dart';
 
@@ -19,7 +20,7 @@ class TodayClassListPage extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         // 圆角
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(20.r),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.shade300,
@@ -75,7 +76,7 @@ class TodayClassListPage extends StatelessWidget {
                         children: [
                           // 节次信息
                           Container(
-                            width: 40,
+                            width: 40.w,
                             alignment: Alignment.center,
                             child: Text(
                               "${course.session}",

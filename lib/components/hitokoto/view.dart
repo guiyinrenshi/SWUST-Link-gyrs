@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'logic.dart';
@@ -15,7 +16,7 @@ class HitokotoPage extends StatelessWidget {
     return Container(
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(20.r),
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.shade300,
@@ -33,13 +34,13 @@ class HitokotoPage extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.textsms_outlined,
-                    size: 22,
+                    size: 22.sp,
                   ),
                   SizedBox(width: 20),
                   Expanded(
                       child: Text(
                     "一言",
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.bold),
                   )),
                   // IconButton(onPressed: logic.getHitokoto, icon: Icon(Icons.refresh))
                 ],
@@ -57,7 +58,7 @@ class HitokotoPage extends StatelessWidget {
                     () => Text(
                       "—— ${state.creator.value == ""?"无":state.creator.value}",
                       textAlign: TextAlign.right,
-                      style: TextStyle(fontSize: 15),
+                      style: TextStyle(fontSize: 15.sp),
                     ),
                   ))
                 ],

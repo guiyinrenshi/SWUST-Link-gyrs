@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:swust_link/common/entity/oa/course.dart';
 
@@ -19,18 +20,18 @@ class Class_cardComponent extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(20.r),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.shade300,
-              blurRadius: 10,
+              blurRadius: 10.r,
               spreadRadius: 2,
               offset: Offset(0, 4),
             ),
           ]
           ),
       child: Padding(
-        padding: EdgeInsets.all(20),
+        padding: EdgeInsets.all(20.sp),
         child: Column(
           children: [
             Row(
@@ -58,7 +59,7 @@ class Class_cardComponent extends StatelessWidget {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 30,
+                            fontSize: 30.sp,
                           ),
                         )))
               ],
@@ -70,7 +71,7 @@ class Class_cardComponent extends StatelessWidget {
               children: [
                 Icon(
                   Icons.class_,
-                  size: 30,
+                  size: 30.sp,
                   color: Colors.blue[200],
                 ),
                 Expanded(

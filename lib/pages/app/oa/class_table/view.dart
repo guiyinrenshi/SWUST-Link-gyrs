@@ -187,7 +187,7 @@ class ClassTablePage extends StatelessWidget {
                                                   TextOverflow.ellipsis,
                                                   style: TextStyle(
                                                     color: Colors.white,
-                                                    fontSize: 14.sp,
+                                                    fontSize: 13.sp,
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
@@ -195,7 +195,7 @@ class ClassTablePage extends StatelessWidget {
                                                   course.teacher,
                                                   style: TextStyle(
                                                     color: Colors.white,
-                                                    fontSize: 13.sp,
+                                                    fontSize: 12.sp,
                                                   ),
                                                 ),
                                                 Text(
