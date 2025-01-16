@@ -58,6 +58,8 @@ dependencies:
   flutter_markdown: ^0.7.5
   flutter_downloader: ^1.11.8
   open_file: ^3.0.3
+  # 屏幕适配 https://pub.flutter-io.cn/packages/flutter_screenutil
+  flutter_screenutil: ^5.9.0
 
 dev_dependencies:
   flutter_test:

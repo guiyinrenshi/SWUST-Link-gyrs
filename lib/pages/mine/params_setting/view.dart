@@ -14,7 +14,9 @@ class Params_settingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Color(0xfff3f4f6),
       appBar: AppBar(
+          backgroundColor: Color(0xfff3f4f6),
           title: Row(
         children: [
           Expanded(

@@ -13,6 +13,7 @@ class ClassScorePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xfff3f4f6),
       appBar: AppBar(
         title: Row(children: [
           Expanded(child: Text("成绩查询"),),

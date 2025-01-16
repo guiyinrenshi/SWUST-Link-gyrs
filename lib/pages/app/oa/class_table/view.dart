@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'logic.dart';
 import 'state.dart';
@@ -16,7 +17,9 @@ class ClassTablePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xfff3f4f6),
       appBar: AppBar(
+        backgroundColor: Color(0xfff3f4f6),
         title: Row(
           children: [
             Expanded(
@@ -79,8 +82,8 @@ class ClassTablePage extends StatelessWidget {
                           ),
                           Text(
                             "${currentDate.month}.${currentDate.day}",
-                            style: const TextStyle(
-                                color: Colors.grey, fontSize: 12),
+                            style: TextStyle(
+                                color: Colors.grey, fontSize: 12.sp),
                           ),
                         ],
                       ),
@@ -121,7 +124,7 @@ class ClassTablePage extends StatelessWidget {
                           return Expanded(
                             flex: 1,
                             child: Container(
-                              margin: const EdgeInsets.all(2),
+                              margin: EdgeInsets.only(left: 2.w,right: 2.w,top: 1.h,bottom: 1.h),
                               child: courses.isNotEmpty
                                   ? Column(
                                       children:
@@ -163,15 +166,14 @@ class ClassTablePage extends StatelessWidget {
                                               );
                                             },
                                             child: Container(
-                                              width: double.infinity,
-                                            margin: const EdgeInsets.only(
-                                                bottom: 2),
-                                            padding: const EdgeInsets.all(4),
+                                            margin: EdgeInsets.only(
+                                                bottom: 2.h),
+                                            padding: EdgeInsets.only(left: 4.w,right: 4.w,top: 4.h,bottom: 4.h),
                                             decoration: BoxDecoration(
                                               color: logic.getCourseColor(
                                                   course.className),
                                               borderRadius:
-                                              BorderRadius.circular(4),
+                                              BorderRadius.circular(4.r),
                                             ),
                                             child: Column(
                                               mainAxisAlignment:
@@ -183,24 +185,24 @@ class ClassTablePage extends StatelessWidget {
                                                   textAlign: TextAlign.center,
                                                   overflow:
                                                   TextOverflow.ellipsis,
-                                                  style: const TextStyle(
+                                                  style: TextStyle(
                                                     color: Colors.white,
-                                                    fontSize: 14,
+                                                    fontSize: 14.sp,
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
                                                 Text(
                                                   course.teacher,
-                                                  style: const TextStyle(
+                                                  style: TextStyle(
                                                     color: Colors.white,
-                                                    fontSize: 13,
+                                                    fontSize: 13.sp,
                                                   ),
                                                 ),
                                                 Text(
                                                   "@${course.location}",
-                                                  style: const TextStyle(
+                                                  style:TextStyle(
                                                     color: Colors.white,
-                                                    fontSize: 12,
+                                                    fontSize: 11.sp,
                                                   ),
                                                 )
                                               ],

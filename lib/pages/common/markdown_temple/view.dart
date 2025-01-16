@@ -21,7 +21,10 @@ class MarkdownTemplePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Obx(() => Text(state.title.value)),), body: Padding(
+        backgroundColor: Color(0xfff3f4f6),
+      appBar: AppBar(
+        backgroundColor: Color(0xfff3f4f6),
+        title: Obx(() => Text(state.title.value)),), body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Obx(() =>
             Markdown(

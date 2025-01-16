@@ -16,7 +16,9 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Color(0xfff3f4f6),
         appBar: AppBar(
+          backgroundColor: Color(0xfff3f4f6),
           title: Text("帐号登录"),
         ),
         body: Padding(
