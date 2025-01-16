@@ -24,6 +24,7 @@ class DuifenePaperLogic extends GetxController {
       state.duifeneClient = DuiFenE(username: username, password: password);
       if (await state.duifeneClient.passwordLogin()) {
         state.papers.value = await state.duifeneClient.getAllPager();
+        state.isLoading.value = false;
       } else {
         Get.dialog(AlertDialog(
           title: Text("登录对分易错误"),

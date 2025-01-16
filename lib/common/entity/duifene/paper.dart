@@ -7,6 +7,8 @@ class Paper {
   final String myScore;
   final String myDoneDate;
 
+  final bool isSubmit;
+
   Paper({
     required this.histPaperID,
     required this.name,
@@ -14,6 +16,7 @@ class Paper {
     required this.endDate,
     required this.myScore,
     required this.myDoneDate,
+    required this.isSubmit
   });
 
   factory Paper.fromJson(Map<String, dynamic> json) {
@@ -24,6 +27,7 @@ class Paper {
       endDate: json['EndDate'],
       myScore: json['MyScore'],
       myDoneDate: json['MyDoneDate'],
+      isSubmit: json['MyDoneDate'] != ""
     );
   }
 }

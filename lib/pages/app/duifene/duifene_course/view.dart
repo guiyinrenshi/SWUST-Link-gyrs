@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 
 import 'logic.dart';
 import 'state.dart';
@@ -20,12 +21,11 @@ class DuifeneCoursePage extends StatelessWidget {
           children: [
             Expanded(child: Text("对分易课程")),
             TextButton(onPressed: logic.joinClass, child: Text("加入班级"))
-
           ],
         ),
       ),
       body: Obx(
-            () => ListView.builder(
+        () => ListView.builder(
           itemCount: state.courses.length,
           itemBuilder: (context, index) {
             final course = state.courses[index];
@@ -49,11 +49,11 @@ class DuifeneCoursePage extends StatelessWidget {
                   ),
                 ),
               ),
+              trailing: TextButton(onPressed: () {logic.showSignInfo(course);}, child: Text("签到码签到")),
             );
           },
         ),
       ),
-
     );
   }
 }

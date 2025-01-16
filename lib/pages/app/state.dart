@@ -16,7 +16,7 @@ class AppState {
       "label": "对分易",
       "children": [
         {"route": AppRoutes.MAIN + AppRoutes.DUIFENE_COURSE, "text": "对分易课程"},
-        {"route": AppRoutes.MAIN + AppRoutes.COMING_SOON, "text": "对分易作业"},
+        {"route": AppRoutes.MAIN + AppRoutes.DUIFENE_WORK, "text": "对分易作业"},
         {"route": AppRoutes.MAIN + AppRoutes.DUIFENE_PAPER, "text": "对分易练习"}
       ]
     },

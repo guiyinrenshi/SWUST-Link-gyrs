@@ -48,7 +48,7 @@ class HitokotoPage extends StatelessWidget {
               SizedBox(height: 10,),
 
               Row(
-                children: [Obx(() => Text(state.text.value == ""?"未获取到信息": state.text.value))],
+                children: [Obx(() => Expanded(child: Text(state.text.value == ""?"未获取到信息": state.text.value)))],
               ),
               SizedBox(height: 5,),
               Row(

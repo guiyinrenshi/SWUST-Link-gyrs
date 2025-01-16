@@ -5,8 +5,10 @@ import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:html/parser.dart';
 import 'package:logger/logger.dart';
+import 'package:swust_link/common/entity/duifene/check_in.dart';
 import 'package:swust_link/common/entity/duifene/course.dart';
 import 'package:swust_link/common/entity/duifene/paper.dart';
+import 'package:swust_link/common/entity/duifene/work.dart';
 
 class DuiFenE {
   late Dio dio;
@@ -29,14 +31,14 @@ class DuiFenE {
       "priority": "u=1, i",
       "referer": "https://www.duifene.com/",
       "sec-ch-ua":
-      "\"Chromium\";v=\"128\", \"Not;A=Brand\";v=\"24\", \"Google Chrome\";v=\"128\"",
+          "\"Chromium\";v=\"128\", \"Not;A=Brand\";v=\"24\", \"Google Chrome\";v=\"128\"",
       "sec-ch-ua-mobile": "?0",
       "sec-ch-ua-platform": "\"Windows\"",
       "sec-fetch-dest": "empty",
       "sec-fetch-mode": "cors",
       "sec-fetch-site": "same-origin",
       "user-agent":
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
       "x-requested-with": "XMLHttpRequest"
     };
 
@@ -123,78 +125,133 @@ class DuiFenE {
     }
   }
 
-    Future<List<Paper>> getAllPager() async {
-      List<Course>? courses = await getCourseInfo();
-      List<Paper>? papers = [];
-      if (courses != null) {
-        for (Course course in courses) {
-          List<Paper>? paper = await getPaperList(course.courseID);
-          if (paper != null) {
-            papers.addAll(paper);
-          }
+  Future<List<Paper>> getAllPager() async {
+    List<Course>? courses = await getCourseInfo();
+    List<Paper>? papers = [];
+    if (courses != null) {
+      for (Course course in courses) {
+        List<Paper>? paper = await getPaperList(course.courseID);
+        if (paper != null) {
+          papers.addAll(paper);
         }
-      } else {
-        Logger().i("没有课程信息");
       }
-      return papers;
+    } else {
+      Logger().i("没有课程信息");
     }
+    return papers;
+  }
 
-    Future<bool> getCourseMoreInfo(String courseId) async {
-      String url = "https://www.duifene.com/_UserCenter/CourseInfo.ashx";
-      var payload = {
-        "action": "getcoursemodule",
-        "classtypeid": 2,
-        "courseid": courseId
-      };
-      try {
-        var response = await dio.post(url, data: payload);
-        if (response.statusCode == 200) {
-          Logger().d(response.data);
-          Logger().i("获取课程信息成功！");
-          return true;
-        } else {
-          Logger().d(response.data);
-          Logger().e("获取课程信息失败！");
-          return false;
-        }
-      } catch (e) {
-        Logger().e("获取课程信息失败！$e");
+  Future<bool> getCourseMoreInfo(String courseId) async {
+    String url = "https://www.duifene.com/_UserCenter/CourseInfo.ashx";
+    var payload = {
+      "action": "getcoursemodule",
+      "classtypeid": 2,
+      "courseid": courseId
+    };
+    try {
+      var response = await dio.post(url, data: payload);
+      if (response.statusCode == 200) {
+        Logger().d(response.data);
+        Logger().i("获取课程信息成功！");
+        return true;
+      } else {
+        Logger().d(response.data);
+        Logger().e("获取课程信息失败！");
         return false;
       }
-    }
-
-    Future<String?> joinClass(String classId) async {
-      String url = "https://www.duifene.com/_UserCenter/CourseInfo.ashx";
-      var payload = {"action": "joinclassbyclasscode", "classcode": classId};
-      try {
-        var response = await dio.post(url,
-            data: payload, options: Options(responseType: ResponseType.plain));
-
-        final parsed = json.decode(response.data);
-        return parsed['msg'] as String?;
-      } catch (e) {
-        Logger().e("加入班级失败！$e");
-      }
-      return "加入班级失败";
-    }
-
-    Future<List<Paper>?> getPaperList(String courseID) async {
-      String url = "https://www.duifene.com/_Paper/StudentPaper.ashx";
-      var payload = {"action": "datalist", "CourseID": courseID};
-      try {
-        var response = await dio.post(url,
-            data: payload, options: Options(responseType: ResponseType.plain));
-        final parsed = json.decode(response.data);
-        if (parsed['msg'] == '1') {
-          final List<dynamic> papersJson = parsed['jsontb1'];
-          return papersJson.map<Paper>((json) => Paper.fromJson(json)).toList();
-        } else {
-          Logger().i("暂无数据：${parsed['msgbox']}");
-          return null;
-        }
-      } catch (e) {
-        Logger().e("获取练习列表失败！$e");
-        return null;
-      }
+    } catch (e) {
+      Logger().e("获取课程信息失败！$e");
+      return false;
     }
   }
+
+  Future<String?> joinClass(String classId) async {
+    String url = "https://www.duifene.com/_UserCenter/CourseInfo.ashx";
+    var payload = {"action": "joinclassbyclasscode", "classcode": classId};
+    try {
+      var response = await dio.post(url,
+          data: payload, options: Options(responseType: ResponseType.plain));
+
+      final parsed = json.decode(response.data);
+      return parsed['msg'] as String?;
+    } catch (e) {
+      Logger().e("加入班级失败！$e");
+    }
+    return "加入班级失败";
+  }
+
+  Future<List<Paper>?> getPaperList(String courseID) async {
+    String url = "https://www.duifene.com/_Paper/StudentPaper.ashx";
+    var payload = {"action": "datalist", "CourseID": courseID};
+    try {
+      var response = await dio.post(url,
+          data: payload, options: Options(responseType: ResponseType.plain));
+      final parsed = json.decode(response.data);
+      if (parsed['msg'] == '1') {
+        final List<dynamic> papersJson = parsed['jsontb1'];
+        return papersJson.map<Paper>((json) => Paper.fromJson(json)).toList();
+      } else {
+        Logger().i("暂无数据：${parsed['msgbox']}");
+        return null;
+      }
+    } catch (e) {
+      Logger().e("获取练习列表失败！$e");
+      return null;
+    }
+  }
+
+  Future<List<Work>> getWorkList(String courseId, String classId) async {
+    String url = "https://www.duifene.com/_HomeWork/HomeWorkInfo.ashx";
+    var payload = {
+      "action": "gethomeworklist",
+      "courseid": courseId,
+      "classtypeid": "2",
+      "classid": classId,
+      "refresh": "0"
+    };
+    var res = await dio.post(url, data: FormData.fromMap(payload));
+    final List<dynamic> jsonResponse = json.decode(res.data);
+    return jsonResponse
+        .map((e) => Work.fromJson(e as Map<String, dynamic>))
+        .toList();
+  }
+
+  Future<List<Work>> getAllWorkList() async {
+    List<Course>? courses = await getCourseInfo();
+    List<Work>? works = [];
+    if (courses != null) {
+      for (Course course in courses) {
+        List<Work>? work = await getWorkList(course.courseID, course.tClassID);
+        works.addAll(work);
+      }
+    } else {
+      Logger().i("没有课程信息");
+    }
+    return works;
+  }
+
+  Future<List<CheckIn>> getSignCode(String classId) async {
+    String stuUrl = "https://www.duifene.com/_CheckIn/PC/StudentCheckIn.aspx";
+    var stuIdInfoRaw = await dio.get(stuUrl);
+    Logger().i(stuIdInfoRaw);
+    var document = parse(stuIdInfoRaw.data);
+    String? stuId = document.querySelector("#HFStudentID")!.attributes['value'];
+    var url = "https://www.duifene.com/_CheckIn/MBCount.ashx";
+    var payload = {
+      "action": "getstudentinloglist",
+      "classid": classId,
+      "studentid": stuId
+    };
+
+    var res =
+        await dio.post(url, data: FormData.fromMap(payload));
+    final Map<String,dynamic> jsonData = json.decode(res.data);
+    final List<dynamic> jsonDatas = jsonData['rows'];
+    return jsonDatas.map((e) => CheckIn.fromJson(e as Map<String,dynamic>)).toList();
+  }
+
+
+// Future<String> signByCourse(String course,String classId) async{
+//
+// }
+}

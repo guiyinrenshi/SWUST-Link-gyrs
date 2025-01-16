@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -54,8 +55,6 @@ class DuifeneCourseLogic extends GetxController {
     }
   }
 
-
-
   Future<void> joinClass() async {
     Get.dialog(
       AlertDialog(
@@ -90,7 +89,8 @@ class DuifeneCourseLogic extends GetxController {
           TextButton(
             onPressed: () async {
               Get.back();
-              String? msg = await state.duifeneClient.joinClass(state.classIdController.value.text);
+              String? msg = await state.duifeneClient
+                  .joinClass(state.classIdController.value.text);
               Get.snackbar("", msg!);
             },
             child: Text("确定"),
@@ -98,5 +98,69 @@ class DuifeneCourseLogic extends GetxController {
         ],
       ),
     );
+  }
+
+  Future<void> showSignInfo(course) async {
+    var data = await state.duifeneClient.getSignCode(course.tClassID);
+
+    Get.dialog(Dialog(
+      child: SizedBox(
+        width: 300.w, // 设置对话框宽度
+        height: 500.h,
+        child: Column(
+          mainAxisSize: MainAxisSize.min, // 确保 Column 根据内容调整大小
+          children: [
+            const Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Text("签到列表", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            ),
+            if (data.isNotEmpty)
+              TextButton(
+                child: const Text("一键签到"),
+                onPressed: () async {
+                  var data = await state.duifeneClient.getSignCode(course.tClassID);
+
+                  String msg = await state.duifeneClient.signIn(data[0].checkInCode);
+                  Get.snackbar("签到结果", msg);
+                },
+              ),
+            data.isEmpty
+                ? const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text("暂无签到信息"),
+            )
+                : Expanded(
+              child: ListView.builder(
+                itemCount: data.length,
+                itemBuilder: (context, index) {
+                  final checkIn = data[index];
+                  return ListTile(
+                    title: Text(checkIn.createrDate),
+                    leading: Container(
+                      height: 48,
+                      width: 48,
+                      decoration: BoxDecoration(
+                        color: Color((checkIn.statusName.hashCode) | 0xFF000000),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      alignment: Alignment.center,
+                      child: Text(
+                        checkIn.statusName[0], // 使用文字的首字母作为图标
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24,
+                        ),
+                      ),
+                    ),
+                    trailing: Text(checkIn.statusName),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    ));
   }
 }
