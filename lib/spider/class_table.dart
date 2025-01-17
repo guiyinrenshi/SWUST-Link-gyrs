@@ -20,16 +20,6 @@ class UndergraduateClassTable {
     return await oa.login();
   }
 
-  // Future<List<ClassInfo>> getClassTable() {
-  //
-  // }
-  // Future<void> getClassTable() async {
-  //
-  //   Response response = await oa.dio.get("https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=chooseCourse:courseTable");
-  //   Logger().i(response.data);
-  //   List<List<String>> out = parseTable(response.data,tableSelector: "#choosenCourseTable" );
-  //   Logger().i(out);
-  // }
 
   Future<List<Course>> parseClassTable(String url) async {
     try {
@@ -119,9 +109,6 @@ class UndergraduateClassTable {
       return [];
     }
   }
-
-
-
 
 }
 

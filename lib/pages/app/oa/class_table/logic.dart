@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,13 +9,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:swust_link/common/entity/oa/course.dart';
 import 'package:swust_link/common/routes/app_pages.dart';
 import 'package:swust_link/spider/class_table.dart';
+import 'package:swust_link/spider/sjjx_class_table.dart';
 import 'package:swust_link/utils/class_util.dart';
 
 import 'state.dart';
 
 class ClassTableLogic extends GetxController {
   final ClassTableState state = ClassTableState();
-
 
   Future<void> loadClassTable() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -35,10 +34,16 @@ class ClassTableLogic extends GetxController {
           UndergraduateClassTable(username: username, password: password);
 
       state.courses.value = await loadCoursesFromLocal();
+
       if (await state.undergraduateClassTable.login()) {
-        state.courses.value =
-            await state.undergraduateClassTable.parseClassTable(state.url.value);
+        state.courses.value = await state.undergraduateClassTable
+            .parseClassTable(state.url.value);
+        if (state.title.value == "课程表") {
+          state.sjjxTable = SJJXTable(username: username, password: password);
+          state.courses.addAll(await state.sjjxTable.getCourseList());
+        }
         await saveCoursesToLocal(state.courses);
+
       } else {
         if (state.courses.isEmpty) {
           Get.dialog(AlertDialog(
@@ -73,7 +78,6 @@ class ClassTableLogic extends GetxController {
     }
   }
 
-
   // List<Course> get filteredCourses {
   //   return state.courses
   //       .where((course) =>
@@ -94,7 +98,6 @@ class ClassTableLogic extends GetxController {
 
     return groupedCourses.values.toList();
   }
-
 
   Color getCourseColor(String className) {
     if (!state.courseColors.containsKey(className)) {
@@ -152,7 +155,8 @@ class ClassTableLogic extends GetxController {
     final firstDayWeekday = state.firstDay.value.weekday;
 
     // 计算第一天的周一日期（回溯到第一周的周一）
-    final firstMonday = state.firstDay.value.subtract(Duration(days: firstDayWeekday - 1));
+    final firstMonday =
+        state.firstDay.value.subtract(Duration(days: firstDayWeekday - 1));
 
     // 根据指定周数计算对应周的周一日期
     final daysToAdd = (week - 1) * 7;

@@ -54,3 +54,22 @@ class Course {
         'period: $period, session: $session)';
   }
 }
+
+class CourseTime {
+  final int week; // 周次
+  final int weekday; // 星期几 (1-7)
+  final int startPeriod; // 起始节次
+  final int endPeriod; // 结束节次
+
+  CourseTime({
+    required this.week,
+    required this.weekday,
+    required this.startPeriod,
+    required this.endPeriod,
+  });
+
+  @override
+  String toString() {
+    return 'Week: $week, Weekday: $weekday, Start: $startPeriod, End: $endPeriod';
+  }
+}

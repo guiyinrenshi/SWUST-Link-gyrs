@@ -5,10 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:swust_link/spider/class_table.dart';
 import 'package:swust_link/common/entity/oa/course.dart';
+import 'package:swust_link/spider/sjjx_class_table.dart';
 
 class ClassTableState {
   late UndergraduateClassTable undergraduateClassTable;
-
+  late SJJXTable sjjxTable;
   final RxList<Course> courses = <Course>[].obs;
   final Map<String, Color> courseColors = {};
   final List<Color> predefinedColors = [

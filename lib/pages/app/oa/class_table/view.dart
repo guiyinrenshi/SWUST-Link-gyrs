@@ -193,6 +193,8 @@ class ClassTablePage extends StatelessWidget {
                                                 ),
                                                 Text(
                                                   course.teacher,
+
+                                                  maxLines: 2,
                                                   style: TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 12.sp,
@@ -200,6 +202,7 @@ class ClassTablePage extends StatelessWidget {
                                                 ),
                                                 Text(
                                                   "@${course.location}",
+                                                  maxLines: 2,
                                                   style:TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 11.sp,
