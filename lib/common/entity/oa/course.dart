@@ -1,4 +1,6 @@
-class Course {
+import 'package:swust_link/common/model/entity_model.dart';
+
+class Course extends JsonSerializable {
   final String className;
   final String teacher;
   final String location;
@@ -20,6 +22,7 @@ class Course {
   });
 
   // JSON 转 Course 对象
+  @override
   factory Course.fromJson(Map<String, dynamic> json) {
     return Course(
       className: json['className'] as String,
@@ -34,6 +37,7 @@ class Course {
   }
 
   // Course 对象转 JSON
+  @override
   Map<String, dynamic> toJson() {
     return {
       'className': className,
@@ -53,6 +57,9 @@ class Course {
         'startTime: $startTime, endTime: $endTime, weekDay: $weekDay, '
         'period: $period, session: $session)';
   }
+
+
+
 }
 
 class CourseTime {

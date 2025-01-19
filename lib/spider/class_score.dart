@@ -1,30 +1,19 @@
 import 'package:html/dom.dart';
 import 'package:html/parser.dart';
+import 'package:swust_link/common/global.dart';
 import 'package:swust_link/spider/oa_auth.dart';
 
 import '../common/entity/oa/score.dart';
 
 class ClassScore {
-  late OAAuth oa;
 
-  ClassScore(String username, String password) {
-    oa = OAAuth(
-        service:
-            "https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=studentPortal:DEFAULT_EVENT",
-        username: username,
-        password: password);
-  }
+  ClassScore();
 
   Future<List<CourseScore>> getScoreList() async {
     final url =
         "https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=studentProfile:courseMark";
-
-    // 登录校验
-    if(!await oa.login()){
-      return [];
-    }
-    final res = await oa.dio.get(url);
-    return extractCourses(res.data);
+    final res = await Global.oa?.dio.get(url);
+    return extractCourses(res?.data);
   }
 
   /// 获取当前元素的所有后续兄弟元素（仅元素节点）

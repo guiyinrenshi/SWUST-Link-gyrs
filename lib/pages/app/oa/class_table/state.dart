@@ -49,4 +49,6 @@ class ClassTableState {
   final url = "".obs;
   final title = "".obs;
   final currentWeek = 1.obs;
+  final isLoading = true.obs;
+
 }

@@ -75,8 +75,6 @@ class SJJXTable {
           'accept':
               'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
           'accept-language': 'zh-CN,zh;q=0.9',
-          'cookie':
-              'JSESSIONID=6E800225CFDF0FB6CDE4E7B14888DA75.node1; aexpsid=6E800225CFDF0FB6CDE4E7B14888DA75.node1',
           'priority': 'u=0, i',
           'referer': 'https://sjjx.dean.swust.edu.cn/aexp/stuLeft.jsp',
           'sec-ch-ua':
@@ -93,6 +91,8 @@ class SJJXTable {
         },
       ),
     );
+    Logger().i(res.statusCode);
+    Logger().i(res.data);
     return res.data;
   }
 
@@ -145,7 +145,8 @@ class SJJXTable {
   }
 
   Future<List<Course>> getCourseList() async {
-    await login();
+    await oa.login();
+    // Logger().i(await oa.dio.get("https://sjjx.dean.swust.edu.cn/aexp/stuIndex.jsp"));
     // var url = "https://sjjx.dean.swust.edu.cn/teachn/teachnAction/index.action";
     var data = await getInfo(1);
     List<Course> courses = [];

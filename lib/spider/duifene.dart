@@ -57,8 +57,16 @@ class DuiFenE {
     try {
       var response = await dio.post(url, data: data);
       if (response.statusCode == 200) {
-        Logger().i("登录成功！${response.data}");
-        return true;
+        var data = jsonDecode(response.data);
+        if (data['msg']=="1"){
+          Logger().i("登录成功！${data['msg']}");
+          return true;
+
+        } else{
+          Logger().i("登录失败！${data['msgbox']}");
+          return false;
+        }
+
       } else {
         Logger().e("登录失败！${response.data}");
         return false;

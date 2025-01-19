@@ -1,4 +1,6 @@
-class FinalExam {
+import '../../model/entity_model.dart';
+
+class FinalExam extends JsonSerializable{
   final int index;
   final String course;
   final String week;
@@ -34,6 +36,7 @@ class FinalExam {
     );
   }
 
+  @override
   Map<String, dynamic> toJson() {
     return {
       'index': index,

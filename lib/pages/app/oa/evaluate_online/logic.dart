@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:swust_link/common/entity/oa/evaluation_paper.dart';
-import 'package:swust_link/pages/app/oa/evaluate_online/view.dart';
 import 'package:swust_link/spider/evaluate_online.dart';
 
-import '../../../../common/routes/app_pages.dart';
 import 'state.dart';
 
 class EvaluateOnlineLogic extends GetxController {
@@ -19,43 +16,10 @@ class EvaluateOnlineLogic extends GetxController {
   }
 
   Future<void> getEvalPaperList() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String? username = prefs.getString('0username');
-    final String? password = prefs.getString('0password');
-    if (username != null && password != null) {
-      state.epClient = EvaluateOnline(username, password);
-      if (await state.epClient.login()) {
-        state.evaluatePaperList.value =
-            await state.epClient.getEvaluationPaperList();
-        state.isLoading.value = false;
-      } else {
-        Get.dialog(AlertDialog(
-          title: Text("登录失败"),
-          content: Text("请重进页面重新尝试登录! "),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Get.back();
-              },
-              child: Text("确定"),
-            ),
-          ],
-        ));
-      }
-    } else {
-      Get.dialog(AlertDialog(
-        title: Text("暂未登录"),
-        content: Text("您还未登录过一站式大厅，请先登录并保存信息! "),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Get.toNamed(AppRoutes.MAIN + AppRoutes.ACCOUNT);
-            },
-            child: Text("确定"),
-          ),
-        ],
-      ));
-    }
+    state.epClient = EvaluateOnline();
+    state.evaluatePaperList.value =
+        await state.epClient.getEvaluationPaperList();
+    state.isLoading.value = false;
   }
 
   Future<void> showEPDialog(List<EvaluationPaper> data) async {

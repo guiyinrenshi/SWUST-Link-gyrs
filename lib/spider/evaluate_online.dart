@@ -3,29 +3,20 @@ import 'dart:convert';
 import 'package:html/parser.dart';
 import 'package:logger/logger.dart';
 import 'package:swust_link/common/entity/oa/evaluation_paper.dart';
+import 'package:swust_link/common/global.dart';
 import 'package:swust_link/spider/oa_auth.dart';
 import 'package:dio/dio.dart';
 
 class EvaluateOnline {
-  late OAAuth oa;
 
-  EvaluateOnline(username, password) {
-    oa = OAAuth(
-        service:
-            "https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=studentPortal:DEFAULT_EVENT",
-        username: username,
-        password: password);
-  }
+  EvaluateOnline();
 
-  Future<bool> login() async {
-    return await oa.login();
-  }
 
   Future<List<EvaluationPaper>> getEvaluationPaperList() async {
     final url =
         'https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=evaluateOnline:DEFAULT_EVENT';
-    var res = await oa.dio.get(url);
-    var document = parse(res.data);
+    var res = await Global.oa?.dio.get(url);
+    var document = parse(res?.data);
     var evaluationList = <EvaluationPaper>[];
     final baseurl = "https://matrix.dean.swust.edu.cn/acadmicManager/";
     var evaluationRawData = document.querySelectorAll(".editRows");
@@ -51,8 +42,8 @@ class EvaluateOnline {
   Future<Map<dynamic, dynamic>> parseEvaluation(
       Map<String, dynamic> data, int value) async {
     final url = data['url'];
-    var res = await oa.dio.get(url);
-    var document = parse(res.data);
+    var res = await Global.oa?.dio.get(url);
+    var document = parse(res?.data);
 
     var scc =
         document.querySelector("input[name='SCC']")?.attributes['value'] ?? '';
@@ -114,7 +105,7 @@ class EvaluateOnline {
         "https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=evaluateOnline:apiPostQuota";
 
     Logger().i(option);
-    var response = await oa.dio.post(url,
+    var response = await Global.oa?.dio.post(url,
         data: FormData.fromMap(option),
         options: Options(headers: {
           "accept":
@@ -138,7 +129,7 @@ class EvaluateOnline {
           "user-agent":
               "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
         }));
-    var resultString = response.data; // 返回的字符串
+    var resultString = response?.data; // 返回的字符串
     try {
       var result = jsonDecode(resultString); // 解析为 Map
       if (result['success'] == true) {
@@ -156,7 +147,7 @@ class EvaluateOnline {
     var params = {"event": "evaluateOnline:evaluateResponseDo"};
     Logger().i(courseInfo);
     var response =
-        await oa.dio.post(url, data: FormData.fromMap(courseInfo), queryParameters: params,options: Options(
+        await Global.oa?.dio.post(url, data: FormData.fromMap(courseInfo), queryParameters: params,options: Options(
           headers:  {
             "accept":
             "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
@@ -185,7 +176,7 @@ class EvaluateOnline {
           },
         ));
 
-    if (response.statusCode == 200) {
+    if (response?.statusCode == 200) {
       print("${courseInfo['Title']} 评价提交成功！");
     } else {
       print("${courseInfo['Title']} 评价提交失败！");

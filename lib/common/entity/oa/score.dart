@@ -1,5 +1,6 @@
+import 'package:swust_link/common/model/entity_model.dart';
 
-class CourseScore {
+class CourseScore extends JsonSerializable{
   final String semester; // 学期，如 2024-2025-春
   final String name; // 课程名
   final String courseCode; // 课程号
@@ -18,6 +19,7 @@ class CourseScore {
     required this.retakeScore,
     required this.gpa,
   });
+
   factory CourseScore.fromJson(Map<String, dynamic> json) {
     return CourseScore(
       semester: json['semester'] ?? '',
@@ -31,18 +33,17 @@ class CourseScore {
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'semester': semester,
-      'name': name,
-      'courseCode': courseCode,
-      'credit': credit,
-      'courseNature': courseNature,
-      'examScore': examScore,
-      'retakeScore': retakeScore,
-      'gpa': gpa,
-    };
-  }
+  @override
+  Map<String, dynamic> toJson() => {
+        'semester': semester,
+        'name': name,
+        'courseCode': courseCode,
+        'credit': credit,
+        'courseNature': courseNature,
+        'examScore': examScore,
+        'retakeScore': retakeScore,
+        'gpa': gpa,
+      };
 
   @override
   String toString() {

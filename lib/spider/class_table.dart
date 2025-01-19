@@ -1,36 +1,30 @@
 import 'package:html/parser.dart';
 import 'package:logger/logger.dart';
 import 'package:swust_link/common/entity/oa/course.dart';
+import 'package:swust_link/common/global.dart';
 import 'package:swust_link/spider/oa_auth.dart';
 
 class UndergraduateClassTable {
-  late OAAuth oa;
-  late String username;
-  late String password;
+  UndergraduateClassTable() {
+    // oa = OAAuth(
+    //     service:
+    //         "https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=studentPortal:DEFAULT_EVENT",
+    //     username: username,
+    //     password: password);
 
-  UndergraduateClassTable({required this.username, required this.password}) {
-    oa = OAAuth(
-        service:
-            "https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=studentPortal:DEFAULT_EVENT",
-        username: username,
-        password: password);
   }
-
-  Future<bool> login() async {
-    return await oa.login();
-  }
-
 
   Future<List<Course>> parseClassTable(String url) async {
+
     try {
       // 发起 GET 请求获取课程表 HTML
-      final response = await oa.dio.get(url);
-      if (response.statusCode != 200) {
-        throw Exception("Failed to fetch class table, status code: ${response.statusCode}");
+      final response = await Global.oa?.dio.get(url);
+      if (response?.statusCode != 200) {
+        throw Exception(
+            "Failed to fetch class table, status code: ${response?.statusCode}");
       }
-
       // 解析 HTML
-      final document = parse(response.data);
+      final document = parse(response?.data);
       final table = document.querySelector("#choosenCourseTable tbody");
       if (table == null) throw Exception("Failed to locate course table");
 
@@ -49,7 +43,8 @@ class UndergraduateClassTable {
 
         for (var cellIndex = 0; cellIndex < cells.length; cellIndex++) {
           // 跳过被 rowspan 占据的列
-          while (rowspanMap.containsKey(colIndex) && rowspanMap[colIndex]! > 0) {
+          while (
+              rowspanMap.containsKey(colIndex) && rowspanMap[colIndex]! > 0) {
             rowspanMap[colIndex] = rowspanMap[colIndex]! - 1;
             colIndex++;
           }
@@ -80,12 +75,15 @@ class UndergraduateClassTable {
           // 解析课程信息
           final lectures = cell.querySelectorAll(".lecture");
           for (var lecture in lectures) {
-            final className = lecture.querySelector(".course")?.text.trim() ?? "未知课程";
-            final teacher = lecture.querySelector(".teacher")?.text.trim() ?? "未知教师";
+            final className =
+                lecture.querySelector(".course")?.text.trim() ?? "未知课程";
+            final teacher =
+                lecture.querySelector(".teacher")?.text.trim() ?? "未知教师";
             final week = lecture.querySelector(".week")?.text.trim() ?? "";
             final startTime = week.split("-").first;
             final endTime = week.split("-").last.split("(").first;
-            final location = lecture.querySelector(".place")?.text.trim() ?? "未知地点";
+            final location =
+                lecture.querySelector(".place")?.text.trim() ?? "未知地点";
 
             courses.add(Course(
               className: className,
@@ -93,7 +91,8 @@ class UndergraduateClassTable {
               location: location,
               startTime: startTime,
               endTime: endTime,
-              weekDay: colIndex - 2 + 1, // 星期几，从 1 开始
+              weekDay: colIndex - 2 + 1,
+              // 星期几，从 1 开始
               period: currentPeriod ?? "未知",
               session: session,
             ));
@@ -109,7 +108,4 @@ class UndergraduateClassTable {
       return [];
     }
   }
-
 }
-
-

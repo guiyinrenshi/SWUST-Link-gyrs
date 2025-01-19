@@ -3,16 +3,12 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:swust_link/common/global.dart';
 import 'package:swust_link/common/routes/app_pages.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_downloader/flutter_downloader.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); // 确保插件初始化前绑定 Widgets
-  await FlutterDownloader.initialize(
-    debug: true, // 设置为 true 以启用调试日志
-    ignoreSsl: true, // 如果需要忽略 SSL 验证
-  );
   if(window.physicalSize.isEmpty){
     window.onMetricsChanged = (){
       //在回调中，size仍然有可能是0
@@ -25,6 +21,8 @@ void main() async {
     //如果size非0，则直接runApp
     runApp(const MyApp());
   }
+  Global.initialize();
+
   runApp(const MyApp());
 }
 

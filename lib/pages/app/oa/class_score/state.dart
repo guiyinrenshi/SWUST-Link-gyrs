@@ -8,6 +8,6 @@ class ClassScoreState {
   final scores = <CourseScore>[].obs;
   final selectedSemester = "".obs;
   final displayList  = <CourseScore>[].obs;
-
+  final isLoading = true.obs;
   var averageGPA = 0.0.obs;
 }

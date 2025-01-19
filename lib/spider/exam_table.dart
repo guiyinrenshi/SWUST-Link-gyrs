@@ -1,25 +1,18 @@
 // 考试
 import 'package:html/parser.dart';
 import 'package:swust_link/common/entity/oa/exam.dart';
+import 'package:swust_link/common/global.dart';
 import 'package:swust_link/spider/oa_auth.dart';
 
 class ExamTable {
-  late OAAuth oa;
 
-  ExamTable(String username, String password) {
-    oa = OAAuth(
-        service:
-            "https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=studentPortal:DEFAULT_EVENT",
-        username: username,
-        password: password);
-  }
+  ExamTable();
 
   Future<List<FinalExam>> getExams() async {
-    await oa.login();
     final url =
         "https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=studentPortal:examTable";
-    var data = await oa.dio.get(url);
-    final document = parse(data.data);
+    var data = await Global.oa?.dio.get(url);
+    final document = parse(data?.data);
     final rows = document.querySelectorAll('.editRows');
     return rows.map((row) {
       final cells = row.querySelectorAll('td');

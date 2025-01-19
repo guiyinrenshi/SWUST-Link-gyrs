@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:logger/logger.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:swust_link/common/routes/app_pages.dart';
-import 'package:swust_link/spider/duifene.dart';
 
+import '../../../../common/global.dart';
 import 'state.dart';
 
 class DuifeneCourseLogic extends GetxController {
@@ -18,40 +15,10 @@ class DuifeneCourseLogic extends GetxController {
   }
 
   Future<void> loadDuifene() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String? username = prefs.getString('1username');
-    final String? password = prefs.getString('1password');
-    if (username != null && password != null) {
-      state.duifeneClient = DuiFenE(username: username, password: password);
-      if (await state.duifeneClient.passwordLogin()) {
-        state.courses.value = (await state.duifeneClient.getCourseInfo())!;
-      } else {
-        Get.dialog(AlertDialog(
-          title: Text("登录对分易错误"),
-          content: Text("请检查账号密码是否无误并修改保存! "),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Get.toNamed(AppRoutes.MAIN + AppRoutes.ACCOUNT);
-              },
-              child: Text("确定"),
-            ),
-          ],
-        ));
-      }
+    if (Global.isLoginDfe) {
+      state.courses.value = (await Global.duiFenE?.getCourseInfo())!;
     } else {
-      Get.dialog(AlertDialog(
-        title: Text("暂未登录"),
-        content: Text("您还未登录过对分易，请先登录并保存信息! "),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Get.toNamed(AppRoutes.MAIN + AppRoutes.ACCOUNT);
-            },
-            child: Text("确定"),
-          ),
-        ],
-      ));
+      Get.snackbar("未登录", "请先在我的-账号信息中保存信息");
     }
   }
 
@@ -89,8 +56,8 @@ class DuifeneCourseLogic extends GetxController {
           TextButton(
             onPressed: () async {
               Get.back();
-              String? msg = await state.duifeneClient
-                  .joinClass(state.classIdController.value.text);
+              String? msg = await Global.duiFenE
+                  ?.joinClass(state.classIdController.value.text);
               Get.snackbar("", msg!);
             },
             child: Text("确定"),
@@ -101,7 +68,7 @@ class DuifeneCourseLogic extends GetxController {
   }
 
   Future<void> showSignInfo(course) async {
-    var data = await state.duifeneClient.getSignCode(course.tClassID);
+    var data = await Global.duiFenE?.getSignCode(course.tClassID);
 
     Get.dialog(Dialog(
       child: SizedBox(
@@ -112,52 +79,56 @@ class DuifeneCourseLogic extends GetxController {
           children: [
             const Padding(
               padding: EdgeInsets.all(16.0),
-              child: Text("签到列表", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              child: Text("签到列表",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             ),
-            if (data.isNotEmpty)
+            if (data!.isNotEmpty)
               TextButton(
                 child: const Text("一键签到"),
                 onPressed: () async {
-                  var data = await state.duifeneClient.getSignCode(course.tClassID);
+                  var data =
+                      await Global.duiFenE?.getSignCode(course.tClassID);
 
-                  String msg = await state.duifeneClient.signIn(data[0].checkInCode);
+                  String msg =
+                      await Global.duiFenE?.signIn(data![0].checkInCode)??"";
                   Get.snackbar("签到结果", msg);
                 },
               ),
             data.isEmpty
                 ? const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text("暂无签到信息"),
-            )
+                    padding: EdgeInsets.all(8.0),
+                    child: Text("暂无签到信息"),
+                  )
                 : Expanded(
-              child: ListView.builder(
-                itemCount: data.length,
-                itemBuilder: (context, index) {
-                  final checkIn = data[index];
-                  return ListTile(
-                    title: Text(checkIn.createrDate),
-                    leading: Container(
-                      height: 48,
-                      width: 48,
-                      decoration: BoxDecoration(
-                        color: Color((checkIn.statusName.hashCode) | 0xFF000000),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      alignment: Alignment.center,
-                      child: Text(
-                        checkIn.statusName[0], // 使用文字的首字母作为图标
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24,
-                        ),
-                      ),
+                    child: ListView.builder(
+                      itemCount: data.length,
+                      itemBuilder: (context, index) {
+                        final checkIn = data[index];
+                        return ListTile(
+                          title: Text(checkIn.createrDate),
+                          leading: Container(
+                            height: 48,
+                            width: 48,
+                            decoration: BoxDecoration(
+                              color: Color(
+                                  (checkIn.statusName.hashCode) | 0xFF000000),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            alignment: Alignment.center,
+                            child: Text(
+                              checkIn.statusName[0], // 使用文字的首字母作为图标
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 24,
+                              ),
+                            ),
+                          ),
+                          trailing: Text(checkIn.statusName),
+                        );
+                      },
                     ),
-                    trailing: Text(checkIn.statusName),
-                  );
-                },
-              ),
-            ),
+                  ),
           ],
         ),
       ),
