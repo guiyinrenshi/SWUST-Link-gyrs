@@ -58,6 +58,7 @@ dependencies:
   flutter_markdown: ^0.7.5
   # 屏幕适配 https://pub.flutter-io.cn/packages/flutter_screenutil
   flutter_screenutil: ^5.9.0
+  webview_flutter: ^4.10.0 #webview
 
 dev_dependencies:
   flutter_test:
