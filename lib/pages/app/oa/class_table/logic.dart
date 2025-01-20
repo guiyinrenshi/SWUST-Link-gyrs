@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:swust_link/common/entity/oa/course.dart';
 import 'package:swust_link/common/global.dart';
 import 'package:swust_link/spider/class_table.dart';
@@ -11,6 +13,13 @@ class ClassTableLogic extends GetxController {
   final ClassTableState state = ClassTableState();
 
   Future<void> loadClassTable() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String? firstDay = prefs.getString("firstDay");
+    try {
+      state.firstDay.value = DateTime.parse(firstDay!);
+    } catch (e) {
+      state.firstDay.value = DateTime.now();
+    }
     state.courses.value = await Global.localStorageService.loadFromLocal(
         "${state.title.value}-courses", (json) => Course.fromJson(json));
     state.isLoading.value = false;
@@ -19,7 +28,7 @@ class ClassTableLogic extends GetxController {
       var data =
           await state.undergraduateClassTable.parseClassTable(state.url.value);
       if(data.isNotEmpty){
-        await Global.localStorageService.saveToLocal(state.courses,"${state.title.value}-courses");
+        await Global.localStorageService.saveToLocal(data,"${state.title.value}-courses");
         state.courses.value = data;
       }
     } catch (e) {

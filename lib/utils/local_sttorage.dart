@@ -14,6 +14,7 @@ class LocalStorageService {
 
       // 将数据转换为 JSON 字符串
       final jsonString = jsonEncode(items.map((item) => item.toJson()).toList());
+      print(items);
       // 写入本地文件
       final file = File(filePath);
       await file.writeAsString(jsonString);
@@ -36,6 +37,7 @@ class LocalStorageService {
       if (await file.exists()) {
         final jsonString = await file.readAsString();
         final List<dynamic> jsonList = jsonDecode(jsonString);
+        print("Data load from $filePath");
 
         // 将 JSON 列表转换为对应类型列表
         return jsonList.map((json) => fromJson(json)).toList();

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:swust_link/common/entity/account.dart';
 import 'package:image/image.dart' as image_lib;
+import 'package:swust_link/common/global.dart';
 import 'package:swust_link/common/routes/app_pages.dart';
 
 import 'state.dart';
@@ -99,6 +100,11 @@ class LoginLogic extends GetxController {
         '${state.account.platformCode}username', state.account.username);
     await prefs.setString(
         '${state.account.platformCode}password', state.account.password);
+    if (state.account.platformCode == 0) {
+      Global.initOA();
+    } else if (state.account.platformCode == 1) {
+      Global.initDuifene();
+    }
     Get.dialog(AlertDialog(
       title: Text("保存成功"),
       content: Text("保存${state.username.value}登录信息成功, 后续无需再次登录!"),

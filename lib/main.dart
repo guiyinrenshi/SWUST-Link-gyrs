@@ -8,7 +8,8 @@ import 'package:swust_link/common/routes/app_pages.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized(); // 确保插件初始化前绑定 Widgets
+  // WidgetsFlutterBinding.ensureInitialized(); // 确保插件初始化前绑定 Widgets
+
   if(window.physicalSize.isEmpty){
     window.onMetricsChanged = (){
       //在回调中，size仍然有可能是0
@@ -21,9 +22,10 @@ void main() async {
     //如果size非0，则直接runApp
     runApp(const MyApp());
   }
-  Global.initialize();
 
   runApp(const MyApp());
+  Global.initialize();
+
 }
 
 class MyApp extends StatelessWidget {
