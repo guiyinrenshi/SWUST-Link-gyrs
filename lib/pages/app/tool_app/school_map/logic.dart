@@ -1,4 +1,3 @@
-import 'package:logger/logger.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:get/get.dart';
 
@@ -10,7 +9,6 @@ class SchoolMapLogic extends GetxController {
   @override
   void onInit() {
     super.onInit();
-
   }
 
   WebViewController controller = WebViewController()
