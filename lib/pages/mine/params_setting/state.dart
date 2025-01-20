@@ -5,4 +5,5 @@ class Params_settingState {
   final TextEditingController firstDayController = TextEditingController();
   final TextEditingController autoQueryTimeController = TextEditingController();
   final RxBool isAutoQueryEnabled = false.obs;
+  final RxBool isAnime = true.obs;
 }
