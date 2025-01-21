@@ -25,8 +25,6 @@ class ClassTableState {
     Colors.deepOrangeAccent,
     Colors.deepPurpleAccent,
     Colors.pinkAccent,
-    Colors.indigoAccent,
-    Colors.yellowAccent,
     Colors.limeAccent,
     Colors.brown,
     Colors.grey,
