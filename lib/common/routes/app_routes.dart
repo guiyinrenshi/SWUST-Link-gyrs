@@ -1,8 +1,7 @@
 part of 'app_pages.dart';
 
-abstract class AppRoutes{
+abstract class AppRoutes {
   static const MAIN = "/main";
-
   static const ACCOUNT = "/mine/account";
   static const DUIFENE_WORK = "/app/duifene/work";
   static const DUIFENE_COURSE = "/app/duifene/course";
@@ -20,4 +19,5 @@ abstract class AppRoutes{
   static const EXAM = "/app/exam";
   static const LOGIN_TIP = "/mine/login/tip";
   static const EVALUATE_ONLINE = "/app/evaluate/online";
+  static const JUDGE_SCORE = "/app/judge/score";
 }

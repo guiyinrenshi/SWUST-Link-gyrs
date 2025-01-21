@@ -6,6 +6,7 @@ import 'package:swust_link/pages/app/oa/class_score/view.dart';
 import 'package:swust_link/pages/app/oa/class_table/view.dart';
 import 'package:swust_link/pages/app/oa/evaluate_online/view.dart';
 import 'package:swust_link/pages/app/oa/exam/view.dart';
+import 'package:swust_link/pages/app/oa/judge_score/view.dart';
 import 'package:swust_link/pages/common/coming_soon/view.dart';
 import 'package:swust_link/pages/common/markdown_temple/view.dart';
 
@@ -36,6 +37,7 @@ class AppPages {
           page: () => ClassTablePage("选课课表",
               "https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=chooseCourse:courseTable")),
       GetPage(name: AppRoutes.PARAMS_SETTING, page: () => Params_settingPage()),
+      GetPage(name: AppRoutes.JUDGE_SCORE, page: () => JudgeScorePage()),
       GetPage(name: AppRoutes.VARIABLE_NAME, page: () => VariableNamePage()),
       GetPage(name: AppRoutes.SCHOOL_MAP, page: () => SchoolMapPage()),
       GetPage(

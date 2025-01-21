@@ -4,6 +4,7 @@ import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:swust_link/spider/duifene.dart';
 import 'package:swust_link/spider/oa_auth.dart';
+import 'package:swust_link/spider/xsc_oa.dart';
 
 import '../utils/local_sttorage.dart';
 
@@ -77,6 +78,7 @@ class Global {
       var isSuccess = await loginOA();
       if (isSuccess) {
         isLoginOA = true;
+        XSCOA.initXSCOA();
       } else {
         Get.dialog(AlertDialog(
           title: Text("登录OA失败"),
