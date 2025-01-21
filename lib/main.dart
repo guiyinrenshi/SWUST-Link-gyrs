@@ -10,9 +10,7 @@ import 'package:swust_link/common/routes/app_pages.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
-  Get.put(params_setting());
-  getSetting();
-  Logger().i("After getSetting called");
+
 
   if (window.physicalSize.isEmpty) {
     window.onMetricsChanged = () {
@@ -28,6 +26,9 @@ void main() async {
   }
 
   runApp(const MyApp());
+  Get.put(params_setting());
+  getSetting();
+  Logger().i("After getSetting called");
   Global.initialize();
 }
 
