@@ -3,29 +3,51 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:swust_link/common/global.dart';
 import 'package:swust_link/common/routes/app_pages.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
-  // WidgetsFlutterBinding.ensureInitialized(); // 确保插件初始化前绑定 Widgets
+  WidgetsFlutterBinding.ensureInitialized();
+  Get.put(params_setting());
+  getSetting();
+  Logger().i("After getSetting called");
 
-  if(window.physicalSize.isEmpty){
-    window.onMetricsChanged = (){
+  if (window.physicalSize.isEmpty) {
+    window.onMetricsChanged = () {
       //在回调中，size仍然有可能是0
-      if(!window.physicalSize.isEmpty){
+      if (!window.physicalSize.isEmpty) {
         window.onMetricsChanged = null;
         runApp(const MyApp());
       }
     };
-  } else{
+  } else {
     //如果size非0，则直接runApp
     runApp(const MyApp());
   }
 
   runApp(const MyApp());
   Global.initialize();
+}
 
+class params_setting extends GetxController {
+  static params_setting get to => Get.find();
+  final RxBool isAnime = true.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    Logger().i("params_setting initialized with isAnime: ${isAnime.value}");
+  }
+}
+
+Future<void> getSetting()async {
+  final prefs = await SharedPreferences.getInstance();
+  final isAnimePrefs = prefs.getBool("isAnime") ?? false;
+  params_setting.to.isAnime.value = isAnimePrefs;
+  Logger().i("getSetting loaded with isAnime: $isAnimePrefs");
 }
 
 class MyApp extends StatelessWidget {

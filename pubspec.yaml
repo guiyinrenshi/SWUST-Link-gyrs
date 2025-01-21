@@ -86,7 +86,7 @@ flutter:
     - assets/update.md
     - assets/privacy_and_protocol_state.md
     - assets/login_tip.md
-
+    - assets/images/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
