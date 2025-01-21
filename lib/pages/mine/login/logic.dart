@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:swust_link/common/entity/account.dart';
-import 'package:image/image.dart' as image_lib;
 import 'package:swust_link/common/global.dart';
 import 'package:swust_link/common/routes/app_pages.dart';
 
@@ -31,19 +30,12 @@ class LoginLogic extends GetxController {
   }
 
   Future<void> testLogin() async {
-    Get.dialog(
-      Center(
-        child: CircularProgressIndicator(),
-      ),
-      barrierDismissible: false, // 防止用户通过点击外部区域关闭对话框
-    );
+
 
     state.account = Account(state.username.value, state.password.value,
         state.currentPlatform.value);
 
     var res = await state.account.testLogin();
-
-    Get.back();
     Get.dialog(
       AlertDialog(
         title: Text(res ? "登录成功" : "登录失败"),

@@ -18,7 +18,7 @@ class UndergraduateClassTable {
 
     try {
       // 发起 GET 请求获取课程表 HTML
-      final response = await Global.oa?.dio.get(url);
+      final response = await Global.matrixOa?.dio.get(url);
       if (response?.statusCode != 200) {
         throw Exception(
             "Failed to fetch class table, status code: ${response?.statusCode}");

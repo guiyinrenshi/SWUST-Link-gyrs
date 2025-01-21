@@ -36,7 +36,7 @@ class HomeLogic extends GetxController {
   Future<List<Course>> getTodayCourses() async {
     final courses = await Global.localStorageService
         .loadFromLocal("课程表-courses", (json) => Course.fromJson(json));
-    Logger().i(courses);
+    // Logger().i(courses);
     // 计算当前周和星期几
     final today = DateTime.now();
     final daysSinceFirstDay = today.difference(state.firstDay.value).inDays;

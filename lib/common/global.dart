@@ -8,18 +8,46 @@ import 'package:swust_link/spider/oa_auth.dart';
 import '../utils/local_sttorage.dart';
 
 class Global {
-  static late OAAuth? oa;
+  static late OAAuth? matrixOa;
+  static late OAAuth? xscOa;
+  static late OAAuth? sjjxOa;
+
   static bool isLoginOA = false;
   static late DuiFenE? duiFenE;
   static bool isLoginDfe = false;
   static late SharedPreferences prefs;
   static late LocalStorageService localStorageService;
+  static Map<String, bool> oaLoginSymbol = {
+    "matrix": false,
+    "xsc": false,
+    "sjjx": false
+  };
 
   static Future<void> initialize() async {
     localStorageService = LocalStorageService();
     prefs = await SharedPreferences.getInstance();
     initOA();
     initDuifene();
+  }
+
+  static Future<bool> loginOA() async {
+    if (!oaLoginSymbol['matrix']!) {
+      oaLoginSymbol['matrix'] = await matrixOa!.login();
+    }
+    if (!oaLoginSymbol['xsc']!) {
+      oaLoginSymbol['xsc'] = await xscOa!.login();
+    }
+    if (!oaLoginSymbol['sjjx']!) {
+      oaLoginSymbol['sjjx'] = await sjjxOa!.login();
+    }
+    int trueCount = oaLoginSymbol.values.where((value) => value).length;
+    if (trueCount == 0) {
+      return false;
+    } else if (trueCount == oaLoginSymbol.length) {
+      return true;
+    } else {
+      return await loginOA();
+    }
   }
 
   static Future<void> initOA() async {
@@ -33,11 +61,21 @@ class Global {
     String? password = prefs.getString("0password");
     if (username != null && password != null) {
       Logger().i(username + password);
-      oa = OAAuth(service: "", username: username, password: password);
-      var isSuccess = await oa?.login() ?? false;
+      matrixOa = OAAuth(
+          service:
+              "https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=studentPortal:DEFAULT_EVENT",
+          username: username,
+          password: password);
+      xscOa = OAAuth(
+          service: "http://xsc.swust.edu.cn/JC/OneLogin.aspx",
+          username: username,
+          password: password);
+      sjjxOa = OAAuth(
+          service: "https://sjjx.dean.swust.edu.cn/swust/",
+          username: username,
+          password: password);
+      var isSuccess = await loginOA();
       if (isSuccess) {
-        await Global.getOAService(
-            "https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=studentPortal:DEFAULT_EVENT");
         isLoginOA = true;
       } else {
         Get.dialog(AlertDialog(
@@ -66,7 +104,8 @@ class Global {
   }
 
   static Future<bool> getOAService(String service) async {
-    var response = await oa?.dio.get("http://cas.swust.edu.cn/authserver/login",
+    var response = await matrixOa?.dio.get(
+        "http://cas.swust.edu.cn/authserver/login",
         queryParameters: {"service": service});
     final maxRedirects = 5; // 最大重定向次数
     var currentRedirects = 0;
@@ -85,7 +124,7 @@ class Global {
               .resolve(location)
               .toString();
       // 发起重定向请求，保持方法一致
-      response = await oa?.dio.get(newUrl);
+      response = await matrixOa?.dio.get(newUrl);
       currentRedirects++;
     }
     Logger().i(response?.requestOptions.uri.toString());

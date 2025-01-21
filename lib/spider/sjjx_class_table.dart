@@ -2,25 +2,13 @@ import 'package:dio/dio.dart';
 import 'package:html/dom.dart';
 import 'package:html/parser.dart';
 import 'package:logger/logger.dart';
-import 'package:swust_link/spider/oa_auth.dart';
+import 'package:swust_link/common/global.dart';
 
 import '../common/entity/oa/course.dart';
 
 class SJJXTable {
-  late OAAuth oa;
-  late String username;
-  late String password;
 
-  SJJXTable({required this.username, required this.password}) {
-    oa = OAAuth(
-        service: "https://sjjx.dean.swust.edu.cn/swust/",
-        username: username,
-        password: password);
-  }
-
-  Future<bool> login() async {
-    return await oa.login();
-  }
+  SJJXTable();
 
   CourseTime parseTimeInfo(String timeInfo) {
     // 提取周次
@@ -68,7 +56,7 @@ class SJJXTable {
   }
 
   Future<String> getInfo(pageNum) async {
-    var res = await oa.dio.get(
+    var res = await Global.sjjxOa?.dio.get(
       'https://sjjx.dean.swust.edu.cn/teachn/teachnAction/index.action?page.pageNum=$pageNum',
       options: Options(
         headers: {
@@ -91,9 +79,9 @@ class SJJXTable {
         },
       ),
     );
-    Logger().i(res.statusCode);
-    Logger().i(res.data);
-    return res.data;
+    Logger().i(res?.statusCode);
+    Logger().i(res?.data);
+    return res?.data;
   }
 
   List<Course> parseList(String data) {
@@ -145,9 +133,6 @@ class SJJXTable {
   }
 
   Future<List<Course>> getCourseList() async {
-    await oa.login();
-    // Logger().i(await oa.dio.get("https://sjjx.dean.swust.edu.cn/aexp/stuIndex.jsp"));
-    // var url = "https://sjjx.dean.swust.edu.cn/teachn/teachnAction/index.action";
     var data = await getInfo(1);
     List<Course> courses = [];
     int page = parseTotalPages(data);

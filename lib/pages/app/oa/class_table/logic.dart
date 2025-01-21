@@ -1,11 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:swust_link/common/entity/oa/course.dart';
 import 'package:swust_link/common/global.dart';
 import 'package:swust_link/spider/class_table.dart';
+import 'package:swust_link/spider/sjjx_class_table.dart';
 
 import 'state.dart';
 
@@ -20,15 +19,25 @@ class ClassTableLogic extends GetxController {
     } catch (e) {
       state.firstDay.value = DateTime.now();
     }
+
     state.courses.value = await Global.localStorageService.loadFromLocal(
         "${state.title.value}-courses", (json) => Course.fromJson(json));
     state.isLoading.value = false;
     state.undergraduateClassTable = UndergraduateClassTable();
+
     try {
       var data =
           await state.undergraduateClassTable.parseClassTable(state.url.value);
-      if(data.isNotEmpty){
-        await Global.localStorageService.saveToLocal(data,"${state.title.value}-courses");
+      if (state.title.value == "课程表") {
+        if (data.isNotEmpty) {
+          state.sjjxTable = SJJXTable();
+          var sjjxData = await state.sjjxTable.getCourseList();
+          data.addAll(sjjxData);
+        }
+      }
+      if (data.isNotEmpty) {
+        await Global.localStorageService
+            .saveToLocal(data, "${state.title.value}-courses");
         state.courses.value = data;
       }
     } catch (e) {
@@ -58,8 +67,6 @@ class ClassTableLogic extends GetxController {
     }
     return state.courseColors[className]!;
   }
-
-
 
 // 计算指定周的起始日期
   DateTime getWeekStartDate(int week) {

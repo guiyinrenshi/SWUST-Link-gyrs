@@ -15,7 +15,7 @@ class EvaluateOnline {
   Future<List<EvaluationPaper>> getEvaluationPaperList() async {
     final url =
         'https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=evaluateOnline:DEFAULT_EVENT';
-    var res = await Global.oa?.dio.get(url);
+    var res = await Global.matrixOa?.dio.get(url);
     var document = parse(res?.data);
     var evaluationList = <EvaluationPaper>[];
     final baseurl = "https://matrix.dean.swust.edu.cn/acadmicManager/";
@@ -42,7 +42,7 @@ class EvaluateOnline {
   Future<Map<dynamic, dynamic>> parseEvaluation(
       Map<String, dynamic> data, int value) async {
     final url = data['url'];
-    var res = await Global.oa?.dio.get(url);
+    var res = await Global.matrixOa?.dio.get(url);
     var document = parse(res?.data);
 
     var scc =
@@ -105,7 +105,7 @@ class EvaluateOnline {
         "https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=evaluateOnline:apiPostQuota";
 
     Logger().i(option);
-    var response = await Global.oa?.dio.post(url,
+    var response = await Global.matrixOa?.dio.post(url,
         data: FormData.fromMap(option),
         options: Options(headers: {
           "accept":
@@ -147,7 +147,7 @@ class EvaluateOnline {
     var params = {"event": "evaluateOnline:evaluateResponseDo"};
     Logger().i(courseInfo);
     var response =
-        await Global.oa?.dio.post(url, data: FormData.fromMap(courseInfo), queryParameters: params,options: Options(
+        await Global.matrixOa?.dio.post(url, data: FormData.fromMap(courseInfo), queryParameters: params,options: Options(
           headers:  {
             "accept":
             "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",

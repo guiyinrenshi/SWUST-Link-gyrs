@@ -12,7 +12,7 @@ class ClassScore {
   Future<List<CourseScore>> getScoreList() async {
     final url =
         "https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=studentProfile:courseMark";
-    final res = await Global.oa?.dio.get(url);
+    final res = await Global.matrixOa?.dio.get(url);
     return extractCourses(res?.data);
   }
 

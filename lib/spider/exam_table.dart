@@ -11,7 +11,7 @@ class ExamTable {
   Future<List<FinalExam>> getExams() async {
     final url =
         "https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=studentPortal:examTable";
-    var data = await Global.oa?.dio.get(url);
+    var data = await Global.matrixOa?.dio.get(url);
     final document = parse(data?.data);
     final rows = document.querySelectorAll('.editRows');
     return rows.map((row) {
