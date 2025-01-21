@@ -9,5 +9,6 @@ class JudgeScoreState {
 
   // 当前选中记录
   final Rx<JudgeScore?> selectedRecord = Rx<JudgeScore?>(null);
+  final RxString selectedFilter = "成绩".obs;
 
 }
