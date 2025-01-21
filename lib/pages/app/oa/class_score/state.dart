@@ -10,4 +10,5 @@ class ClassScoreState {
   final displayList  = <CourseScore>[].obs;
   final isLoading = true.obs;
   var averageGPA = 0.0.obs;
+  var bxGPA = 0.0.obs;
 }

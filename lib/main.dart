@@ -10,7 +10,6 @@ import 'package:swust_link/common/routes/app_pages.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
   Get.put(params_setting());
   getSetting();
   Logger().i("After getSetting called");

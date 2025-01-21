@@ -6,7 +6,6 @@ import 'package:swust_link/spider/oa_auth.dart';
 import '../common/entity/oa/score.dart';
 
 class ClassScore {
-
   ClassScore();
 
   Future<List<CourseScore>> getScoreList() async {
@@ -27,6 +26,7 @@ class ClassScore {
     // 返回从当前节点之后的所有兄弟元素
     return siblings.sublist(currentIndex + 1);
   }
+
   /// 提取课程数据
   List<CourseScore> extractCourses(String htmlContent) {
     final document = parse(htmlContent);
@@ -35,12 +35,14 @@ class ClassScore {
 
     for (final table in tables) {
       // 提取学年信息
-      final yearRow = table.querySelector('tr > td[colspan]')?.text.trim() ?? '';
+      final yearRow =
+          table.querySelector('tr > td[colspan]')?.text.trim() ?? '';
       final yearMatch = RegExp(r'(\d{4}-\d{4})').firstMatch(yearRow);
       final year = yearMatch != null ? yearMatch.group(1) : '未知学年';
 
       // 提取学期和课程
-      final semesterRows = table.querySelectorAll('tr.cellBorder > td[rowspan]');
+      final semesterRows =
+          table.querySelectorAll('tr.cellBorder > td[rowspan]');
       for (final semesterRow in semesterRows) {
         final semester = semesterRow.text.trim(); // 获取 "春" 或 "秋"
         final fullSemester = "$year-$semester"; // 组合为 "2023-2024-春"
@@ -73,7 +75,11 @@ class ClassScore {
               courseCode: courseCode,
               credit: credit,
               courseNature: courseNature,
-              examScore: examScore,
+              examScore: examScore == ""
+                  ? gpa.isNotEmpty
+                      ? "通过"
+                      : "不通过"
+                  : examScore,
               retakeScore: retakeScore,
               gpa: gpa,
             ));
@@ -95,18 +101,24 @@ class ClassScore {
         // 确保行包含足够的列数据
         if (cells.length >= 7) {
           final name = cells[1].text.trim(); // 课程名称
-          final courseCode = cells[2].querySelector('span')?.text.trim() ?? ''; // 课程号
-          final credit = cells[3].querySelector('span')?.text.trim() ?? ''; // 学分
-          final examScore = cells[4].querySelector('span')?.text.trim() ?? ''; // 正考分数
-          final retakeScore = cells[5].querySelector('span')?.text.trim() ?? ''; // 补考分数
+          final courseCode =
+              cells[2].querySelector('span')?.text.trim() ?? ''; // 课程号
+          final credit =
+              cells[3].querySelector('span')?.text.trim() ?? ''; // 学分
+          final examScore =
+              cells[4].querySelector('span')?.text.trim() ?? ''; // 正考分数
+          final retakeScore =
+              cells[5].querySelector('span')?.text.trim() ?? ''; // 补考分数
           final gpa = cells[6].querySelector('span')?.text.trim() ?? ''; // 绩点
 
           courses.add(CourseScore(
-            semester: "全校通选课", // 固定为全校通选课
+            semester: "全校通选课",
+            // 固定为全校通选课
             name: name,
             courseCode: courseCode,
             credit: credit,
-            courseNature: "通选课", // 根据实际需要定义课程性质
+            courseNature: "通选课",
+            // 根据实际需要定义课程性质
             examScore: examScore,
             retakeScore: retakeScore,
             gpa: gpa,
@@ -126,18 +138,24 @@ class ClassScore {
         // 确保行包含足够的列数据
         if (cells.length >= 7) {
           final name = cells[1].text.trim(); // 课程名称
-          final courseCode = cells[2].querySelector('span')?.text.trim() ?? ''; // 课程号
-          final credit = cells[3].querySelector('span')?.text.trim() ?? ''; // 学分
-          final examScore = cells[4].querySelector('span')?.text.trim() ?? ''; // 正考分数
-          final retakeScore = cells[5].querySelector('span')?.text.trim() ?? ''; // 补考分数
+          final courseCode =
+              cells[2].querySelector('span')?.text.trim() ?? ''; // 课程号
+          final credit =
+              cells[3].querySelector('span')?.text.trim() ?? ''; // 学分
+          final examScore =
+              cells[4].querySelector('span')?.text.trim() ?? ''; // 正考分数
+          final retakeScore =
+              cells[5].querySelector('span')?.text.trim() ?? ''; // 补考分数
           final gpa = cells[6].querySelector('span')?.text.trim() ?? ''; // 绩点
 
           courses.add(CourseScore(
-            semester: "体育项目", // 固定为全校通选课
+            semester: "体育项目",
+            // 固定为全校通选课
             name: name,
             courseCode: courseCode,
             credit: credit,
-            courseNature: "体育项目", // 根据实际需要定义课程性质
+            courseNature: "体育项目",
+            // 根据实际需要定义课程性质
             examScore: examScore,
             retakeScore: retakeScore,
             gpa: gpa,

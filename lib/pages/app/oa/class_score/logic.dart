@@ -34,6 +34,7 @@ class ClassScoreLogic extends GetxController {
       state.scores.value = await Global.localStorageService
           .loadFromLocal("courseScore", (json) => CourseScore.fromJson(json));
       updateSelectedSemester(state.scores.first.semester);
+      Logger().i(state.scores);
     } catch (e) {
       Get.snackbar("获取缓存失败", "本地暂无分数缓存信息! ");
     }
@@ -64,21 +65,39 @@ class ClassScoreLogic extends GetxController {
     for (var course in state.displayList) {
       if (course.gpa.isNotEmpty) {
         totalGPA += double.tryParse(course.gpa) ?? 0.0;
-        var tmpCourseCount = double.tryParse(course.credit);
-        courseCount += ((tmpCourseCount == 0.3 || tmpCourseCount == 0.8)?
-        tmpCourseCount : (tmpCourseCount! - 0.05))!;
-      } else{
-        courseCount += double.tryParse(course.credit) ?? 0.0;
+
       }
+      var tmpCourseCount = double.tryParse(course.credit);
+      courseCount += ((tmpCourseCount != 0.3 || tmpCourseCount == 0.8)?
+      tmpCourseCount : (tmpCourseCount! - 0.05))!;
+    }
+    state.averageGPA.value = courseCount > 0 ? (totalGPA / courseCount) : 0.0;
+  }
+
+  void calculateBXGPA(){
+    double totalGPA = 0.0;
+    double courseCount = 0.0;
+    for (var course in state.displayList) {
+      if (course.courseNature=="必修") {
+        if (course.gpa.isNotEmpty ){
+          totalGPA += double.tryParse(course.gpa) ?? 0.0;
+
+        }
+        var tmpCourseCount = double.tryParse(course.credit);
+        courseCount += ((tmpCourseCount != 0.3 || tmpCourseCount != 0.8)?
+        tmpCourseCount : (tmpCourseCount! - 0.05))!;
+      }
+
     }
 
-    state.averageGPA.value = courseCount > 0 ? (totalGPA / courseCount) : 0.0;
+    state.bxGPA.value = courseCount > 0 ? (totalGPA / courseCount) : 0.0;
   }
 
   void updateSelectedSemester(String semester) {
     state.selectedSemester.value = semester;
     updateDisplayList();
     calculateAverageGPA();
+    calculateBXGPA();
   }
 
   void updateDisplayList() {

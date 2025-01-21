@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:swust_link/components/g_p_a/view.dart';
 
 import 'logic.dart';
 import 'state.dart';
@@ -35,13 +36,24 @@ class ClassScorePage extends StatelessWidget {
         }
         return Column(
           children: [
-            Obx(() => Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                '当前学期平均绩点: ${state.averageGPA.value.toStringAsFixed(3)}',
-                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-            )),
+            SizedBox(height: 20,),
+            Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                // 当前学期平均绩点
+                Obx(() => GPAComponent(
+                  value: state.averageGPA.value,
+                  label: "平均绩点",
+                  color: Colors.blue,
+                )),
+                // 当前学期必修绩点
+                Obx(() => GPAComponent(
+                  value: state.bxGPA.value,
+                  label: "必修绩点",
+                  color: Colors.green,
+                )),
+              ],
+            ),
             Obx(() {
               final semesters = logic.state.scores
                   .map((course) => course.semester)
@@ -97,7 +109,7 @@ class ClassScorePage extends StatelessWidget {
                             Text("补考: ${course.retakeScore}"),
                         ],
                       ),
-                      trailing: Text("正考: ${course.examScore}"),
+                      trailing: Text("正考: ${course.examScore??"通过"}"),
                     );
                   },
                 );

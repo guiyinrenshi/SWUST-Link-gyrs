@@ -40,7 +40,7 @@ class CourseScore extends JsonSerializable{
         'courseCode': courseCode,
         'credit': credit,
         'courseNature': courseNature,
-        'examScore': examScore,
+        'examScore':  examScore ,
         'retakeScore': retakeScore,
         'gpa': gpa,
       };
