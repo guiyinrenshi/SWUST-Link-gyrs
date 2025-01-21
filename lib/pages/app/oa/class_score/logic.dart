@@ -64,8 +64,10 @@ class ClassScoreLogic extends GetxController {
     for (var course in state.displayList) {
       if (course.gpa.isNotEmpty) {
         totalGPA += double.tryParse(course.gpa) ?? 0.0;
-        courseCount += double.tryParse(course.credit) ?? 0.0;
-      } else {
+        var tmpCourseCount = double.tryParse(course.credit);
+        courseCount += ((tmpCourseCount == 0.3 || tmpCourseCount == 0.8)?
+        tmpCourseCount : (tmpCourseCount! - 0.05))!;
+      } else{
         courseCount += double.tryParse(course.credit) ?? 0.0;
       }
     }

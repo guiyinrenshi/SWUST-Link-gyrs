@@ -174,7 +174,7 @@ class ClassTablePage extends StatelessWidget {
                                           },
                                           child: Container(
                                             margin: EdgeInsets.only(
-                                                bottom: 2.h),
+                                                bottom: 1.h),
                                             padding: EdgeInsets.only(left: 4.w,right: 4.w,top: 4.h,bottom: 4.h),
                                             decoration: BoxDecoration(
                                               color: logic.getCourseColor(
