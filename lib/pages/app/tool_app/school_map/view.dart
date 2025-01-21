@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:swust_link/components/acg_background/view.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:get/get.dart';
 
@@ -14,9 +15,8 @@ class SchoolMapPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(state.title.value)),
-      body: WebViewWidget(controller: logic.controller),
-    );
+    return AcgBackgroundComponent(
+        title: Text(state.title.value),
+        child: WebViewWidget(controller: logic.controller));
   }
 }

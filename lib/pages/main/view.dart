@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:swust_link/common/global.dart';
+import 'package:swust_link/components/acg_background/view.dart';
 
 import 'logic.dart';
 import 'state.dart';
@@ -12,23 +14,17 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Color(0xfff3f4f6),
-        appBar: AppBar(
-          backgroundColor: Color(0xfff3f4f6),
-          title: Obx(() => Text(state.title[state.currentIndex.value])),
-        ),
-        body: Obx(() => state.page[state.currentIndex.value]),
-        bottomNavigationBar: Obx(
-          () => BottomNavigationBar(
-            backgroundColor: Color(0xffffffff),
-            items: state.bottomNavItems,
-            currentIndex: state.currentIndex.value,
-            // type: BottomNavigationBarType.shifting,
-            onTap: (index) {
-              logic.changePage(index);
-            },
-          ),
-        ));
+    return AcgBackgroundComponent(
+        bottomNavigationBar: Obx(() => BottomNavigationBar(
+              backgroundColor: Color(0x9cffffff),
+              selectedItemColor: Colors.cyan,
+              items: state.bottomNavItems,
+              currentIndex: state.currentIndex.value,
+              onTap: (index) {
+                logic.changePage(index);
+              },
+            )),
+        title: Obx(() => Text(state.title[state.currentIndex.value])),
+        child: Obx(() => state.page[state.currentIndex.value]));
   }
 }

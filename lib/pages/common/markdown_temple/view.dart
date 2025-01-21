@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:get/get.dart';
+import 'package:swust_link/components/acg_background/view.dart';
 
 import 'logic.dart';
 import 'state.dart';
@@ -14,32 +15,31 @@ class MarkdownTemplePage extends StatelessWidget {
   }
 
   final MarkdownTempleLogic logic = Get.put(MarkdownTempleLogic());
-  final MarkdownTempleState state = Get
-      .find<MarkdownTempleLogic>()
-      .state;
+  final MarkdownTempleState state = Get.find<MarkdownTempleLogic>().state;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Color(0xfff3f4f6),
-      appBar: AppBar(
-        backgroundColor: Color(0xfff3f4f6),
-        title: Obx(() => Text(state.title.value)),), body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Obx(() =>
-            Markdown(
-              data: state.markdownStr.value,
-              styleSheet: MarkdownStyleSheet(
-                h1: TextStyle(fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blueAccent),
-                h2: TextStyle(fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blueGrey),
-                p: TextStyle(fontSize: 16, color: Colors.black87),
-                listBullet: TextStyle(fontSize: 16, color: Colors.black87),
+    return AcgBackgroundComponent(
+        title: Text(state.title.value),
+        actions: [],
+        child: Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Obx(
+              () => Markdown(
+                data: state.markdownStr.value,
+                styleSheet: MarkdownStyleSheet(
+                  h1: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blueAccent),
+                  h2: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blueGrey),
+                  p: TextStyle(fontSize: 16, color: Colors.black87),
+                  listBullet: TextStyle(fontSize: 16, color: Colors.black87),
+                ),
               ),
-            ),)
-    ));
+            )));
   }
 }

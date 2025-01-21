@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:swust_link/spider/duifene.dart';
+import 'package:swust_link/components/acg_background/view.dart';
 
 import 'logic.dart';
 import 'state.dart';
@@ -14,25 +13,18 @@ class DuifenePaperPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xfff3f4f6),
-      appBar: AppBar(
-        backgroundColor: Color(0xfff3f4f6),
-        title: Row(
-          children: [
-            Expanded(child: Text("对分易练习")),
-            Text("筛选"),
-            Obx(()=>Switch(
-                value: state.isShowComplete.value,
-                onChanged: (value) {
-
-                  state.isShowComplete.value = value;
-                  state.papers.refresh();
-                }))
-          ],
-        ),
-      ),
-      body: Obx(() {
+    return AcgBackgroundComponent(
+      title: Text("对分易练习"),
+      actions: [
+        Text("筛选"),
+        Obx(() => Switch(
+            value: state.isShowComplete.value,
+            onChanged: (value) {
+              state.isShowComplete.value = value;
+              state.papers.refresh();
+            }))
+      ],
+      child: Obx(() {
         if (state.isLoading.value) {
           // 显示加载占位符
           return Center(
@@ -51,19 +43,19 @@ class DuifenePaperPage extends StatelessWidget {
             // 其他组件保持不变
             Expanded(
               child: Obx(
-                    () => ListView.builder(
+                () => ListView.builder(
                   itemCount: state.papers.length,
                   itemBuilder: (context, index) {
-
                     final paper = state.papers[index];
-                    if(state.isShowComplete.value){
-                      if(paper.isSubmit){
+                    if (state.isShowComplete.value) {
+                      if (paper.isSubmit) {
                         return SizedBox.shrink();
                       }
                     }
                     return ListTile(
                       title: Text(paper.name),
-                      subtitle: Text("开始: ${paper.createDate}\n结束: ${paper.endDate}"),
+                      subtitle:
+                          Text("开始: ${paper.createDate}\n结束: ${paper.endDate}"),
                       trailing: Column(
                         children: [
                           Text(paper.isSubmit ? "分数: ${paper.myScore}" : "未提交"),
@@ -93,9 +85,7 @@ class DuifenePaperPage extends StatelessWidget {
             ),
           ],
         );
-
       }),
-
     );
   }
 }

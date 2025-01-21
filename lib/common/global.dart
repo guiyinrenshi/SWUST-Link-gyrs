@@ -9,6 +9,8 @@ import 'package:swust_link/spider/xsc_oa.dart';
 import '../utils/local_sttorage.dart';
 
 class Global {
+
+  static RxBool isAnime = false.obs;
   static late OAAuth? matrixOa;
   static late OAAuth? xscOa;
   static late OAAuth? sjjxOa;
@@ -27,6 +29,7 @@ class Global {
   static Future<void> initialize() async {
     localStorageService = LocalStorageService();
     prefs = await SharedPreferences.getInstance();
+    isAnime.value = prefs.getBool("isAnime") ?? false;
     initOA();
     initDuifene();
   }
@@ -41,7 +44,9 @@ class Global {
     if (!oaLoginSymbol['sjjx']!) {
       oaLoginSymbol['sjjx'] = await sjjxOa!.login();
     }
-    int trueCount = oaLoginSymbol.values.where((value) => value).length;
+    int trueCount = oaLoginSymbol.values
+        .where((value) => value)
+        .length;
     if (trueCount == 0) {
       return false;
     } else if (trueCount == oaLoginSymbol.length) {
@@ -64,7 +69,7 @@ class Global {
       Logger().i(username + password);
       matrixOa = OAAuth(
           service:
-              "https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=studentPortal:DEFAULT_EVENT",
+          "https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=studentPortal:DEFAULT_EVENT",
           username: username,
           password: password);
       xscOa = OAAuth(
@@ -120,11 +125,13 @@ class Global {
         throw Exception('No Location header found for redirect');
       }
       // 构造新的 URL
-      final newUrl = Uri.parse(location).isAbsolute
+      final newUrl = Uri
+          .parse(location)
+          .isAbsolute
           ? location
           : Uri.parse(response!.realUri.toString())
-              .resolve(location)
-              .toString();
+          .resolve(location)
+          .toString();
       // 发起重定向请求，保持方法一致
       response = await matrixOa?.dio.get(newUrl);
       currentRedirects++;

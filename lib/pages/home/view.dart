@@ -16,45 +16,57 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return
-      SingleChildScrollView(
-        child:
-        Padding(
-          padding: EdgeInsets.all(8),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Expanded(child: Class_cardComponent(state.toDayCourses))
-                ],
-              ),
-              SizedBox(height: 10),
-              Row(
-                children: [
-                  Expanded(
-                      child: TodayClassListPage(
-                        state.toDayCourses,
-                      ))
-                ],
-              ),
-              SizedBox(height: 10),
-              Row(
-                children: [
-                  Expanded(child: HitokotoPage())
-                ],
-              ),
-              SizedBox(height: 10,),
-              Row(
-                children: [
-                  Expanded(
-                      child:
-                      DuifeneSignComponent()
-                  )
-                ],
-              )
-            ],
-          ),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.all(8),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                    child: Opacity(
+                  opacity: 0.8,
+                  child: Class_cardComponent(state.toDayCourses),
+                ))
+              ],
+            ),
+            SizedBox(height: 10),
+            Row(
+              children: [
+                Expanded(
+                    child: Opacity(
+                  opacity: 0.8,
+                  child: TodayClassListPage(
+                    state.toDayCourses,
+                  ),
+                ))
+              ],
+            ),
+            SizedBox(height: 10),
+            Row(
+              children: [
+                Expanded(
+                    child: Opacity(
+                  opacity: 0.8,
+                  child: HitokotoPage(),
+                ))
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                Expanded(
+                    child: Opacity(
+                  opacity: 0.8,
+                  child: DuifeneSignComponent(),
+                ))
+              ],
+            )
+          ],
         ),
-      );
+      ),
+    );
   }
 }

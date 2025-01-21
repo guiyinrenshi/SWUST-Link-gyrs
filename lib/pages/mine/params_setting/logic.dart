@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:swust_link/common/global.dart';
 
 import 'state.dart';
 
@@ -15,7 +16,8 @@ class Params_settingLogic extends GetxController {
     await prefs.setString("queryTime", queryTime);
     await prefs.setBool("isAutoQueryEnabled", isAutoQuery);
     await prefs.setBool("isAnime", isAnime);
-
+    Global.isAnime.value = isAnime;
+    state.isAnime.value = isAnime;
     print("设置已保存: $firstDay, $queryTime, $isAutoQuery, $isAnime");
   }
 
@@ -31,6 +33,7 @@ class Params_settingLogic extends GetxController {
     state.firstDayController.text = firstDay;
     state.isAutoQueryEnabled.value = isEnabled;
     state.isAnime.value = isAnime;
+
     Logger().i(state.isAnime.value);
   }
 

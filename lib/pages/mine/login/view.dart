@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:swust_link/common/entity/account.dart';
 import 'package:swust_link/common/routes/app_pages.dart';
+import 'package:swust_link/components/acg_background/view.dart';
 
+import '../../../common/global.dart';
 import 'logic.dart';
 import 'state.dart';
 
@@ -15,120 +17,116 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Color(0xfff3f4f6),
-        appBar: AppBar(
-          backgroundColor: Color(0xfff3f4f6),
-          title: Text("帐号登录"),
-        ),
-        body: Padding(
-            padding: EdgeInsets.all(20),
-            child: Form(
-              key: _formKey,
-              child: Column(children: [
-                Text(
-                  "登录",
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                DropdownMenu(
-                  dropdownMenuEntries: state.dropDownItem,
-                  width: double.infinity,
-                  initialSelection: state.currentPlatform.value,
-                  onSelected: (value) {
-                    state.currentPlatform.value = value;
-                    logic.loadUseInfo();
-                  },
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Obx(
+    return AcgBackgroundComponent(title: Text("帐号登录"), actions: [], child: Padding(
+        padding: EdgeInsets.all(20),
+        child: Form(
+          key: _formKey,
+          child: Column(children: [
+            Text(
+              "登录",
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            DropdownMenu(
+              dropdownMenuEntries: state.dropDownItem,
+              width: double.infinity,
+              initialSelection: state.currentPlatform.value,
+              onSelected: (value) {
+                state.currentPlatform.value = value;
+                logic.loadUseInfo();
+              },
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Obx(
                   () => TextFormField(
-                    controller: state.usernameController.value,
-                    decoration:
-                        InputDecoration(labelText: "用户名", hintText: "请输入用户名"),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "请输入用户名";
-                      }
-                      return null;
-                    },
-                    onChanged: (value) {
-                      state.username.value = value;
-                    },
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Obx(
+                controller: state.usernameController.value,
+                decoration:
+                InputDecoration(labelText: "用户名", hintText: "请输入用户名"),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "请输入用户名";
+                  }
+                  return null;
+                },
+                onChanged: (value) {
+                  state.username.value = value;
+                },
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Obx(
                   () => TextFormField(
-                    controller: state.passwordController.value,
-                    obscureText: state.isShowPassword.value,
-                    keyboardType: TextInputType.visiblePassword,
-                    decoration: InputDecoration(
-                        labelText: "密码",
-                        hintText: "请输入密码",
-                        suffixIcon: IconButton(
-                            onPressed: () {
-                              logic.changeShowPassword();
-                            },
-                            icon: Icon(state.isShowPassword.value
-                                ? Icons.visibility
-                                : Icons.visibility_off))),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "请输入密码";
-                      }
-                      return null;
-                    },
-                    onChanged: (value) {
-                      state.password.value = value;
-                    },
-                  ),
-                ),
-                SizedBox(
-                  height: 40,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: ElevatedButton(
+                controller: state.passwordController.value,
+                obscureText: state.isShowPassword.value,
+                keyboardType: TextInputType.visiblePassword,
+                decoration: InputDecoration(
+                    labelText: "密码",
+                    hintText: "请输入密码",
+                    suffixIcon: IconButton(
                         onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            logic.testLogin();
-                          }
+                          logic.changeShowPassword();
                         },
-                        style: ButtonStyle(
-                          shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                        icon: Icon(state.isShowPassword.value
+                            ? Icons.visibility
+                            : Icons.visibility_off))),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "请输入密码";
+                  }
+                  return null;
+                },
+                onChanged: (value) {
+                  state.password.value = value;
+                },
+              ),
+            ),
+            SizedBox(
+              height: 40,
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        logic.testLogin();
+                      }
+                    },
+                    style: ButtonStyle(
+                      shape: WidgetStateProperty.all(
+                          RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10))),
-                          backgroundColor: WidgetStateProperty.all(Colors.blue),
-                        ),
-                        child: Text(
-                          "测试登录",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    TextButton(
-                        onPressed: () {
-                          Get.toNamed(AppRoutes.MAIN+AppRoutes.LOGIN_TIP);
-                        },
-                        child: Text("登录说明,百度翻译必看"))
-                  ],
+                      backgroundColor:
+                      WidgetStateProperty.all(Colors.blue),
+                    ),
+                    child: Text(
+                      "测试登录",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
                 )
-              ]),
-            )));
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                    onPressed: () {
+                      Get.toNamed(AppRoutes.MAIN + AppRoutes.LOGIN_TIP);
+                    },
+                    child: Text("登录说明,百度翻译必看"))
+              ],
+            )
+          ]),
+        )));
   }
 }

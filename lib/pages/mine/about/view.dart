@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:swust_link/components/acg_background/view.dart';
 
 import 'logic.dart';
 import 'state.dart';
@@ -13,13 +14,10 @@ class AboutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Color(0xfff3f4f6),
-        appBar: AppBar(
-          backgroundColor: Color(0xfff3f4f6),
-          title: Text('关于我们'),
-        ),
-        body: SingleChildScrollView(
+    return AcgBackgroundComponent(
+        title: Text('关于我们'),
+        actions: [],
+        child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -72,7 +70,9 @@ class AboutPage extends StatelessWidget {
                 SizedBox(height: 5),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [TextButton(onPressed: logic.checkNew, child: Text("检查更新"))],
+                  children: [
+                    TextButton(onPressed: logic.checkNew, child: Text("检查更新"))
+                  ],
                 ),
                 SizedBox(height: 16),
                 Text(
