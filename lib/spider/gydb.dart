@@ -79,7 +79,7 @@ class GYDB {
                 child: Text("取消")),
             TextButton(
                 onPressed: () {
-                  Get.toNamed(AppRoutes.ACCOUNT);
+                  Get.toNamed(AppRoutes.MAIN+AppRoutes.ACCOUNT);
                 },
                 child: Text("前去登录"))
           ],
