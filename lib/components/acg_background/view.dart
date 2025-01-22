@@ -43,12 +43,12 @@ class AcgBackgroundComponent extends StatelessWidget {
           color: Colors.white.withOpacity(0.2), // 偏浅白色蒙版，透明度 0.4
         ),
         // 添加磨砂效果
-        BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 6.0, sigmaY: 6.0), // 轻度磨砂
-          child: Container(
-            color: Colors.transparent, // 背景透明以展示磨砂
-          ),
-        ),
+        // BackdropFilter(
+        //   filter: ImageFilter.blur(sigmaX: 6.0, sigmaY: 6.0), // 轻度磨砂
+        //   child: Container(
+        //     color: Colors.transparent, // 背景透明以展示磨砂
+        //   ),
+        // ),
         // 前景内容
         Obx(
           () => Scaffold(

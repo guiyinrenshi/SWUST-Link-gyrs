@@ -16,7 +16,7 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return AcgBackgroundComponent(
         bottomNavigationBar: Obx(() => BottomNavigationBar(
-              backgroundColor: Color(0x9cffffff),
+              backgroundColor: Color(0xffffffff),
               selectedItemColor: Colors.cyan,
               items: state.bottomNavItems,
               currentIndex: state.currentIndex.value,

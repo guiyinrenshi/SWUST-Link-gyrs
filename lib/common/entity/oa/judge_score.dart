@@ -3,22 +3,22 @@ import 'package:swust_link/common/model/entity_model.dart';
 class JudgeScore extends JsonSerializable{
   final String studentId;
   final String name;
-  final double moralScore;
+  final String moralScore;
   final String moralRankClass;
   final String moralRankMajor;
-  final double developmentScore;
+  final String developmentScore;
   final String developmentRankClass;
   final String developmentRankMajor;
-  final double intelligenceScore;
+  final String intelligenceScore;
   final String intelligenceRankClass;
   final String intelligenceRankMajor;
-  final double physicalScore;
+  final String physicalScore;
   final String physicalRankClass;
   final String physicalRankMajor;
-  final double laborScore;
+  final String laborScore;
   final String laborRankClass;
   final String laborRankMajor;
-  final double totalScore;
+  final String totalScore;
   final String totalRankClass;
   final String totalRankMajor;
   final String academicYear;
@@ -110,22 +110,22 @@ JudgeScore(
     return JudgeScore(
       studentId: json['studentId'],
       name: json['name'],
-      moralScore: (json['moralScore'] as num).toDouble(),
+      moralScore: json['moralScore'] ,
       moralRankClass: json['moralRankClass'],
       moralRankMajor: json['moralRankMajor'],
-      developmentScore: (json['developmentScore'] as num).toDouble(),
+      developmentScore: json['developmentScore'],
       developmentRankClass: json['developmentRankClass'],
       developmentRankMajor: json['developmentRankMajor'],
-      intelligenceScore: (json['intelligenceScore'] as num).toDouble(),
+      intelligenceScore: json['intelligenceScore'],
       intelligenceRankClass: json['intelligenceRankClass'],
       intelligenceRankMajor: json['intelligenceRankMajor'],
-      physicalScore: (json['physicalScore'] as num).toDouble(),
+      physicalScore: json['physicalScore'],
       physicalRankClass: json['physicalRankClass'],
       physicalRankMajor: json['physicalRankMajor'],
-      laborScore: (json['laborScore'] as num).toDouble(),
+      laborScore: json['laborScore'],
       laborRankClass: json['laborRankClass'],
       laborRankMajor: json['laborRankMajor'],
-      totalScore: (json['totalScore'] as num).toDouble(),
+      totalScore: json['totalScore'],
       totalRankClass: json['totalRankClass'],
       totalRankMajor: json['totalRankMajor'],
       academicYear: json['academicYear'],
