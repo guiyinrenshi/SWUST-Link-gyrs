@@ -10,6 +10,7 @@ import 'package:swust_link/common/entity/oa/score.dart';
 import 'package:swust_link/common/global.dart';
 import 'package:swust_link/common/routes/app_pages.dart';
 import 'package:swust_link/spider/class_score.dart';
+import 'package:swust_link/spider/matrix_oa.dart';
 import 'package:swust_link/utils/local_sttorage.dart';
 
 import 'state.dart';
@@ -21,13 +22,9 @@ class ClassScoreLogic extends GetxController {
   void onInit() async {
     // TODO: implement onInit
     super.onInit();
-    await initScore();
     getScore();
   }
 
-  Future<void> initScore() async {
-    state.classScore = ClassScore();
-  }
 
   Future<void> loadFromLocal() async {
     try {
@@ -44,7 +41,7 @@ class ClassScoreLogic extends GetxController {
     await loadFromLocal();
     state.isLoading.value = false;
     try {
-      var data = await state.classScore.getScoreList();
+      var data = await (await MatrixOa.getInstance())!.classScore.getScoreList();
       if (data.isNotEmpty) {
         state.scores.value = data;
         await Global.localStorageService.saveToLocal(state.scores,"courseScore");

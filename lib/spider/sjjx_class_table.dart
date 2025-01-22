@@ -1,14 +1,17 @@
 import 'package:dio/dio.dart';
+import 'package:get/get.dart';
 import 'package:html/dom.dart';
 import 'package:html/parser.dart';
 import 'package:logger/logger.dart';
 import 'package:swust_link/common/global.dart';
 
 import '../common/entity/oa/course.dart';
+import 'oa_auth.dart';
 
 class SJJXTable {
+  SJJXTable(this.sjjxOa);
 
-  SJJXTable();
+  late OAAuth sjjxOa;
 
   CourseTime parseTimeInfo(String timeInfo) {
     // 提取周次
@@ -56,7 +59,7 @@ class SJJXTable {
   }
 
   Future<String> getInfo(pageNum) async {
-    var res = await Global.sjjxOa?.dio.get(
+    var res = await sjjxOa.dio.get(
       'https://sjjx.dean.swust.edu.cn/teachn/teachnAction/index.action?page.pageNum=$pageNum',
       options: Options(
         headers: {
@@ -79,9 +82,8 @@ class SJJXTable {
         },
       ),
     );
-    Logger().i(res?.statusCode);
-    Logger().i(res?.data);
-    return res?.data;
+    Logger().i(res.statusCode);
+    return res.data;
   }
 
   List<Course> parseList(String data) {
@@ -145,4 +147,26 @@ class SJJXTable {
     }
     return courses;
   }
+
+  static SJJXTable? sjjxTable;
+
+ static Future<SJJXTable?> getInstance() async {
+    if (sjjxTable == null) {
+      String? username = Global.prefs.getString("0username");
+      String? password = Global.prefs.getString("0password");
+      if (username != null && password != null) {
+        var sjjxOa = OAAuth(
+            service: "https://sjjx.dean.swust.edu.cn/swust/",
+            username: username,
+            password: password);
+        if (await sjjxOa.login()) {
+          sjjxTable = SJJXTable(sjjxOa);
+        } else{
+          Get.snackbar("登录失效", "请尝试刷新或检查账号密码是否正确!");
+        }
+      }
+    }
+    return sjjxTable;
+  }
+
 }

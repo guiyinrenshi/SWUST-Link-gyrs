@@ -7,6 +7,7 @@ import 'package:swust_link/pages/app/oa/class_table/view.dart';
 import 'package:swust_link/pages/app/oa/evaluate_online/view.dart';
 import 'package:swust_link/pages/app/oa/exam/view.dart';
 import 'package:swust_link/pages/app/oa/judge_score/view.dart';
+import 'package:swust_link/pages/app/tool_app/gydb/view.dart';
 import 'package:swust_link/pages/common/coming_soon/view.dart';
 import 'package:swust_link/pages/common/markdown_temple/view.dart';
 
@@ -45,6 +46,7 @@ class AppPages {
           page: () => MarkdownTemplePage(
               "隐私与协议", "assets/privacy_and_protocol_state.md")),
       GetPage(name: AppRoutes.CLASS_SCORE, page: () => ClassScorePage()),
+      GetPage(name: AppRoutes.GYDB_PAGE, page: ()=>GydbPage()),
       GetPage(name: AppRoutes.ABOUT, page: () => AboutPage()),
       GetPage(name: AppRoutes.COMING_SOON, page: () => ComingSoonPage()),
       GetPage(

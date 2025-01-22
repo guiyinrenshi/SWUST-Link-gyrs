@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:swust_link/spider/duifene.dart';
 
 import '../../../../common/global.dart';
 import 'state.dart';
@@ -14,10 +15,10 @@ class DuifeneWorkLogic extends GetxController {
   }
 
   Future<void> loadDuifene() async {
-    if (Global.isLoginDfe) {
-      state.workList.value = (await Global.duiFenE?.getAllWorkList())!;
+    try{
+      state.workList.value = (await (await DuiFenE.getInstance())!.getAllWorkList());
       state.isLoading.value = false;
-    } else {
+    } catch(e) {
       Get.snackbar("未登录", "请先在我的-账号信息中保存信息");
     }
   }

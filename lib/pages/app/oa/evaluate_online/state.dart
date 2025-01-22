@@ -4,6 +4,5 @@ import 'package:swust_link/spider/evaluate_online.dart';
 
 class EvaluateOnlineState {
   final evaluatePaperList = <EvaluationPaper>[].obs;
-  late EvaluateOnline epClient;
   final isLoading = true.obs;
 }

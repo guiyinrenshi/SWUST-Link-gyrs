@@ -4,6 +4,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:swust_link/common/entity/account.dart';
 import 'package:swust_link/common/global.dart';
 import 'package:swust_link/common/routes/app_pages.dart';
+import 'package:swust_link/spider/duifene.dart';
+import 'package:swust_link/spider/matrix_oa.dart';
+import 'package:swust_link/spider/sjjx_class_table.dart';
+import 'package:swust_link/spider/xsc_oa.dart';
 
 import 'state.dart';
 
@@ -93,9 +97,11 @@ class LoginLogic extends GetxController {
     await prefs.setString(
         '${state.account.platformCode}password', state.account.password);
     if (state.account.platformCode == 0) {
-      Global.initOA();
+      XSCOA.xscoa = null;
+      MatrixOa.matrixOa = null;
+      SJJXTable.sjjxTable = null;
     } else if (state.account.platformCode == 1) {
-      Global.initDuifene();
+      DuiFenE.duiFenE = null;
     }
     Get.dialog(AlertDialog(
       title: Text("保存成功"),

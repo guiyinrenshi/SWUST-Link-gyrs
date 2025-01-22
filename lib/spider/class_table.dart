@@ -1,30 +1,23 @@
 import 'package:html/parser.dart';
 import 'package:logger/logger.dart';
 import 'package:swust_link/common/entity/oa/course.dart';
-import 'package:swust_link/common/global.dart';
 import 'package:swust_link/spider/oa_auth.dart';
 
 class UndergraduateClassTable {
-  UndergraduateClassTable() {
-    // oa = OAAuth(
-    //     service:
-    //         "https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=studentPortal:DEFAULT_EVENT",
-    //     username: username,
-    //     password: password);
+  final OAAuth matrixOa;
 
-  }
+  UndergraduateClassTable(this.matrixOa);
 
   Future<List<Course>> parseClassTable(String url) async {
-
     try {
       // 发起 GET 请求获取课程表 HTML
-      final response = await Global.matrixOa?.dio.get(url);
-      if (response?.statusCode != 200) {
+      final response = await matrixOa.dio.get(url);
+      if (response.statusCode != 200) {
         throw Exception(
-            "Failed to fetch class table, status code: ${response?.statusCode}");
+            "Failed to fetch class table, status code: ${response.statusCode}");
       }
       // 解析 HTML
-      final document = parse(response?.data);
+      final document = parse(response.data);
       final table = document.querySelector("#choosenCourseTable tbody");
       if (table == null) throw Exception("Failed to locate course table");
 

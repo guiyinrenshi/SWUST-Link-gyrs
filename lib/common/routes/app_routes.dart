@@ -20,4 +20,5 @@ abstract class AppRoutes {
   static const LOGIN_TIP = "/mine/login/tip";
   static const EVALUATE_ONLINE = "/app/evaluate/online";
   static const JUDGE_SCORE = "/app/judge/score";
+  static const GYDB_PAGE = "/app/tool/gydb";
 }

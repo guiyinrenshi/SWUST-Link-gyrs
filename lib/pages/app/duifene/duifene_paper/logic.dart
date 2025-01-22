@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:swust_link/spider/duifene.dart';
 import '../../../../common/global.dart';
 import 'state.dart';
 
@@ -12,10 +13,10 @@ class DuifenePaperLogic extends GetxController {
   }
 
   Future<void> loadDuifene() async {
-    if (Global.isLoginDfe) {
-      state.papers.value = (await Global.duiFenE?.getAllPager())!;
+    try{
+      state.papers.value = (await (await DuiFenE.getInstance())!.getAllPager());
       state.isLoading.value = false;
-    } else {
+    } catch(e) {
       Get.snackbar("未登录", "请先在我的-账号信息中保存信息");
     }
   }

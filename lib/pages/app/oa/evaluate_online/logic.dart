@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:swust_link/common/entity/oa/evaluation_paper.dart';
 import 'package:swust_link/spider/evaluate_online.dart';
+import 'package:swust_link/spider/matrix_oa.dart';
 
 import 'state.dart';
 
@@ -16,9 +17,8 @@ class EvaluateOnlineLogic extends GetxController {
   }
 
   Future<void> getEvalPaperList() async {
-    state.epClient = EvaluateOnline();
     state.evaluatePaperList.value =
-        await state.epClient.getEvaluationPaperList();
+        await (await MatrixOa.getInstance())!.evaluateOnline.getEvaluationPaperList();
     state.isLoading.value = false;
   }
 
@@ -105,7 +105,7 @@ class EvaluateOnlineLogic extends GetxController {
                   try {
                     for (var ep in data) {
                       try {
-                        state.epClient.evaluateOne(
+                        (await MatrixOa.getInstance())!.evaluateOnline.evaluateOne(
                             ep.toJson(),
                             commentController.text,
                             int.parse(selectedGrade.value));

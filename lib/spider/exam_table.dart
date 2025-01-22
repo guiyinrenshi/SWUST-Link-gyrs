@@ -5,14 +5,15 @@ import 'package:swust_link/common/global.dart';
 import 'package:swust_link/spider/oa_auth.dart';
 
 class ExamTable {
+  final OAAuth matrixOa;
 
-  ExamTable();
+  ExamTable(this.matrixOa);
 
   Future<List<FinalExam>> getExams() async {
     final url =
         "https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=studentPortal:examTable";
-    var data = await Global.matrixOa?.dio.get(url);
-    final document = parse(data?.data);
+    var data = await matrixOa.dio.get(url);
+    final document = parse(data.data);
     final rows = document.querySelectorAll('.editRows');
     return rows.map((row) {
       final cells = row.querySelectorAll('td');
@@ -29,4 +30,5 @@ class ExamTable {
       );
     }).toList();
   }
+
 }

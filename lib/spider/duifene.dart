@@ -9,6 +9,7 @@ import 'package:swust_link/common/entity/duifene/check_in.dart';
 import 'package:swust_link/common/entity/duifene/course.dart';
 import 'package:swust_link/common/entity/duifene/paper.dart';
 import 'package:swust_link/common/entity/duifene/work.dart';
+import 'package:swust_link/common/global.dart';
 
 class DuiFenE {
   late Dio dio;
@@ -58,15 +59,13 @@ class DuiFenE {
       var response = await dio.post(url, data: data);
       if (response.statusCode == 200) {
         var data = jsonDecode(response.data);
-        if (data['msg']=="1"){
+        if (data['msg'] == "1") {
           Logger().i("登录成功！${data['msg']}");
           return true;
-
-        } else{
+        } else {
           Logger().i("登录失败！${data['msgbox']}");
           return false;
         }
-
       } else {
         Logger().e("登录失败！${response.data}");
         return false;
@@ -251,15 +250,25 @@ class DuiFenE {
       "studentid": stuId
     };
 
-    var res =
-        await dio.post(url, data: FormData.fromMap(payload));
-    final Map<String,dynamic> jsonData = json.decode(res.data);
+    var res = await dio.post(url, data: FormData.fromMap(payload));
+    final Map<String, dynamic> jsonData = json.decode(res.data);
     final List<dynamic> jsonDatas = jsonData['rows'];
-    return jsonDatas.map((e) => CheckIn.fromJson(e as Map<String,dynamic>)).toList();
+    return jsonDatas
+        .map((e) => CheckIn.fromJson(e as Map<String, dynamic>))
+        .toList();
   }
 
+  static DuiFenE? duiFenE;
 
-// Future<String> signByCourse(String course,String classId) async{
-//
-// }
+  static Future<DuiFenE?> getInstance() async {
+    if (duiFenE == null) {
+      String? username = Global.prefs.getString("1username");
+      String? password = Global.prefs.getString("1password");
+      if (username != null && password != null) {
+        duiFenE = DuiFenE(username: username, password: password);
+        await duiFenE!.passwordLogin();
+      }
+    }
+    return duiFenE;
+  }
 }

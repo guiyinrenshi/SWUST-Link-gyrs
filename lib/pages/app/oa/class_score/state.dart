@@ -3,7 +3,6 @@ import 'package:swust_link/common/entity/oa/score.dart';
 import 'package:swust_link/spider/class_score.dart';
 
 class ClassScoreState {
-  late ClassScore classScore;
   // final RxList<AcademicRecord> scores = <AcademicRecord>[].obs;
   final scores = <CourseScore>[].obs;
   final selectedSemester = "".obs;

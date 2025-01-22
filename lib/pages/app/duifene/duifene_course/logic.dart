@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:swust_link/spider/duifene.dart';
 
 import '../../../../common/global.dart';
 import 'state.dart';
@@ -15,10 +16,11 @@ class DuifeneCourseLogic extends GetxController {
   }
 
   Future<void> loadDuifene() async {
-    if (Global.isLoginDfe) {
-      state.courses.value = (await Global.duiFenE?.getCourseInfo())!;
-    } else {
-      Get.snackbar("未登录", "请先在我的-账号信息中保存信息");
+    try{
+      state.courses.value =
+      (await (await DuiFenE.getInstance())!.getCourseInfo())!;
+    } catch(e){
+      Get.snackbar("获取失败", "请检查账号信息是否正确");
     }
   }
 
@@ -56,8 +58,8 @@ class DuifeneCourseLogic extends GetxController {
           TextButton(
             onPressed: () async {
               Get.back();
-              String? msg = await Global.duiFenE
-                  ?.joinClass(state.classIdController.value.text);
+              String? msg = await (await DuiFenE.getInstance())!
+                  .joinClass(state.classIdController.value.text);
               Get.snackbar("", msg!);
             },
             child: Text("确定"),
@@ -68,7 +70,8 @@ class DuifeneCourseLogic extends GetxController {
   }
 
   Future<void> showSignInfo(course) async {
-    var data = await Global.duiFenE?.getSignCode(course.tClassID);
+    var data =
+        await (await DuiFenE.getInstance())!.getSignCode(course.tClassID);
 
     Get.dialog(Dialog(
       child: SizedBox(
@@ -86,11 +89,12 @@ class DuifeneCourseLogic extends GetxController {
               TextButton(
                 child: const Text("一键签到"),
                 onPressed: () async {
-                  var data =
-                      await Global.duiFenE?.getSignCode(course.tClassID);
+                  var data = await (await DuiFenE.getInstance())!
+                      .getSignCode(course.tClassID);
 
-                  String msg =
-                      await Global.duiFenE?.signIn(data![0].checkInCode)??"";
+                  String msg = await (await DuiFenE.getInstance())!
+                          .signIn(data![0].checkInCode) ??
+                      "";
                   Get.snackbar("签到结果", msg);
                 },
               ),

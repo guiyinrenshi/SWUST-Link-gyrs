@@ -8,7 +8,6 @@ import 'package:swust_link/common/entity/oa/course.dart';
 import 'package:swust_link/spider/sjjx_class_table.dart';
 
 class ClassTableState {
-  late UndergraduateClassTable undergraduateClassTable;
   late SJJXTable sjjxTable;
   final RxList<Course> courses = <Course>[].obs;
   final Map<String, Color> courseColors = {};

@@ -6,13 +6,15 @@ import 'package:swust_link/spider/oa_auth.dart';
 import '../common/entity/oa/score.dart';
 
 class ClassScore {
-  ClassScore();
+  final OAAuth matrixOa;
+
+  ClassScore(this.matrixOa);
 
   Future<List<CourseScore>> getScoreList() async {
     final url =
         "https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=studentProfile:courseMark";
-    final res = await Global.matrixOa?.dio.get(url);
-    return extractCourses(res?.data);
+    final res = await matrixOa.dio.get(url);
+    return extractCourses(res.data);
   }
 
   /// 获取当前元素的所有后续兄弟元素（仅元素节点）

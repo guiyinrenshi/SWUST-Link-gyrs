@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:swust_link/common/entity/oa/course.dart';
 import 'package:swust_link/common/global.dart';
-import 'package:swust_link/spider/class_table.dart';
+import 'package:swust_link/spider/matrix_oa.dart';
 import 'package:swust_link/spider/sjjx_class_table.dart';
 
 import 'state.dart';
@@ -23,15 +23,13 @@ class ClassTableLogic extends GetxController {
     state.courses.value = await Global.localStorageService.loadFromLocal(
         "${state.title.value}-courses", (json) => Course.fromJson(json));
     state.isLoading.value = false;
-    state.undergraduateClassTable = UndergraduateClassTable();
 
     try {
       var data =
-          await state.undergraduateClassTable.parseClassTable(state.url.value);
+          await (await MatrixOa.getInstance())!.undergraduateClassTable.parseClassTable(state.url.value);
       if (state.title.value == "课程表") {
         if (data.isNotEmpty) {
-          state.sjjxTable = SJJXTable();
-          var sjjxData = await state.sjjxTable.getCourseList();
+          var sjjxData = await (await SJJXTable.getInstance())?.getCourseList()??[];
           data.addAll(sjjxData);
         }
       }

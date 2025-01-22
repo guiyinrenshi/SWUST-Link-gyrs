@@ -1,22 +1,26 @@
 import 'package:dio/dio.dart';
+import 'package:get/get.dart';
 import 'package:html/parser.dart';
 import 'package:logger/logger.dart';
 import 'package:swust_link/common/entity/oa/judge_score.dart';
 import 'package:swust_link/common/global.dart';
+import 'package:swust_link/spider/oa_auth.dart';
 
 class XSCOA {
-  static void initXSCOA() async {
+  final OAAuth xscOa;
+  XSCOA(this.xscOa);
+  Future<void> initXSCOA() async {
     final url = "http://xsc.swust.edu.cn/JC/OneLogin.aspx";
-    final res = await Global.xscOa?.dio.get(url);
+    final res = await xscOa.dio.get(url);
     // 正则表达式匹配 URL
     final urlRegex = RegExp(r"window\.location\.href\s*=\s*'([^']+)'");
 
     // 查找匹配
-    final match = urlRegex.firstMatch(res?.data);
+    final match = urlRegex.firstMatch(res.data);
 
     if (match != null) {
       final extractedUrl = match.group(1); // 提取第一个捕获组（URL）
-      Global.xscOa?.dio.get(extractedUrl!);
+       await xscOa.dio.get(extractedUrl!);
       print('Extracted URL: $extractedUrl');
     } else {
       print('No URL found.');
@@ -25,7 +29,7 @@ class XSCOA {
 
   Future<List<JudgeScore>> getJudgeScore() async {
     final url = "http://xsc.swust.edu.cn/Sys/SystemForm/StudentJudge/StuJudgeScore.aspx";
-    final res = await Global.xscOa?.dio.get(url,
+    final res = await xscOa.dio.get(url,
         options: Options(headers: {
           "Accept":
               "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
@@ -36,10 +40,10 @@ class XSCOA {
           "User-Agent":
               "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36"
         }));
-    Logger().i(res?.data);
-    Logger().i(res?.statusCode);
-    Logger().i(res?.headers);
-    return parseHtmlToRecords(res?.data);
+    Logger().i(res.statusCode);
+    Logger().i(res.headers);
+    Logger().i(res.data);
+    return parseHtmlToRecords(res.data);
   }
 
 
@@ -88,6 +92,27 @@ class XSCOA {
     }
     Logger().i(records);
     return records;
+  }
+  static XSCOA? xscoa;
+
+  static Future<XSCOA?> getInstance() async {
+    if (xscoa == null) {
+      String? username = Global.prefs.getString("0username");
+      String? password = Global.prefs.getString("0password");
+      if (username != null && password != null) {
+        var oa = OAAuth(
+            service: "http://xsc.swust.edu.cn/JC/OneLogin.aspx",
+            username: username,
+            password: password);
+        if (await oa.login()) {
+          xscoa = XSCOA(oa);
+          await xscoa?.initXSCOA();
+        } else{
+          Get.snackbar("登录失效", "请尝试刷新或检查账号密码是否正确!");
+        }
+      }
+    }
+    return xscoa;
   }
 
 }

@@ -15,7 +15,6 @@ class JudgeScoreLogic extends GetxController {
   }
 
   Future<void> getJudgeScore() async {
-    state.xscoa = XSCOA();
     loadRecords();
   }
 
@@ -27,7 +26,7 @@ class JudgeScoreLogic extends GetxController {
       state.selectedRecord.value = state.records.first;
     }
 
-    final data = await state.xscoa.getJudgeScore();
+    final data = await (await XSCOA.getInstance())!.getJudgeScore();
     if (data.isNotEmpty) {
       Global.localStorageService.saveToLocal(data, "judgeScore");
       state.records.value = data;

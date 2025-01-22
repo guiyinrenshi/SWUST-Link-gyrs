@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:swust_link/common/entity/oa/exam.dart';
 import 'package:swust_link/common/global.dart';
-import 'package:swust_link/spider/exam_table.dart';
+import 'package:swust_link/spider/matrix_oa.dart';
 import 'state.dart';
 
 class ExamLogic extends GetxController {
@@ -16,7 +16,7 @@ class ExamLogic extends GetxController {
 
   Future<List<FinalExam>> getExams() async {
     try {
-      var data = await state.examTable.getExams();
+      var data = await (await MatrixOa.getInstance())!.examTable.getExams();
       if(data.isNotEmpty){
         await Global.localStorageService.saveToLocal(state.exams, "exams");
       } else{
@@ -35,10 +35,6 @@ class ExamLogic extends GetxController {
     state.exams.value = await Global.localStorageService
         .loadFromLocal("exams", (json) => FinalExam.fromJson(json));
     state.isLoading.value = false;
-    state.examTable = ExamTable();
     state.exams.value = await getExams();
-
-
-
   }
 }

@@ -8,15 +8,15 @@ import 'package:swust_link/spider/oa_auth.dart';
 import 'package:dio/dio.dart';
 
 class EvaluateOnline {
-
-  EvaluateOnline();
+  final OAAuth matrixOa;
+  EvaluateOnline(this.matrixOa);
 
 
   Future<List<EvaluationPaper>> getEvaluationPaperList() async {
     final url =
         'https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=evaluateOnline:DEFAULT_EVENT';
-    var res = await Global.matrixOa?.dio.get(url);
-    var document = parse(res?.data);
+    var res = await matrixOa.dio.get(url);
+    var document = parse(res.data);
     var evaluationList = <EvaluationPaper>[];
     final baseurl = "https://matrix.dean.swust.edu.cn/acadmicManager/";
     var evaluationRawData = document.querySelectorAll(".editRows");
@@ -42,8 +42,8 @@ class EvaluateOnline {
   Future<Map<dynamic, dynamic>> parseEvaluation(
       Map<String, dynamic> data, int value) async {
     final url = data['url'];
-    var res = await Global.matrixOa?.dio.get(url);
-    var document = parse(res?.data);
+    var res = await matrixOa.dio.get(url);
+    var document = parse(res.data);
 
     var scc =
         document.querySelector("input[name='SCC']")?.attributes['value'] ?? '';
@@ -105,7 +105,7 @@ class EvaluateOnline {
         "https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=evaluateOnline:apiPostQuota";
 
     Logger().i(option);
-    var response = await Global.matrixOa?.dio.post(url,
+    var response = await matrixOa.dio.post(url,
         data: FormData.fromMap(option),
         options: Options(headers: {
           "accept":
@@ -147,7 +147,7 @@ class EvaluateOnline {
     var params = {"event": "evaluateOnline:evaluateResponseDo"};
     Logger().i(courseInfo);
     var response =
-        await Global.matrixOa?.dio.post(url, data: FormData.fromMap(courseInfo), queryParameters: params,options: Options(
+        await matrixOa.dio.post(url, data: FormData.fromMap(courseInfo), queryParameters: params,options: Options(
           headers:  {
             "accept":
             "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
@@ -176,7 +176,7 @@ class EvaluateOnline {
           },
         ));
 
-    if (response?.statusCode == 200) {
+    if (response.statusCode == 200) {
       print("${courseInfo['Title']} 评价提交成功！");
     } else {
       print("${courseInfo['Title']} 评价提交失败！");
