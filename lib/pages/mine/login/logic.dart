@@ -38,10 +38,10 @@ class LoginLogic extends GetxController {
     var res = await state.account.testLogin();
     Get.dialog(
       AlertDialog(
-        title: Text(res ? "登录成功" : "登录失败"),
-        content: Text(res ? "测试登录成功!保存信息后即代表您同意了隐私与协议!" : "用户名或密码错误！"),
+        title: Text(res['key'] ? "登录成功" : "登录失败"),
+        content: Text(res['key'] ? "测试登录成功!保存信息后即代表您同意了隐私与协议!" : res['message']),
         actions: [
-          res
+          res['key']
               ? TextButton(
                   onPressed: () {
                     Get.toNamed(
@@ -53,7 +53,7 @@ class LoginLogic extends GetxController {
                     Get.back();
                   },
                   child: Text("取消")),
-          res
+          res['key']
               ? TextButton(
                   onPressed: () {
                     Get.back();

@@ -9,18 +9,31 @@ class Account {
 
   Account(this.username, this.password, this.platformCode);
 
-  Future<bool> testLogin() async {
+  Future<Map> testLogin() async {
     if (platformCode == 0) {
       var oa = OAAuth(service: "http://soa.swust.edu.cn/", username: username, password: password);
-      return oa.login();
+      if(await oa.login()){
+        return {'key': true, 'message': ""};
+      } else {
+        return {'key': false, 'message': "用户名或密码错误！"};
+      }
     } else if (platformCode == 1) {
       var duifene = DuiFenE(username: username, password: password);
-      return duifene.passwordLogin();
+      if(await duifene.passwordLogin()){
+        return {'key': true, 'message': ""};
+      } else {
+        return {'key': false, 'message': "用户名或密码错误！"};
+      }
     }else if (platformCode == 2) {
       var baiduTrans = BaiduTrans(appID: username, key: password);
-      return baiduTrans.connect();
+      if(await baiduTrans.connect()){
+        return {'key': true, 'message': ""};
+      } else {
+        var errorMsg = baiduTrans.getErrorMsg();
+        return {'key': false, 'message': errorMsg};
+      }
     } else {
-      return true;
+      return {'key': true, 'message': ""};
     }
   }
 }
