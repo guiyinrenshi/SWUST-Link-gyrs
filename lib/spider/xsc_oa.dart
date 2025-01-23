@@ -5,10 +5,16 @@ import 'package:logger/logger.dart';
 import 'package:swust_link/common/entity/oa/judge_score.dart';
 import 'package:swust_link/common/global.dart';
 import 'package:swust_link/spider/oa_auth.dart';
+import 'package:swust_link/spider/xsc_leave.dart';
 
 class XSCOA {
   final OAAuth xscOa;
-  XSCOA(this.xscOa);
+  late final XscLeave xscLeave;
+
+  XSCOA(this.xscOa) {
+    xscLeave = XscLeave(xscOa);
+  }
+
   Future<void> initXSCOA() async {
     final url = "http://xsc.swust.edu.cn/JC/OneLogin.aspx";
     final res = await xscOa.dio.get(url);
@@ -20,7 +26,7 @@ class XSCOA {
 
     if (match != null) {
       final extractedUrl = match.group(1); // 提取第一个捕获组（URL）
-       await xscOa.dio.get(extractedUrl!);
+      await xscOa.dio.get(extractedUrl!);
       print('Extracted URL: $extractedUrl');
     } else {
       print('No URL found.');
@@ -28,7 +34,8 @@ class XSCOA {
   }
 
   Future<List<JudgeScore>> getJudgeScore() async {
-    final url = "http://xsc.swust.edu.cn/Sys/SystemForm/StudentJudge/StuJudgeScore.aspx";
+    final url =
+        "http://xsc.swust.edu.cn/Sys/SystemForm/StudentJudge/StuJudgeScore.aspx";
     final res = await xscOa.dio.get(url,
         options: Options(headers: {
           "Accept":
@@ -45,7 +52,6 @@ class XSCOA {
     Logger().i(res.data);
     return parseHtmlToRecords(res.data);
   }
-
 
   List<JudgeScore> parseHtmlToRecords(String htmlContent) {
     final document = parse(htmlContent);
@@ -84,7 +90,7 @@ class XSCOA {
         laborScore: cells[14].text.trim(),
         laborRankClass: cells[15].text.trim(),
         laborRankMajor: cells[16].text.trim(),
-        totalScore:cells[17].text.trim(),
+        totalScore: cells[17].text.trim(),
         totalRankClass: cells[18].text.trim(),
         totalRankMajor: cells[19].text.trim(),
         academicYear: cells[20].text.trim(),
@@ -93,6 +99,7 @@ class XSCOA {
     Logger().i(records);
     return records;
   }
+
   static XSCOA? xscoa;
 
   static Future<XSCOA?> getInstance() async {
@@ -107,12 +114,11 @@ class XSCOA {
         if (await oa.login()) {
           xscoa = XSCOA(oa);
           await xscoa?.initXSCOA();
-        } else{
+        } else {
           Get.snackbar("登录失效", "请尝试刷新或检查账号密码是否正确!");
         }
       }
     }
     return xscoa;
   }
-
 }

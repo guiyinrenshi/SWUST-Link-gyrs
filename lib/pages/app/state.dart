@@ -11,6 +11,7 @@ class AppState {
         {"route": AppRoutes.MAIN + AppRoutes.EXAM, "text": "考试查询"},
         {"route": AppRoutes.MAIN + AppRoutes.EVALUATE_ONLINE, "text": "教学评价"},
         {"route": AppRoutes.MAIN + AppRoutes.JUDGE_SCORE, "text": "综合测评"},
+        {"route": AppRoutes.MAIN + AppRoutes.LEAVE_INFO_PAGE, "text": "日常请假"},
       ]
     },
     {
