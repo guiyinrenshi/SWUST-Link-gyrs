@@ -5,4 +5,5 @@ class LeaveInfoState {
   var records = <LeaveRecord>[].obs;
   var currentPage = 1.obs;
   var totalPages = 1.obs;
+  var isLoading = true.obs;
 }

@@ -15,10 +15,11 @@ class LeaveInfoLogic extends GetxController {
 
   // 模拟数据获取
   void fetchRecords() async {
+    state.isLoading.value = true;
     LeaveInfoRecord leaveInfoRecord = await (await XSCOA.getInstance())!
         .xscLeave
         .getAllLeave(state.currentPage.value);
-
+    state.isLoading.value = false;
     // 假设总页数为 5，每页有 2 条记录
     state.totalPages.value = leaveInfoRecord.paginationInfo.totalPages;
     state.records.value = leaveInfoRecord.records;

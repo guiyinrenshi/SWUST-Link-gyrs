@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:swust_link/components/app_card/view.dart';
 import 'package:swust_link/components/class_card/view.dart';
 import 'package:swust_link/components/duifene_sign/view.dart';
 import 'package:swust_link/components/hitokoto/view.dart';
@@ -40,6 +41,16 @@ class HomePage extends StatelessWidget {
                     state.toDayCourses,
                   ),
                 ))
+              ],
+            ),
+            SizedBox(height: 10),
+            Row(
+              children: [
+                Expanded(
+                    child: Opacity(
+                      opacity: 0.8,
+                      child: AppCardComponent(),
+                    ))
               ],
             ),
             SizedBox(height: 10),

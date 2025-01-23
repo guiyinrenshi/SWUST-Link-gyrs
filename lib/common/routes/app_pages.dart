@@ -10,12 +10,14 @@ import 'package:swust_link/pages/app/oa/judge_score/view.dart';
 import 'package:swust_link/pages/app/oa/leave_application/view.dart';
 import 'package:swust_link/pages/app/oa/leave_info/view.dart';
 import 'package:swust_link/pages/app/tool_app/gydb/view.dart';
+import 'package:swust_link/pages/common/app_settings/view.dart';
 import 'package:swust_link/pages/app/tool_app/ykt/view.dart';
 import 'package:swust_link/pages/common/coming_soon/view.dart';
 import 'package:swust_link/pages/common/markdown_temple/view.dart';
 
 import 'package:swust_link/pages/app/tool_app/school_map/view.dart';
 import 'package:swust_link/pages/app/tool_app/variable_name/view.dart';
+import 'package:swust_link/pages/common/web_view_common/view.dart';
 import 'package:swust_link/pages/main/view.dart';
 import 'package:swust_link/pages/mine/about/view.dart';
 import 'package:swust_link/pages/mine/login/view.dart';
@@ -55,6 +57,7 @@ class AppPages {
       GetPage(name: AppRoutes.LEAVE_INFO_PAGE, page: () => LeaveInfoPage()),
       GetPage(name: AppRoutes.ABOUT, page: () => AboutPage()),
       GetPage(name: AppRoutes.COMING_SOON, page: () => ComingSoonPage()),
+      GetPage(name: AppRoutes.APP_SETTING, page: () => AppSettingsPage()),
       GetPage(
           name: AppRoutes.UPDATE_LOGS,
           page: () => MarkdownTemplePage("更新日志", "assets/update.md")),
@@ -62,7 +65,22 @@ class AppPages {
       GetPage(
           name: AppRoutes.LOGIN_TIP,
           page: () => MarkdownTemplePage("登录说明", "assets/login_tip.md")),
-      GetPage(name: AppRoutes.EVALUATE_ONLINE, page: () => EvaluateOnlinePage())
+      GetPage(
+          name: AppRoutes.EVALUATE_ONLINE, page: () => EvaluateOnlinePage()),
+      for (var item in urls)
+        GetPage(
+            name: item['route']!,
+            page: () =>
+                WebViewCommonPage(title: item['title']!, initUrl: item['url']!))
     ])
+  ];
+
+  static final urls = [
+    {
+      "title": "计科社团",
+      "url": "https://wiki.yudream.online/",
+      "route": "/app/computer/science/society"
+    },
+    {"title": "一生一芯", "url": "https://ysyx.oscc.cc/", "route": "/app/ysyx"}
   ];
 }

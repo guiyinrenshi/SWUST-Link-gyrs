@@ -16,15 +16,23 @@ class LeaveInfoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return AcgBackgroundComponent(
         title: Text("日常请假"),
-        actions: [TextButton(onPressed: (){
-          Get.toNamed(AppRoutes.MAIN+AppRoutes.LEAVE_PAGE);
-        }, child: Text("新增"))],
+        actions: [
+          TextButton(
+              onPressed: () {
+                Get.toNamed(AppRoutes.MAIN + AppRoutes.LEAVE_PAGE);
+              },
+              child: Text("新增"))
+        ],
         child: Column(
           children: [
             Expanded(
               child: Obx(() {
                 if (state.records.isEmpty) {
-                  return Center(child: CircularProgressIndicator());
+                  if (state.isLoading.value) {
+                    return Center(child: CircularProgressIndicator());
+                  } else {
+                    return Center(child: Text("当前无请假信息"),);
+                  }
                 }
                 return ListView.builder(
                   itemCount: state.records.length,

@@ -1,7 +1,7 @@
 import 'package:swust_link/common/routes/app_pages.dart';
 
 class AppState {
-  final appNewList = [
+  static final appNewList = [
     {
       "label": "一站式",
       "children": [
@@ -23,19 +23,19 @@ class AppState {
       ]
     },
     {
-      "label": "学习通",
-      "children": [
-        {"route": AppRoutes.MAIN + AppRoutes.COMING_SOON, "text": "学习通课程"},
-        {"route": AppRoutes.MAIN + AppRoutes.COMING_SOON, "text": "学习通作业"},
-      ]
-    },
-    {
       "label": "实用",
       "children": [
         {"route": AppRoutes.MAIN + AppRoutes.YKT, "text": "一卡通"},
         {"route": AppRoutes.MAIN + AppRoutes.GYDB_PAGE, "text": "舍先生"},
         {"route": AppRoutes.MAIN + AppRoutes.SCHOOL_MAP, "text": "学校地图"},
         {"route": AppRoutes.MAIN + AppRoutes.VARIABLE_NAME, "text": "起个变量名"},
+      ]
+    },
+    {
+      "label": "友情链接",
+      "children": [
+        for (var item in AppPages.urls)
+          {"route": AppRoutes.MAIN + item['route']!, "text": item['title']}
       ]
     }
   ];

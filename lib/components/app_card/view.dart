@@ -1,53 +1,60 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:swust_link/common/entity/app.dart';
 import 'package:swust_link/common/routes/app_pages.dart';
 
 import 'logic.dart';
 import 'state.dart';
 
-class AppPage extends StatelessWidget {
-  AppPage({Key? key}) : super(key: key);
+class AppCardComponent extends StatelessWidget {
+  AppCardComponent({Key? key}) : super(key: key);
 
-  final AppLogic logic = Get.put(AppLogic());
-  final AppState state = Get.find<AppLogic>().state;
+  final AppCardLogic logic = Get.put(AppCardLogic());
+  final AppCardState state = Get.find<AppCardLogic>().state;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10),
-      child: ListView.builder(
-        itemCount: AppState.appNewList.length,
-        itemBuilder: (context, sectionIndex) {
-          final section = AppState.appNewList[sectionIndex];
-          return Opacity(opacity: 0.8,child: Container(
-              padding: EdgeInsets.only(left: 15,right: 15,top: 5,bottom: 5),
-              margin: EdgeInsets.only(bottom: 20),
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  // 圆角
-                  borderRadius: BorderRadius.circular(10.r),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.shade300,
-                      blurRadius: 10,
-                      spreadRadius: 2,
-                      offset: Offset(0, 4),
-                    ),
-                  ]
+    return Container(
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20.r),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.shade300,
+                blurRadius: 10.r,
+                spreadRadius: 2,
+                offset: Offset(0, 4),
               ),
+            ]),
+        child: Obx(() {
+          return Padding(
+              padding: EdgeInsets.all(20.sp),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text(
-                      section['label'] as String,
-                      style: TextStyle(
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.bold,
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.apps,
+                        size: 22.sp,
                       ),
-                    ),
+                      SizedBox(width: 20),
+                      Expanded(
+                          child: Text(
+                        "常用应用",
+                        style: TextStyle(
+                            fontSize: 22.sp, fontWeight: FontWeight.bold),
+                      )),
+                      IconButton(
+                          onPressed: () {
+                            Get.toNamed(AppRoutes.MAIN + AppRoutes.APP_SETTING);
+                          },
+                          icon: Icon(Icons.settings))
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
                   ),
                   GridView.builder(
                     shrinkWrap: true,
@@ -57,12 +64,12 @@ class AppPage extends StatelessWidget {
                       crossAxisSpacing: 10, // 横向间距
                       mainAxisSpacing: 10, // 纵向间距
                     ),
-                    itemCount: (section['children'] as List).length,
+                    itemCount: state.apps.length,
                     itemBuilder: (context, index) {
-                      final app = (section['children'] as List)[index];
+                      final App app = state.apps[index];
                       return GestureDetector(
                         onTap: () {
-                          Get.toNamed(app['route'] as String);
+                          Get.toNamed(app.route);
                         },
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -71,12 +78,12 @@ class AppPage extends StatelessWidget {
                               height: 48.h,
                               width: 48.w,
                               decoration: BoxDecoration(
-                                color: Color((app['text'].hashCode) | 0xFF000000),
+                                color: Color((app.text.hashCode) | 0xFF000000),
                                 borderRadius: BorderRadius.circular(8.r),
                               ),
                               alignment: Alignment.center,
                               child: Text(
-                                app['text'][0], // 使用文字的首字母作为图标
+                                app.text[0], // 使用文字的首字母作为图标
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -86,7 +93,7 @@ class AppPage extends StatelessWidget {
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              app['text'] as String,
+                              app.text,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               textAlign: TextAlign.center,
@@ -97,9 +104,7 @@ class AppPage extends StatelessWidget {
                     },
                   ),
                 ],
-              )),);
-        },
-      ),
-    );
+              ));
+        }));
   }
 }

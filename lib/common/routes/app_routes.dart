@@ -24,4 +24,5 @@ abstract class AppRoutes {
   static const YKT = "/app/tool/ykt";
   static const LEAVE_PAGE = "/app/leave/add";
   static const LEAVE_INFO_PAGE = "/app/leave/info";
+  static const APP_SETTING = "/app/setting";
 }
