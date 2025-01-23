@@ -21,6 +21,7 @@ abstract class AppRoutes {
   static const EVALUATE_ONLINE = "/app/evaluate/online";
   static const JUDGE_SCORE = "/app/judge/score";
   static const GYDB_PAGE = "/app/tool/gydb";
+  static const YKT = "/app/tool/ykt";
   static const LEAVE_PAGE = "/app/leave/add";
   static const LEAVE_INFO_PAGE = "/app/leave/info";
 }

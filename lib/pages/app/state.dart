@@ -32,9 +32,10 @@ class AppState {
     {
       "label": "实用",
       "children": [
-        {"route": AppRoutes.MAIN + AppRoutes.VARIABLE_NAME, "text": "起个变量名"},
+        {"route": AppRoutes.MAIN + AppRoutes.YKT, "text": "一卡通"},
+        {"route": AppRoutes.MAIN + AppRoutes.GYDB_PAGE, "text": "舍先生"},
         {"route": AppRoutes.MAIN + AppRoutes.SCHOOL_MAP, "text": "学校地图"},
-        {"route": AppRoutes.MAIN + AppRoutes.GYDB_PAGE, "text": "舍先生"}
+        {"route": AppRoutes.MAIN + AppRoutes.VARIABLE_NAME, "text": "起个变量名"},
       ]
     }
   ];

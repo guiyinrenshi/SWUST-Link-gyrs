@@ -10,6 +10,7 @@ import 'package:swust_link/pages/app/oa/judge_score/view.dart';
 import 'package:swust_link/pages/app/oa/leave_application/view.dart';
 import 'package:swust_link/pages/app/oa/leave_info/view.dart';
 import 'package:swust_link/pages/app/tool_app/gydb/view.dart';
+import 'package:swust_link/pages/app/tool_app/ykt/view.dart';
 import 'package:swust_link/pages/common/coming_soon/view.dart';
 import 'package:swust_link/pages/common/markdown_temple/view.dart';
 
@@ -41,6 +42,7 @@ class AppPages {
               "https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=chooseCourse:courseTable")),
       GetPage(name: AppRoutes.PARAMS_SETTING, page: () => Params_settingPage()),
       GetPage(name: AppRoutes.JUDGE_SCORE, page: () => JudgeScorePage()),
+      GetPage(name: AppRoutes.YKT, page: () => YktPage()),
       GetPage(name: AppRoutes.VARIABLE_NAME, page: () => VariableNamePage()),
       GetPage(name: AppRoutes.SCHOOL_MAP, page: () => SchoolMapPage()),
       GetPage(
