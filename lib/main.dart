@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bugly/flutter_bugly.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
@@ -11,25 +13,27 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
 
+  runZonedGuarded(() async {
+    WidgetsFlutterBinding.ensureInitialized();
 
-  if (window.physicalSize.isEmpty) {
-    window.onMetricsChanged = () {
-      //在回调中，size仍然有可能是0
-      if (!window.physicalSize.isEmpty) {
-        window.onMetricsChanged = null;
-        runApp(const MyApp());
-      }
-    };
-  } else {
-    //如果size非0，则直接runApp
-    runApp(const MyApp());
-  }
+    // 初始化 Bugly
+    await FlutterBugly.init(
+      androidAppId: "3d7df40363",
+    );
 
-  runApp(const MyApp());
-  Get.put(params_setting());
-  getSetting();
-  Logger().i("After getSetting called");
-  Global.initialize();
+    // 启动应用
+    runApp(MyApp());
+    Get.put(params_setting());
+    getSetting();
+    Logger().i("After getSetting called");
+    Global.initialize();
+  }, (error, stackTrace) {
+    // 捕获未处理的异常并上传到 Bugly
+    FlutterBugly.uploadException(
+      message: error.toString(),
+      detail: stackTrace.toString(),
+    );
+  });
 }
 
 class params_setting extends GetxController {

@@ -76,11 +76,13 @@ class AppPages {
   ];
 
   static final urls = [
+    {"title": "本科招生", "url": "https://zs.swust.edu.cn/#/", "route": "/app/zs"},
     {
       "title": "计科社团",
       "url": "https://wiki.yudream.online/",
       "route": "/app/computer/science/society"
     },
-    {"title": "一生一芯", "url": "https://ysyx.oscc.cc/", "route": "/app/ysyx"}
+    {"title": "一生一芯", "url": "https://ysyx.oscc.cc/", "route": "/app/ysyx"},
+    {"title": "掌上西科", "url": "https://swust.devin.cool/#/", "route": "/app/zsxk"}
   ];
 }

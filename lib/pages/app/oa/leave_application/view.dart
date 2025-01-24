@@ -26,91 +26,103 @@ class LeaveApplicationPage extends StatelessWidget {
             child: Text("保存模板"))
       ],
       child: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Obx(()=>Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildDateTimePicker(
-              '请假开始时间',
-              state.leaveBeginDate,
-              state.leaveBeginTime,
+          padding: const EdgeInsets.all(16.0),
+          child: Obx(
+            () => Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildDateTimePicker(
+                  '请假开始时间',
+                  state.leaveBeginDate,
+                  state.leaveBeginTime,
+                ),
+                const SizedBox(height: 16),
+                _buildDateTimePicker(
+                  '请假结束时间',
+                  state.leaveEndDate,
+                  state.leaveEndTime,
+                ),
+                const SizedBox(height: 16),
+                _buildRadioGroup(
+                  '请假事由类型',
+                  'leaveType',
+                  ['求职', '实习', '返家', '培训', '旅游', '病假', '事假'],
+                  state.leaveType,
+                ),
+                const SizedBox(height: 16),
+                _buildTextField('外出请假事由', 'leaveThing', state.leaveThing),
+                const SizedBox(height: 16),
+                _buildCityPicker('外出地点', state.city),
+                const SizedBox(height: 16),
+                _buildTextField('详细地址', 'outAddress', state.outAddress),
+                const SizedBox(height: 16),
+                _buildRadioGroup(
+                  '是否已告知家长',
+                  'isTellRbl',
+                  ['是', '否'],
+                  state.isTellRbl,
+                ),
+                const SizedBox(height: 16),
+                _buildTextField('同行人数', 'withNumNo', state.withNumNo),
+                const SizedBox(height: 16),
+                _buildTextField('家长姓名', 'jhrName', state.jhrName),
+                const SizedBox(height: 16),
+                _buildTextField('家长电话', 'jhrPhone', state.jhrPhone),
+                const SizedBox(height: 16),
+                _buildTextField('联系人姓名', 'outName', state.outName),
+                const SizedBox(height: 16),
+                _buildTextField('联系人固定电话', 'outTel', state.outTel),
+                const SizedBox(height: 16),
+                _buildTextField('联系人移动电话', 'outMoveTel', state.outMoveTel),
+                const SizedBox(height: 16),
+                _buildTextField('联系人关系', 'relation', state.relation),
+                const SizedBox(height: 16),
+                _buildTextField('学生电话', 'stuMoveTel', state.stuMoveTel),
+                const SizedBox(height: 16),
+                _buildDateTimePicker(
+                  '去程时间',
+                  state.goDate,
+                  state.goTime,
+                ),
+                _buildRadioGroup(
+                  '去程交通工具',
+                  'goVehicle',
+                  ['汽车', '火车', '飞机', '自行车', '其他'],
+                  state.goVehicle,
+                ),
+                const SizedBox(height: 16),
+                _buildDateTimePicker(
+                  '返程时间',
+                  state.backDate,
+                  state.backTime,
+                ),
+                _buildRadioGroup(
+                  '返程交通工具',
+                  'backVehicle',
+                  ['汽车', '火车', '飞机', '自行车', '其他'],
+                  state.backVehicle,
+                ),
+                const SizedBox(height: 32),
+                Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          logic.submitForm();
+                        },
+                        style: ButtonStyle(
+                          shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10))),
+                          backgroundColor: WidgetStateProperty.all(Colors.blue),
+                        ),
+                        child: const Text('提交申请',style: TextStyle(color: Colors.white),),
+                      ),
+                    )
+                  ],
+                )
+              ],
             ),
-            const SizedBox(height: 16),
-            _buildDateTimePicker(
-              '请假结束时间',
-              state.leaveEndDate,
-              state.leaveEndTime,
-            ),
-            const SizedBox(height: 16),
-            _buildRadioGroup(
-              '请假事由类型',
-              'leaveType',
-              ['求职', '实习', '返家', '培训', '旅游', '病假', '事假'],
-              state.leaveType,
-            ),
-            const SizedBox(height: 16),
-            _buildTextField('外出请假事由', 'leaveThing', state.leaveThing),
-            const SizedBox(height: 16),
-            _buildCityPicker('外出地点', state.city),
-            const SizedBox(height: 16),
-            _buildTextField('详细地址', 'outAddress', state.outAddress),
-            const SizedBox(height: 16),
-            _buildRadioGroup(
-              '是否已告知家长',
-              'isTellRbl',
-              ['是', '否'],
-              state.isTellRbl,
-            ),
-            const SizedBox(height: 16),
-            _buildTextField('同行人数', 'withNumNo', state.withNumNo),
-            const SizedBox(height: 16),
-            _buildTextField('家长姓名', 'jhrName', state.jhrName),
-            const SizedBox(height: 16),
-            _buildTextField('家长电话', 'jhrPhone', state.jhrPhone),
-            const SizedBox(height: 16),
-            _buildTextField('联系人姓名', 'outName', state.outName),
-            const SizedBox(height: 16),
-            _buildTextField('联系人固定电话', 'outTel', state.outTel),
-            const SizedBox(height: 16),
-            _buildTextField('联系人移动电话', 'outMoveTel', state.outMoveTel),
-            const SizedBox(height: 16),
-            _buildTextField('联系人关系', 'relation', state.relation),
-            const SizedBox(height: 16),
-            _buildTextField('学生电话', 'stuMoveTel', state.stuMoveTel),
-            const SizedBox(height: 16),
-            _buildDateTimePicker(
-              '去程时间',
-              state.goDate,
-              state.goTime,
-            ),
-            _buildRadioGroup(
-              '去程交通工具',
-              'goVehicle',
-              ['汽车', '火车', '飞机', '自行车', '其他'],
-              state.goVehicle,
-            ),
-            const SizedBox(height: 16),
-            _buildDateTimePicker(
-              '返程时间',
-              state.backDate,
-              state.backTime,
-            ),
-            _buildRadioGroup(
-              '返程交通工具',
-              'backVehicle',
-              ['汽车', '火车', '飞机', '自行车', '其他'],
-              state.backVehicle,
-            ),
-            const SizedBox(height: 32),
-            ElevatedButton(
-              onPressed: () {
-                logic.submitForm();
-              },
-              child: const Text('提交申请'),
-            ),
-          ],
-        ),)
-      ),
+          )),
     );
   }
 
@@ -184,20 +196,19 @@ class LeaveApplicationPage extends StatelessWidget {
     );
 
     return TextField(
-        controller: controller,
-        decoration: InputDecoration(
-          labelText: label,
-          border: const OutlineInputBorder(),
-        ),
-        readOnly: isReadOnly,
-        onChanged: isReadOnly
-            ? null
-            : (newValue) {
-          value.value = newValue; // 更新 RxString 的值
-        },
-      );
+      controller: controller,
+      decoration: InputDecoration(
+        labelText: label,
+        border: const OutlineInputBorder(),
+      ),
+      readOnly: isReadOnly,
+      onChanged: isReadOnly
+          ? null
+          : (newValue) {
+              value.value = newValue; // 更新 RxString 的值
+            },
+    );
   }
-
 
   Widget _buildRadioGroup(String label, String fieldName, List<String> options,
       RxString selectedValue) {
