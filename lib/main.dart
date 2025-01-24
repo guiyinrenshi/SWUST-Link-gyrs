@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bugly/flutter_bugly.dart';
@@ -15,7 +14,6 @@ void main() async {
 
   runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
-
     // 初始化 Bugly
     await FlutterBugly.init(
       androidAppId: "3d7df40363",
