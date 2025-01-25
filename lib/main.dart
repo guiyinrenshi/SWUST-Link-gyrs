@@ -37,6 +37,7 @@ void main() async {
 class params_setting extends GetxController {
   static params_setting get to => Get.find();
   final RxBool isAnime = true.obs;
+  final RxBool isUploadBg = true.obs;
 
   @override
   void onInit() {
@@ -48,8 +49,11 @@ class params_setting extends GetxController {
 Future<void> getSetting()async {
   final prefs = await SharedPreferences.getInstance();
   final isAnimePrefs = prefs.getBool("isAnime") ?? false;
+  final isUploadBgPrefs = prefs.getBool("isUploadBg") ?? false;
   params_setting.to.isAnime.value = isAnimePrefs;
+  params_setting.to.isUploadBg.value = isUploadBgPrefs;
   Logger().i("getSetting loaded with isAnime: $isAnimePrefs");
+  Logger().i("getSetting loaded with isUploadBg: $isUploadBgPrefs");
 }
 
 class MyApp extends StatelessWidget {

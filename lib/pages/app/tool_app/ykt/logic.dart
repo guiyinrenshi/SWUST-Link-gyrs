@@ -1,5 +1,6 @@
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 
 import 'state.dart';
 
@@ -16,18 +17,10 @@ class YktLogic extends GetxController {
     ..setNavigationDelegate(
       NavigationDelegate(
         onProgress: (int progress) {},
-        onPageStarted: (String url) {
-          // state.title.value = '加载中';
-        },
-        onPageFinished: (String url) {
-          // state.title.value = '学校地图';
-        },
-        onHttpError: (HttpResponseError error) {
-          // state.title.value = '发生错误';
-        },
-        onWebResourceError: (WebResourceError error) {
-          // state.title.value = '发生错误';
-        },
+        onPageStarted: (String url) {},
+        onPageFinished: (String url) {},
+        onHttpError: (HttpResponseError error) {},
+        onWebResourceError: (WebResourceError error) {},
         onNavigationRequest: (NavigationRequest request) {
           if (request.url.startsWith("http://ykt.swust.edu.cn/plat/shouyeUser")) {
             return NavigationDecision.prevent;
@@ -36,5 +29,10 @@ class YktLogic extends GetxController {
         },
       ),
     )
+    ..enableZoom(false)
+    ..setBackgroundColor(Colors.transparent)
+    ..setUserAgent('Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Mobile/15E148 Safari/604.1')
+    ..enableZoom(false)
+    ..setJavaScriptMode(JavaScriptMode.unrestricted)
     ..loadRequest(Uri.parse("http://ykt.swust.edu.cn/plat/shouyeUser"));
 }

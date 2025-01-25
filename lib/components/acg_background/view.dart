@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -5,6 +6,7 @@ import 'package:swust_link/common/global.dart';
 import 'package:swust_link/components/acg_background/state.dart';
 
 import 'logic.dart';
+
 class AcgBackgroundComponent extends StatelessWidget {
   final Widget child;
   final Widget title;
@@ -30,9 +32,11 @@ class AcgBackgroundComponent extends StatelessWidget {
           () => Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage(state.image.value.isEmpty
-                    ? "assets/images/1.jpg" // 默认背景
-                    : state.image.value),
+                image: Global.isUploadBg.value
+                    ? FileImage(state.imagePath.value)
+                    : AssetImage(state.image.value.isEmpty
+                        ? "assets/images/1.jpg" // 默认背景
+                        : state.image.value),
                 fit: BoxFit.cover,
               ),
             ),
@@ -52,11 +56,11 @@ class AcgBackgroundComponent extends StatelessWidget {
         // 前景内容
         Obx(
           () => Scaffold(
-            backgroundColor: Global.isAnime.value
+            backgroundColor: Global.isAnime.value || Global.isUploadBg.value
                 ? Colors.transparent
                 : const Color(0xfff3f4f6),
             appBar: AppBar(
-              backgroundColor: Global.isAnime.value
+              backgroundColor: Global.isAnime.value || Global.isUploadBg.value
                   ? Colors.transparent
                   : const Color(0xfff3f4f6),
               title: title,

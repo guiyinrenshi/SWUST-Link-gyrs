@@ -7,6 +7,7 @@ import '../utils/local_sttorage.dart';
 class Global {
 
   static RxBool isAnime = false.obs;
+  static RxBool isUploadBg = false.obs;
   static late SharedPreferences prefs;
   static late LocalStorageService localStorageService;
 
@@ -15,6 +16,6 @@ class Global {
     localStorageService = LocalStorageService();
     prefs = await SharedPreferences.getInstance();
     isAnime.value = prefs.getBool("isAnime") ?? false;
+    isUploadBg.value = prefs.getBool("isUploadBg") ?? false;
   }
-
 }
