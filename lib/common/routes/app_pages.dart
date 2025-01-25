@@ -9,6 +9,7 @@ import 'package:swust_link/pages/app/oa/exam/view.dart';
 import 'package:swust_link/pages/app/oa/judge_score/view.dart';
 import 'package:swust_link/pages/app/oa/leave_application/view.dart';
 import 'package:swust_link/pages/app/oa/leave_info/view.dart';
+import 'package:swust_link/pages/app/tool_app/club_page/view.dart';
 import 'package:swust_link/pages/app/tool_app/gydb/view.dart';
 import 'package:swust_link/pages/common/app_settings/view.dart';
 import 'package:swust_link/pages/app/tool_app/ykt/view.dart';
@@ -53,10 +54,12 @@ class AppPages {
               "隐私与协议", "assets/privacy_and_protocol_state.md")),
       GetPage(name: AppRoutes.CLASS_SCORE, page: () => ClassScorePage()),
       GetPage(name: AppRoutes.GYDB_PAGE, page: () => GydbPage()),
+      GetPage(name: AppRoutes.CLUB_NAV, page: () => ClubPagePage()),
       GetPage(name: AppRoutes.LEAVE_PAGE, page: () => LeaveApplicationPage()),
       GetPage(name: AppRoutes.LEAVE_INFO_PAGE, page: () => LeaveInfoPage()),
       GetPage(name: AppRoutes.ABOUT, page: () => AboutPage()),
       GetPage(name: AppRoutes.COMING_SOON, page: () => ComingSoonPage()),
+
       GetPage(name: AppRoutes.APP_SETTING, page: () => AppSettingsPage()),
       GetPage(
           name: AppRoutes.UPDATE_LOGS,
@@ -83,6 +86,10 @@ class AppPages {
       "route": "/app/computer/science/society"
     },
     {"title": "一生一芯", "url": "https://ysyx.oscc.cc/", "route": "/app/ysyx"},
-    {"title": "掌上西科", "url": "https://swust.devin.cool/#/", "route": "/app/zsxk"}
+    {
+      "title": "掌上西科",
+      "url": "https://swust.devin.cool/#/",
+      "route": "/app/zsxk"
+    }
   ];
 }

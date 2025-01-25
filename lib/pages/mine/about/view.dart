@@ -61,7 +61,7 @@ class AboutPage extends StatelessWidget {
                     children: [
                       Expanded(
                           child: Text(
-                        "版本号: ${state.version.value}+${state.buildNumber.value}",
+                        "版本号: ${state.version.value}",
                         textAlign: TextAlign.center,
                       ))
                     ],

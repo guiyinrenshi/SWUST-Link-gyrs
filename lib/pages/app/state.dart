@@ -29,6 +29,7 @@ class AppState {
         {"route": AppRoutes.MAIN + AppRoutes.GYDB_PAGE, "text": "舍先生"},
         {"route": AppRoutes.MAIN + AppRoutes.SCHOOL_MAP, "text": "学校地图"},
         {"route": AppRoutes.MAIN + AppRoutes.VARIABLE_NAME, "text": "起个变量名"},
+        {"route": AppRoutes.MAIN + AppRoutes.CLUB_NAV, "text": "社团导航"},
       ]
     },
     {

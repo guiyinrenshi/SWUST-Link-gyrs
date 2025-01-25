@@ -16,7 +16,7 @@ class AcgBackgroundLogic extends GetxController {
     // TODO: implement onInit
     super.onInit();
     randomBG();
-    setHandelBG();
+    // setHandelBG();
   }
   void randomBG(){
     Logger().i(state.assets);
@@ -25,16 +25,16 @@ class AcgBackgroundLogic extends GetxController {
     // 更新随机背景图片
     state.image.value = state.assets[randomIndex];
   }
-  Future<void> setHandelBG() async {
-    final prefs = await SharedPreferences.getInstance();
-    final isUploadBg = prefs.getBool("isUploadBg") ?? false;
-    Logger().i("isUploadBg:$isUploadBg");
-    if (isUploadBg) {
-      final uploadBgPath = prefs.getString("uploadBgPath") ?? "";
-      Logger().i("Get UploadBgPath:$uploadBgPath");
-      if(uploadBgPath != ""){
-          state.imagePath.value = File(uploadBgPath);
-      }
-    }
-  }
+  // Future<void> setHandelBG() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   final isUploadBg = prefs.getBool("isUploadBg") ?? false;
+  //   Logger().i("isUploadBg:$isUploadBg");
+  //   if (isUploadBg) {
+  //     final uploadBgPath = prefs.getString("uploadBgPath") ?? "";
+  //     Logger().i("Get UploadBgPath:$uploadBgPath");
+  //     if(uploadBgPath != ""){
+  //         state.imagePath.value = File(uploadBgPath);
+  //     }
+  //   }
+  // }
 }

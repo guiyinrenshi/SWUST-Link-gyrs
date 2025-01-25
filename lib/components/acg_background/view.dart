@@ -12,13 +12,15 @@ class AcgBackgroundComponent extends StatelessWidget {
   final Widget title;
   final List<Widget>? actions;
   final Widget? bottomNavigationBar;
+  final Widget? floatingActionButton;
 
   AcgBackgroundComponent(
       {super.key,
       required this.child,
       required this.title,
       this.actions,
-      this.bottomNavigationBar});
+      this.bottomNavigationBar,
+      this.floatingActionButton});
 
   final AcgBackgroundLogic logic = Get.put(AcgBackgroundLogic());
   final AcgBackgroundState state = Get.find<AcgBackgroundLogic>().state;
@@ -33,7 +35,7 @@ class AcgBackgroundComponent extends StatelessWidget {
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: Global.isUploadBg.value
-                    ? FileImage(state.imagePath.value)
+                    ? FileImage(File(Global.uploadBg.value))
                     : AssetImage(state.image.value.isEmpty
                         ? "assets/images/1.jpg" // 默认背景
                         : state.image.value),
@@ -56,6 +58,7 @@ class AcgBackgroundComponent extends StatelessWidget {
         // 前景内容
         Obx(
           () => Scaffold(
+            floatingActionButton: floatingActionButton,
             backgroundColor: Global.isAnime.value || Global.isUploadBg.value
                 ? Colors.transparent
                 : const Color(0xfff3f4f6),

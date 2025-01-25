@@ -4,6 +4,7 @@ import 'package:swust_link/components/app_card/view.dart';
 import 'package:swust_link/components/class_card/view.dart';
 import 'package:swust_link/components/duifene_sign/view.dart';
 import 'package:swust_link/components/hitokoto/view.dart';
+import 'package:swust_link/components/notice_card/view.dart';
 
 import '../../components/today_class_list/view.dart';
 import 'logic.dart';
@@ -22,6 +23,16 @@ class HomePage extends StatelessWidget {
         padding: EdgeInsets.all(8),
         child: Column(
           children: [
+            Row(
+              children: [
+                Expanded(
+                    child: Opacity(
+                  opacity: 0.8,
+                  child: NoticeCardComponent(),
+                ))
+              ],
+            ),
+            SizedBox(height: 10),
             Row(
               children: [
                 Expanded(

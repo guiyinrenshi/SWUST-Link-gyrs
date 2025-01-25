@@ -60,10 +60,9 @@ class AboutLogic extends GetxController {
   Future<void> checkNew() async {
     Dio dio = Dio();
     try {
-      var res = await dio.get("http://notice.yudream.online/file_info.json");
+      var res = await dio.get("https://alist.yudream.online/d/%E6%B8%B8%E5%AE%A2%E4%B8%BB%E7%9B%AE%E5%BD%95/SWUST%20Link/%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6/label.json?sign=DjqbJzk0tpIkEDrlpwcbWgFYdNF-7uV5QzA9XgCb4VI=:0");
       var data = res.data;
       state.newLabel.value = data['label'];
-      state.newFileName.value = data['fileName'];
       state.newUrl.value = data['url'];
 
       var isNew = state.newLabel.value !=

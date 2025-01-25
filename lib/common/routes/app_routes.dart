@@ -25,4 +25,5 @@ abstract class AppRoutes {
   static const LEAVE_PAGE = "/app/leave/add";
   static const LEAVE_INFO_PAGE = "/app/leave/info";
   static const APP_SETTING = "/app/setting";
+  static const CLUB_NAV = "/app/club/nav";
 }

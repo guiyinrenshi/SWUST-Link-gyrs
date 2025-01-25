@@ -17,8 +17,6 @@ class Params_settingPage extends StatelessWidget {
   final Params_settingLogic logic = Get.put(Params_settingLogic());
   final Params_settingState state = Get.find<Params_settingLogic>().state;
 
-
-
   @override
   Widget build(BuildContext context) {
     return AcgBackgroundComponent(
@@ -32,7 +30,8 @@ class Params_settingPage extends StatelessWidget {
             final isAutoQuery = state.isAutoQueryEnabled.value;
             final isAnime = state.isAnime.value;
             final isUploadBg = state.isUploadBg.value;
-            logic.saveSettings(firstDay, autoQueryTime, isAutoQuery, isAnime, isUploadBg);
+            logic.saveSettings(
+                firstDay, autoQueryTime, isAutoQuery, isAnime, isUploadBg);
             Get.snackbar(
               "保存成功",
               "参数设置已保存",
@@ -86,7 +85,7 @@ class Params_settingPage extends StatelessWidget {
                     style: TextStyle(fontSize: 16),
                   ),
                   Obx(
-                        () => Switch(
+                    () => Switch(
                       value: state.isAutoQueryEnabled.value,
                       onChanged: (value) {
                         state.isAutoQueryEnabled.value = value;
@@ -115,12 +114,11 @@ class Params_settingPage extends StatelessWidget {
                     style: TextStyle(fontSize: 16),
                   ),
                   Obx(
-                        () => Switch(
+                    () => Switch(
                       value: state.isAnime.value,
-
                       onChanged: (value) {
                         if (value) {
-                          state.isUploadBg.value = false;  // 关闭上传背景
+                          state.isUploadBg.value = false; // 关闭上传背景
                         }
                         state.isAnime.value = value;
                       },
@@ -137,11 +135,11 @@ class Params_settingPage extends StatelessWidget {
                     style: TextStyle(fontSize: 16),
                   ),
                   Obx(
-                        () => Switch(
+                    () => Switch(
                       value: state.isUploadBg.value,
                       onChanged: (value) {
                         if (value) {
-                          state.isAnime.value = false;  // 关闭上传背景
+                          state.isAnime.value = false; // 关闭上传背景
                           logic.checkImageSave();
                         }
                         state.isUploadBg.value = value;
