@@ -17,6 +17,7 @@ void main() async {
     // 初始化 Bugly
     await FlutterBugly.init(
       androidAppId: "3d7df40363",
+      iOSAppId: "c906b295b4",
     );
 
     // 启动应用

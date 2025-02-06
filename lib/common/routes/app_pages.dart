@@ -12,11 +12,9 @@ import 'package:swust_link/pages/app/oa/leave_info/view.dart';
 import 'package:swust_link/pages/app/tool_app/club_page/view.dart';
 import 'package:swust_link/pages/app/tool_app/gydb/view.dart';
 import 'package:swust_link/pages/common/app_settings/view.dart';
-import 'package:swust_link/pages/app/tool_app/ykt/view.dart';
 import 'package:swust_link/pages/common/coming_soon/view.dart';
 import 'package:swust_link/pages/common/markdown_temple/view.dart';
 
-import 'package:swust_link/pages/app/tool_app/school_map/view.dart';
 import 'package:swust_link/pages/app/tool_app/variable_name/view.dart';
 import 'package:swust_link/pages/common/web_view_common/view.dart';
 import 'package:swust_link/pages/main/view.dart';
@@ -45,9 +43,9 @@ class AppPages {
               "https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=chooseCourse:courseTable")),
       GetPage(name: AppRoutes.PARAMS_SETTING, page: () => Params_settingPage()),
       GetPage(name: AppRoutes.JUDGE_SCORE, page: () => JudgeScorePage()),
-      GetPage(name: AppRoutes.YKT, page: () => YktPage()),
+      GetPage(name: AppRoutes.YKT, page: () => WebViewCommonPage(title: "一卡通",initUrl: "http://ykt.swust.edu.cn/plat/shouyeUser",)),
       GetPage(name: AppRoutes.VARIABLE_NAME, page: () => VariableNamePage()),
-      GetPage(name: AppRoutes.SCHOOL_MAP, page: () => SchoolMapPage()),
+      GetPage(name: AppRoutes.SCHOOL_MAP, page: () => WebViewCommonPage(title: "学校地图", initUrl: "https://gis.swust.edu.cn/#/home?campus=78924")),
       GetPage(
           name: AppRoutes.PRIVACY_AND_PROTOCOL,
           page: () => MarkdownTemplePage(
