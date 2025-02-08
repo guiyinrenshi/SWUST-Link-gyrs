@@ -31,7 +31,7 @@ class Class_cardComponent extends StatelessWidget {
           ]
           ),
       child: Padding(
-        padding: EdgeInsets.all(20.sp),
+        padding: EdgeInsets.all(20),
         child: Column(
           children: [
             Row(
@@ -59,7 +59,7 @@ class Class_cardComponent extends StatelessWidget {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 30.sp,
+                            fontSize: 30,
                           ),
                         )))
               ],
@@ -71,7 +71,7 @@ class Class_cardComponent extends StatelessWidget {
               children: [
                 Icon(
                   Icons.class_,
-                  size: 30.sp,
+                  size: 30,
                   color: Colors.blue[200],
                 ),
                 Expanded(

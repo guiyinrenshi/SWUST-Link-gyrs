@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:swust_link/common/entity/app.dart';
 import 'package:swust_link/common/global.dart';
@@ -23,5 +24,7 @@ class AppCardLogic extends GetxController {
     state.apps.value = apps;
   }
 
-
+  void updateScreenWidth() {
+    state.screenWidth.value = ScreenUtil().screenWidth; // 更新屏幕宽度
+  }
 }

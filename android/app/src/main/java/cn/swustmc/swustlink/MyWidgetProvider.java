@@ -1,11 +1,11 @@
-package cn.swustmc.swust_link;
+package cn.swustmc.swustlink;
 
 import android.appwidget.AppWidgetProvider;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
-import cn.swustmc.swust_link.R;
+import cn.swustmc.swustlink.R;
 
 public class MyWidgetProvider extends AppWidgetProvider {
 

@@ -1,6 +1,7 @@
-package cn.swustmc.swust_link;
+package cn.swustmc.swustlink;
 
 import io.flutter.embedding.android.FlutterActivity;
 
 public class MainActivity extends FlutterActivity {
+
 }

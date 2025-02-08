@@ -46,8 +46,8 @@ class DuifeneSignComponent extends StatelessWidget {
             Row(
               children: [
                 Container(
-                  height: 48.h,
-                  width: 48.w,
+                  height: 48,
+                  width: 48,
                   decoration: BoxDecoration(
                     color: Colors.redAccent,
                     borderRadius: BorderRadius.circular(8.r),
@@ -58,7 +58,7 @@ class DuifeneSignComponent extends StatelessWidget {
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 24.sp,
+                      fontSize: 24,
                     ),
                   ),
                 ),
@@ -69,7 +69,7 @@ class DuifeneSignComponent extends StatelessWidget {
                     decoration: InputDecoration(
                       labelText: "请输入签到码",
                       labelStyle: TextStyle(
-                        fontSize: 16.sp,
+                        fontSize: 16,
                         color: Colors.grey.shade600,
                       ),
                       border: OutlineInputBorder(
@@ -112,7 +112,7 @@ class DuifeneSignComponent extends StatelessWidget {
                     child: Text(
                       "提交签到",
                       style: TextStyle(
-                        fontSize: 16.sp,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:swust_link/common/routes/app_pages.dart';
 
 class AppState {
@@ -40,4 +41,8 @@ class AppState {
       ]
     }
   ];
+
+  var screenWidth = 0.0.obs; // 确保它是 .obs
+
+
 }

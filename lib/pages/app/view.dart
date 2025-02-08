@@ -14,13 +14,15 @@ class AppPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10),
-      child: ListView.builder(
-        itemCount: AppState.appNewList.length,
-        itemBuilder: (context, sectionIndex) {
-          final section = AppState.appNewList[sectionIndex];
-          return Opacity(opacity: 0.8,child: Container(
+    return LayoutBuilder(builder: (context, constraints){
+      logic.updateScreenWidth();
+      return Padding(
+        padding: const EdgeInsets.all(10),
+        child: ListView.builder(
+          itemCount: AppState.appNewList.length,
+          itemBuilder: (context, sectionIndex) {
+            final section = AppState.appNewList[sectionIndex];
+            return Opacity(opacity: 0.8,child: Container(
               padding: EdgeInsets.only(left: 15,right: 15,top: 5,bottom: 5),
               margin: EdgeInsets.only(bottom: 20),
               decoration: BoxDecoration(
@@ -36,7 +38,7 @@ class AppPage extends StatelessWidget {
                     ),
                   ]
               ),
-              child: Column(
+              child:Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
@@ -44,62 +46,73 @@ class AppPage extends StatelessWidget {
                     child: Text(
                       section['label'] as String,
                       style: TextStyle(
-                        fontSize: 18.sp,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                  GridView.builder(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 4, // 每行四个网格项
-                      crossAxisSpacing: 10, // 横向间距
-                      mainAxisSpacing: 10, // 纵向间距
-                    ),
-                    itemCount: (section['children'] as List).length,
-                    itemBuilder: (context, index) {
-                      final app = (section['children'] as List)[index];
-                      return GestureDetector(
-                        onTap: () {
-                          Get.toNamed(app['route'] as String);
-                        },
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              height: 48.h,
-                              width: 48.w,
-                              decoration: BoxDecoration(
-                                color: Color((app['text'].hashCode) | 0xFF000000),
-                                borderRadius: BorderRadius.circular(8.r),
+                  Obx(() { // 监听屏幕大小变化
+                    double screenWidth = state.screenWidth.value; // 这里获取 Rx 变量的值
+                    int crossAxisCount = (screenWidth / 80).floor(); // 限制最少1列，最多6列
+
+                    return GridView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: crossAxisCount, // 动态列数
+                        // crossAxisSpacing: 20, // 横向间距
+                        // mainAxisSpacing: 10, // 纵向间距
+                      ),
+                      itemCount: (section['children'] as List).length,
+                      itemBuilder: (context, index) {
+                        final app = (section['children'] as List)[index];
+                        return GestureDetector(
+                            onTap: () {
+                              Get.toNamed(app['route'] as String);
+                            },
+                            child: SizedBox(
+                              width: 120,
+                              height: 120,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    height: 48,
+                                    width: 48,
+                                    decoration: BoxDecoration(
+                                      color: Color((app['text'].hashCode) | 0xFF000000),
+                                      borderRadius: BorderRadius.circular(8.r),
+                                    ),
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      app['text'][0], // 使用文字的首字母作为图标
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 24,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Flexible(child: Text(
+                                    app['text'] as String,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    textAlign: TextAlign.center,
+                                  ),)
+                                ],
                               ),
-                              alignment: Alignment.center,
-                              child: Text(
-                                app['text'][0], // 使用文字的首字母作为图标
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 24.sp,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              app['text'] as String,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
+                            )
+                        );
+                      },
+                    );
+                  }),
                 ],
-              )),);
-        },
-      ),
-    );
+              ),));
+          },
+        ),
+      );
+    });
   }
 }

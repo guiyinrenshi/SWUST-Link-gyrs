@@ -4,14 +4,16 @@
         android:name="${applicationName}"
         android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher">
-        <receiver android:name=".MyWidgetProvider" android:label="MyWidget" android:exported="true">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
+<!--        <receiver android:name=".MyWidgetProvider" android:label="MyWidget" android:exported="true">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />-->
+<!--            </intent-filter>-->
 
-            <meta-data android:name="android.appwidget.provider"
-                android:resource="@xml/course_list" />
-        </receiver>
+<!--            <meta-data android:name="android.appwidget.provider"-->
+<!--                android:resource="@xml/course_list" />-->
+<!--        </receiver>-->
+
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -32,9 +34,24 @@
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <receiver
+            android:name=".ClassCardWidgetProvider"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/class_card_widget_info"/>
+        </receiver>
+        <service
+            android:name="es.antonborri.home_widget.HomeWidgetBackgroundService"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:exported="false"/>
         <!-- 处理在Android上打开下载文件的通知上的点击操作-->
         <provider
             android:name="androidx.core.content.FileProvider"

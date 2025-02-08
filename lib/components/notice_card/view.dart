@@ -31,14 +31,14 @@ class NoticeCardComponent extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.notifications_none,
-                    size: 22.sp,
+                    size: 22,
                   ),
                   SizedBox(width: 20),
                   Expanded(
                       child: Text(
                     "公告",
                     style:
-                        TextStyle(fontSize: 22.sp, fontWeight: FontWeight.bold),
+                        TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                   )),
                 ],
               ),

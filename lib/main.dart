@@ -26,6 +26,7 @@ void main() async {
     getSetting();
     Logger().i("After getSetting called");
     Global.initialize();
+
   }, (error, stackTrace) {
     // 捕获未处理的异常并上传到 Bugly
     FlutterBugly.uploadException(
