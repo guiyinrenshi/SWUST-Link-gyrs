@@ -150,7 +150,14 @@ class AboutPage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 20),
-                Expanded(child: Text("蜀ICP备2025122527号",textAlign: TextAlign.center),)
+                Row(
+                  children: [
+                    Expanded(
+                      child:
+                          Text("蜀ICP备2025122527号", textAlign: TextAlign.center),
+                    )
+                  ],
+                )
               ],
             ),
           ),
