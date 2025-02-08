@@ -104,6 +104,16 @@ class AboutPage extends StatelessWidget {
                 ),
                 SizedBox(height: 16),
                 Text(
+                  "关于广告位",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 5),
+                Text(
+                  "广告联系SiberianHusky, 提前准备好标题 描述和相关链接",
+                  style: TextStyle(fontSize: 15),
+                ),
+                SizedBox(height: 16),
+                Text(
                   "联系我们",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
