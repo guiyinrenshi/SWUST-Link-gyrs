@@ -12,6 +12,7 @@ class Global {
   static RxString uploadBg = "".obs;
   static late SharedPreferences prefs;
   static late LocalStorageService localStorageService;
+  static RxInt font = 0.obs;
 
 
   static Future<void> initialize() async {

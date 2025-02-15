@@ -40,17 +40,23 @@ class HomeLogic extends GetxController {
     // 计算当前周和星期几
     final today = DateTime.now();
     final daysSinceFirstDay = today.difference(state.firstDay.value).inDays;
-    final currentWeek = (daysSinceFirstDay ~/ 7) + 1;
-    final todayWeekday = today.weekday; // 1 = 周一, 7 = 周日
 
-    // 筛选今天的课程
-    return courses.where((course) {
-      final courseStartWeek = int.parse(course.startTime);
-      final courseEndWeek = int.parse(course.endTime);
+    Logger().i(daysSinceFirstDay);
+    if (daysSinceFirstDay<0){
+      return [];
+    } else {
+      final currentWeek = (daysSinceFirstDay ~/ 7) + 1;
+      final todayWeekday = today.weekday; // 1 = 周一, 7 = 周日
 
-      return course.weekDay == todayWeekday &&
-          currentWeek >= courseStartWeek &&
-          currentWeek <= courseEndWeek;
-    }).toList();
+      // 筛选今天的课程
+      return courses.where((course) {
+        final courseStartWeek = int.parse(course.startTime);
+        final courseEndWeek = int.parse(course.endTime);
+
+        return course.weekDay == todayWeekday &&
+            currentWeek >= courseStartWeek &&
+            currentWeek <= courseEndWeek;
+      }).toList();
+    }
   }
 }

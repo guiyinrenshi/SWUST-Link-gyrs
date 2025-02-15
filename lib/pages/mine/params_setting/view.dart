@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:swust_link/common/routes/app_pages.dart';
 import 'package:swust_link/components/acg_background/view.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:path_provider/path_provider.dart';
@@ -77,6 +78,22 @@ class Params_settingPage extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               // 自动查询作业功能是否开启
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "字体设置",
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        Get.toNamed(
+                            AppRoutes.MAIN + AppRoutes.FONT_SIZE_SETTING);
+                      },
+                      child: Text("调整"))
+                ],
+              ),
+              const SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

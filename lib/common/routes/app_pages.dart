@@ -20,6 +20,7 @@ import 'package:swust_link/pages/common/web_view_common/view.dart';
 import 'package:swust_link/pages/main/view.dart';
 import 'package:swust_link/pages/mine/about/view.dart';
 import 'package:swust_link/pages/mine/login/view.dart';
+import 'package:swust_link/pages/mine/params_setting/font_size_setting/view.dart';
 import 'package:swust_link/pages/mine/params_setting/view.dart';
 
 part 'app_routes.dart';
@@ -35,21 +36,30 @@ class AppPages {
       GetPage(name: AppRoutes.DUIFENE_PAPER, page: () => DuifenePaperPage()),
       GetPage(
           name: AppRoutes.CLASS_TABLE,
-          page: () => ClassTablePage("课程表",
-              "https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=studentPortal:courseTable")),
+          page: () =>
+              ClassTablePage("课程表",
+                  "https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=studentPortal:courseTable")),
       GetPage(
           name: AppRoutes.CHOOSE_CLSS_TABLE,
-          page: () => ClassTablePage("选课课表",
-              "https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=chooseCourse:courseTable")),
+          page: () =>
+              ClassTablePage("选课课表",
+                  "https://matrix.dean.swust.edu.cn/acadmicManager/index.cfm?event=chooseCourse:courseTable")),
       GetPage(name: AppRoutes.PARAMS_SETTING, page: () => Params_settingPage()),
       GetPage(name: AppRoutes.JUDGE_SCORE, page: () => JudgeScorePage()),
-      GetPage(name: AppRoutes.YKT, page: () => WebViewCommonPage(title: "一卡通",initUrl: "http://ykt.swust.edu.cn/plat/shouyeUser",)),
+      GetPage(name: AppRoutes.YKT,
+          page: () =>
+              WebViewCommonPage(title: "一卡通",
+                initUrl: "http://ykt.swust.edu.cn/plat/shouyeUser",)),
       GetPage(name: AppRoutes.VARIABLE_NAME, page: () => VariableNamePage()),
-      GetPage(name: AppRoutes.SCHOOL_MAP, page: () => WebViewCommonPage(title: "学校地图", initUrl: "https://gis.swust.edu.cn/#/home?campus=78924")),
+      GetPage(name: AppRoutes.SCHOOL_MAP,
+          page: () =>
+              WebViewCommonPage(title: "学校地图",
+                  initUrl: "https://gis.swust.edu.cn/#/home?campus=78924")),
       GetPage(
           name: AppRoutes.PRIVACY_AND_PROTOCOL,
-          page: () => MarkdownTemplePage(
-              "隐私与协议", "assets/privacy_and_protocol_state.md")),
+          page: () =>
+              MarkdownTemplePage(
+                  "隐私与协议", "assets/privacy_and_protocol_state.md")),
       GetPage(name: AppRoutes.CLASS_SCORE, page: () => ClassScorePage()),
       GetPage(name: AppRoutes.GYDB_PAGE, page: () => GydbPage()),
       GetPage(name: AppRoutes.CLUB_NAV, page: () => ClubPagePage()),
@@ -68,6 +78,7 @@ class AppPages {
           page: () => MarkdownTemplePage("登录说明", "assets/login_tip.md")),
       GetPage(
           name: AppRoutes.EVALUATE_ONLINE, page: () => EvaluateOnlinePage()),
+      GetPage(name: AppRoutes.FONT_SIZE_SETTING, page: () => FontSizeSettingPage()),
       for (var item in urls)
         GetPage(
             name: item['route']!,
@@ -77,7 +88,11 @@ class AppPages {
   ];
 
   static final urls = [
-    {"title": "本科招生", "url": "https://zs.swust.edu.cn/#/", "route": "/app/zs"},
+    {
+      "title": "本科招生",
+      "url": "https://zs.swust.edu.cn/#/",
+      "route": "/app/zs"
+    },
     {
       "title": "计科社团",
       "url": "https://wiki.yudream.online/",
