@@ -42,8 +42,9 @@ class ClassTableState {
     Colors.amber,
   ];
 
-  final firstDay = DateTime(2025, 1, 1).obs; // 默认本学期第一天
+  final firstDay = DateTime.now().obs; // 默认本学期第一天
   final url = "".obs;
+
   final title = "".obs;
   final currentWeek = 1.obs;
   final isLoading = true.obs;

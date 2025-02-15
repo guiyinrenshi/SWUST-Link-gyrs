@@ -19,7 +19,7 @@ class ClassTableLogic extends GetxController {
     } catch (e) {
       state.firstDay.value = DateTime.now();
     }
-
+    state.currentWeek.value = getCurrentWeek();
     state.courses.value = await Global.localStorageService.loadFromLocal(
         "${state.title.value}-courses", (json) => Course.fromJson(json));
     state.isLoading.value = false;
@@ -45,6 +45,18 @@ class ClassTableLogic extends GetxController {
     }
   }
 
+  int getCurrentWeek()  {
+
+    // 计算当前周和星期几
+    final today = DateTime.now();
+    final daysSinceFirstDay = today.difference(state.firstDay.value).inDays;
+    if (daysSinceFirstDay<0){
+      return 1;
+    } else {
+      final currentWeek = (daysSinceFirstDay ~/ 7) + 1;
+      return currentWeek;
+    }
+  }
   List<List<Course>> get filteredCourses {
     final groupedCourses = <String, List<Course>>{};
 
