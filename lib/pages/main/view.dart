@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:swust_link/common/global.dart';
+import 'package:swust_link/common/model/font_size_model.dart';
 import 'package:swust_link/components/acg_background/view.dart';
 
 import 'logic.dart';
@@ -24,7 +25,12 @@ class MainPage extends StatelessWidget {
                 logic.changePage(index);
               },
             )),
-        title: Obx(() => Text(state.title[state.currentIndex.value])),
+        title: Obx(() => Text(
+              state.title[state.currentIndex.value],
+              style: TextStyle(
+                  fontSize:
+                      (FontType.TOP_NAV_FONT.size + Global.font.value) * 1.0),
+            )),
         child: Obx(() => state.page[state.currentIndex.value]));
   }
 }

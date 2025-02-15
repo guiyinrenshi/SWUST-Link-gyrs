@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../common/global.dart';
+import '../../common/model/font_size_model.dart';
 import 'logic.dart';
 
 class ADComponent extends StatelessWidget {
@@ -37,7 +39,8 @@ class ADComponent extends StatelessWidget {
                   Expanded(
                       child: Text(
                     "广告",
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: (FontType.CARD_TITLE.size + Global.font.value) *
+                        1.0, fontWeight: FontWeight.bold),
                   )),
                 ],
               ),
@@ -56,7 +59,8 @@ class ADComponent extends StatelessWidget {
                             )),
                         Obx(() => Text(
                               logic.currentAd['des'],
-                              style: TextStyle(fontSize: 13),
+                              style: TextStyle(fontSize:(FontType.DES.size + Global.font.value) *
+    1.0,),
                               softWrap: true,
                             )),
                         TextButton(

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../common/global.dart';
+import '../../common/model/font_size_model.dart';
 import 'logic.dart';
 import 'state.dart';
 
@@ -40,7 +42,9 @@ class HitokotoPage extends StatelessWidget {
                   Expanded(
                       child: Text(
                     "一言",
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize:
+                    (FontType.CARD_TITLE.size + Global.font.value) *
+                        1.0, fontWeight: FontWeight.bold),
                   )),
                   // IconButton(onPressed: logic.getHitokoto, icon: Icon(Icons.refresh))
                 ],
@@ -58,7 +62,8 @@ class HitokotoPage extends StatelessWidget {
                     () => Text(
                       "—— ${state.creator.value == ""?"无":state.creator.value}",
                       textAlign: TextAlign.right,
-                      style: TextStyle(fontSize: 15),
+                      style: TextStyle(fontSize:
+                      (FontType.TITLE.size + Global.font.value) *1.0)
                     ),
                   ))
                 ],

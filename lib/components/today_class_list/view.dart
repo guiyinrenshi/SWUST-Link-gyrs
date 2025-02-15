@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:swust_link/common/entity/oa/course.dart';
 
+import '../../common/global.dart';
+import '../../common/model/font_size_model.dart';
 import 'logic.dart';
 import 'state.dart';
 
@@ -39,10 +41,12 @@ class TodayClassListPage extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
-                      child: const Text(
+                      child: Text(
                         "今日课程",
                         style: TextStyle(
-                          fontSize: 22,
+                          fontSize:
+                        (FontType.CARD_TITLE.size + Global.font.value) *
+                            1.0,
                           fontWeight: FontWeight.bold,
                         ),
                         textAlign: TextAlign.center,
@@ -61,7 +65,9 @@ class TodayClassListPage extends StatelessWidget {
                       child: Text(
                         "今日无课程",
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize:
+                        (FontType.TITLE.size + Global.font.value) *
+                            1.0,
                           color: Colors.grey,
                         ),
                       ),
@@ -80,8 +86,9 @@ class TodayClassListPage extends StatelessWidget {
                             alignment: Alignment.center,
                             child: Text(
                               "${course.session}",
-                              style: const TextStyle(
-                                fontSize: 16,
+                              style:  TextStyle(
+                                fontSize: (FontType.TITLE.size -2+ Global.font.value) *
+                                    1.0,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.blue,
                               ),
@@ -95,28 +102,32 @@ class TodayClassListPage extends StatelessWidget {
                               children: [
                                 Text(
                                   course.className,
-                                  style: const TextStyle(
-                                    fontSize: 16,
+                                  style:  TextStyle(
+                                    fontSize: (FontType.TITLE.size -2+ Global.font.value) *
+                                        1.0,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                                 const SizedBox(height: 4),
                                 Text(
                                   "教师: ${course.teacher}",
-                                  style: const TextStyle(
-                                      fontSize: 14, color: Colors.grey),
+                                  style:  TextStyle(
+                                      fontSize: (FontType.TITLE.size -4+ Global.font.value) *
+                                          1.0, color: Colors.grey),
                                 ),
                                 const SizedBox(height: 4),
                                 Text(
                                   "教室: ${course.location}",
-                                  style: const TextStyle(
-                                      fontSize: 14, color: Colors.grey),
+                                  style:  TextStyle(
+                                      fontSize: (FontType.TITLE.size -4+ Global.font.value) *
+                                          1.0, color: Colors.grey),
                                 ),
                                 const SizedBox(height: 4),
                                 Text(
                                   "时间: ${course.period} 第${course.session}节",
-                                  style: const TextStyle(
-                                      fontSize: 14, color: Colors.grey),
+                                  style:  TextStyle(
+                                      fontSize: (FontType.TITLE.size -4+ Global.font.value) *
+                                          1.0, color: Colors.grey),
                                 ),
                               ],
                             ),

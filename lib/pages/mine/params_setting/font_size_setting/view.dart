@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:swust_link/components/acg_background/view.dart';
+import '../../../../common/global.dart';
 import 'logic.dart';
 import '../../../../common/model/font_size_model.dart';
 
@@ -10,14 +12,16 @@ class FontSizeSettingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('字体大小设置')),
-      body: Padding(
+    return AcgBackgroundComponent(
+      title: Text('字体大小设置',style: TextStyle(
+          fontSize:
+          (FontType.TOP_NAV_FONT.size + Global.font.value) * 1.0),),
+      actions: [IconButton(onPressed: (){logic.saveFontSetting();}, icon: Icon(Icons.save))],
+      child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text("字体大小预览", style: TextStyle(fontSize: 18)),
             SizedBox(height: 20),
             Obx(() => Column(
               children: logic.getAdjustedFontSizes().map((data) {

@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:swust_link/common/routes/app_pages.dart';
 import 'package:swust_link/components/acg_background/view.dart';
 
+import '../../../../common/global.dart';
+import '../../../../common/model/font_size_model.dart';
 import 'logic.dart';
 import 'state.dart';
 
@@ -15,7 +17,9 @@ class LeaveInfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AcgBackgroundComponent(
-        title: Text("日常请假"),
+        title: Text("日常请假",style: TextStyle(
+            fontSize:
+            (FontType.TOP_NAV_FONT.size + Global.font.value) * 1.0)),
         actions: [
           TextButton(
               onPressed: () {

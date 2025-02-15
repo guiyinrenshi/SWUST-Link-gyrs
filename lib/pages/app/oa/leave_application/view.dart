@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:swust_link/components/acg_background/view.dart';
 
+import '../../../../common/global.dart';
+import '../../../../common/model/font_size_model.dart';
 import 'logic.dart';
 import 'state.dart';
 
@@ -17,7 +19,9 @@ class LeaveApplicationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AcgBackgroundComponent(
-      title: const Text('日常请假申请'),
+      title:  Text('日常请假申请',style: TextStyle(
+      fontSize:
+      (FontType.TOP_NAV_FONT.size + Global.font.value) * 1.0)),
       actions: [
         TextButton(
             onPressed: () {

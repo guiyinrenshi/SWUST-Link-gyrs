@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:swust_link/components/acg_background/view.dart';
 
+import '../../../../common/global.dart';
+import '../../../../common/model/font_size_model.dart';
 import 'logic.dart';
 import 'state.dart';
 
@@ -15,7 +17,9 @@ class DuifeneCoursePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AcgBackgroundComponent(
-        title: Text("对分易课程"),
+        title: Text("对分易课程",style: TextStyle(
+            fontSize:
+            (FontType.TOP_NAV_FONT.size + Global.font.value) * 1.0)),
         actions: [TextButton(onPressed: logic.joinClass, child: Text("加入班级"))],
         child: Obx(
           () => ListView.builder(

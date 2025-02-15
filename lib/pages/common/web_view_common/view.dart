@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:swust_link/components/acg_background/view.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+import '../../../common/global.dart';
+import '../../../common/model/font_size_model.dart';
 import 'logic.dart';
 
 class WebViewCommonPage extends StatelessWidget {
@@ -31,7 +33,9 @@ class WebViewCommonPage extends StatelessWidget {
           tooltip: "复制链接",
         ),
       ],
-        title: Obx(() => Text(logic.title.value)),
+        title: Obx(() => Text(logic.title.value,style: TextStyle(
+            fontSize:
+            (FontType.TOP_NAV_FONT.size + Global.font.value) * 1.0),)),
         child: WebViewWidget(controller: logic.controller));
   }
 }

@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:swust_link/common/entity/app.dart';
 import 'package:swust_link/common/routes/app_pages.dart';
 
+import '../../common/global.dart';
+import '../../common/model/font_size_model.dart';
 import 'logic.dart';
 import 'state.dart';
 
@@ -45,7 +47,7 @@ class AppCardComponent extends StatelessWidget {
                           child: Text(
                             "常用应用",
                             style: TextStyle(
-                                fontSize: 22, fontWeight: FontWeight.bold),
+                                fontSize: (FontType.CARD_TITLE.size  + Global.font.value) * 1.0 ,fontWeight: FontWeight.bold),
                           )),
                       IconButton(
                           onPressed: () {
@@ -62,7 +64,7 @@ class AppCardComponent extends StatelessWidget {
                     double screenWidth =
                         state.screenWidth.value; // 这里获取 Rx 变量的值
                     int crossAxisCount =
-                    (screenWidth / 80).floor(); // 限制最少1列，最多6列
+                    (screenWidth / 100).floor(); // 限制最少1列，最多6列
 
                     return GridView.builder(
                       shrinkWrap: true,
@@ -78,8 +80,6 @@ class AppCardComponent extends StatelessWidget {
                               Get.toNamed(app.route as String);
                             },
                             child: SizedBox(
-                              width: 100,
-                              height: 100,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [

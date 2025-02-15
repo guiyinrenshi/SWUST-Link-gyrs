@@ -8,6 +8,7 @@ import 'dart:io';
 import 'package:flutter/services.dart'; // 用于复制文件到本地
 
 import '../../../common/global.dart';
+import '../../../common/model/font_size_model.dart';
 import 'logic.dart';
 import 'state.dart';
 import 'package:intl/intl.dart';
@@ -21,7 +22,9 @@ class Params_settingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AcgBackgroundComponent(
-      title: Text("参数设置"),
+      title: Text("参数设置",style: TextStyle(
+          fontSize:
+          (FontType.TOP_NAV_FONT.size + Global.font.value) * 1.0),),
       actions: [
         TextButton(
           onPressed: () {

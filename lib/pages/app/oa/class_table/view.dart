@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:swust_link/components/acg_background/view.dart';
+import '../../../../common/global.dart';
+import '../../../../common/model/font_size_model.dart';
 import 'logic.dart';
 import 'state.dart';
 
@@ -18,13 +20,13 @@ class ClassTablePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AcgBackgroundComponent(
-        title: Text(
-          state.title.value,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-        ),
+        title: Text(state.title.value,
+            style: TextStyle(
+                fontSize:
+                    (FontType.TOP_NAV_FONT.size + Global.font.value) * 1.0)),
         actions: [
           Obx(
-                () => DropdownButton<int>(
+            () => DropdownButton<int>(
               value: state.currentWeek.value,
               onChanged: (value) {
                 if (value != null) {
@@ -33,7 +35,7 @@ class ClassTablePage extends StatelessWidget {
               },
               items: List.generate(
                 20,
-                    (index) => DropdownMenuItem(
+                (index) => DropdownMenuItem(
                   value: index + 1,
                   child: Text("第${index + 1}周"),
                 ),
@@ -52,7 +54,7 @@ class ClassTablePage extends StatelessWidget {
             children: [
               // 表头：星期
               Obx(
-                    () => Flex(
+                () => Flex(
                   direction: Axis.horizontal,
                   children: [
                     // 第一列为 "讲数"
@@ -90,7 +92,7 @@ class ClassTablePage extends StatelessWidget {
                               Text(
                                 "${currentDate.month}.${currentDate.day}",
                                 style:
-                                TextStyle(color: Colors.grey, fontSize: 12),
+                                    TextStyle(color: Colors.grey, fontSize: 12),
                               ),
                             ],
                           ),
@@ -102,7 +104,7 @@ class ClassTablePage extends StatelessWidget {
               ),
               // 表格主体
               Obx(
-                    () => Expanded(
+                () => Expanded(
                   flex: 7,
                   child: Column(
                     children: List.generate(6, (sessionIndex) {
@@ -123,8 +125,8 @@ class ClassTablePage extends StatelessWidget {
                             ...List.generate(7, (weekDayIndex) {
                               final courses = logic.filteredCourses
                                   .where((list) => list.any((course) =>
-                              course.weekDay == weekDayIndex + 1 &&
-                                  course.session == sessionIndex + 1))
+                                      course.weekDay == weekDayIndex + 1 &&
+                                      course.session == sessionIndex + 1))
                                   .expand((list) => list)
                                   .toList();
 
@@ -138,118 +140,139 @@ class ClassTablePage extends StatelessWidget {
                                       bottom: 1.h),
                                   child: courses.isNotEmpty
                                       ? Column(
-                                    children: courses
-                                        .asMap()
-                                        .entries
-                                        .map((entry) {
-                                      final course = entry.value;
-                                      return Expanded(
-                                          child: GestureDetector(
-                                            onTap: () {
-                                              showDialog(
-                                                context: context,
-                                                builder: (context) {
-                                                  return AlertDialog(
-                                                    title: Text(
+                                          children: courses
+                                              .asMap()
+                                              .entries
+                                              .map((entry) {
+                                            final course = entry.value;
+                                            return Expanded(
+                                                child: GestureDetector(
+                                              onTap: () {
+                                                showDialog(
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return AlertDialog(
+                                                      title: Text(
+                                                          course.className),
+                                                      content: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                              "教师: ${course.teacher}"),
+                                                          Text(
+                                                              "地点: ${course.location}"),
+                                                          Text(
+                                                              "时间: 第${course.session}讲"),
+                                                          Text(
+                                                              "周次: ${course.startTime}-${course.endTime}周"),
+                                                        ],
+                                                      ),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop(),
+                                                          child:
+                                                              const Text("关闭"),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                );
+                                              },
+                                              child: Container(
+                                                  margin: EdgeInsets.only(
+                                                      bottom: 1.h),
+                                                  padding: EdgeInsets.only(
+                                                      left: 4.w,
+                                                      right: 4.w,
+                                                      top: 4.h,
+                                                      bottom: 4.h),
+                                                  decoration: BoxDecoration(
+                                                    color: logic.getCourseColor(
                                                         course.className),
-                                                    content: Column(
-                                                      mainAxisSize:
-                                                      MainAxisSize.min,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4.r),
+                                                  ),
+                                                  child: IntrinsicHeight(
+                                                    child: Column(
                                                       crossAxisAlignment:
-                                                      CrossAxisAlignment
-                                                          .start,
+                                                          CrossAxisAlignment
+                                                              .stretch,
+                                                      // 让文本自动填充宽度
+
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
                                                       children: [
-                                                        Text(
-                                                            "教师: ${course.teacher}"),
-                                                        Text(
-                                                            "地点: ${course.location}"),
-                                                        Text(
-                                                            "时间: 第${course.session}讲"),
-                                                        Text(
-                                                            "周次: ${course.startTime}-${course.endTime}周"),
+                                                        Flexible(
+                                                          child: Text(
+                                                            course.className,
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
+                                                            maxLines:2,
+                                                            style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: (FontType
+                                                                          .DES
+                                                                          .size +
+                                                                      1 +
+                                                                      Global
+                                                                          .font
+                                                                          .value) *
+                                                                  1.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Flexible(
+                                                          child: Text(
+                                                            course.teacher,
+                                                            style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: (FontType
+                                                                          .DES
+                                                                          .size +
+                                                                      Global
+                                                                          .font
+                                                                          .value) *
+                                                                  1.0,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Flexible(
+                                                            child: Text(
+                                                          "@${course.location}",
+                                                          style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: (FontType
+                                                                        .DES
+                                                                        .size -
+                                                                    1 +
+                                                                    Global.font
+                                                                        .value) *
+                                                                1.0,
+                                                          ),
+                                                        ))
                                                       ],
                                                     ),
-                                                    actions: [
-                                                      TextButton(
-                                                        onPressed: () =>
-                                                            Navigator.of(
-                                                                context)
-                                                                .pop(),
-                                                        child:
-                                                        const Text("关闭"),
-                                                      ),
-                                                    ],
-                                                  );
-                                                },
-                                              );
-                                            },
-                                            child: Container(
-                                                margin: EdgeInsets.only(
-                                                    bottom: 1.h),
-                                                padding: EdgeInsets.only(
-                                                    left: 4.w,
-                                                    right: 4.w,
-                                                    top: 4.h,
-                                                    bottom: 4.h),
-                                                decoration: BoxDecoration(
-                                                  color: logic.getCourseColor(
-                                                      course.className),
-                                                  borderRadius:
-                                                  BorderRadius.circular(
-                                                      4.r),
-                                                ),
-                                                child: IntrinsicHeight(
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                    CrossAxisAlignment
-                                                        .stretch, // 让文本自动填充宽度
-
-                                                    mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .center,
-                                                    children: [
-                                                      Flexible(
-                                                        child: Text(
-                                                          course.className,
-                                                          textAlign: TextAlign
-                                                              .center,
-                                                          overflow:
-                                                          TextOverflow
-                                                              .ellipsis,
-                                                          style: TextStyle(
-                                                            color:
-                                                            Colors.white,
-                                                            fontSize: 13,
-                                                            fontWeight:
-                                                            FontWeight
-                                                                .bold,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Flexible(
-                                                        child: Text(
-                                                          course.teacher,
-                                                          style: TextStyle(
-                                                            color:
-                                                            Colors.white,
-                                                            fontSize: 12,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Flexible(
-                                                          child: Text(
-                                                            "@${course.location}",
-                                                            style: TextStyle(
-                                                              color: Colors.white,
-                                                              fontSize: 11,
-                                                            ),
-                                                          ))
-                                                    ],
-                                                  ),
-                                                )),
-                                          ));
-                                    }).toList(),
-                                  )
+                                                  )),
+                                            ));
+                                          }).toList(),
+                                        )
                                       : null,
                                 ),
                               );

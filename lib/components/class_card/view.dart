@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:swust_link/common/entity/oa/course.dart';
 
+import '../../common/global.dart';
+import '../../common/model/font_size_model.dart';
 import 'logic.dart';
 import 'state.dart';
 
@@ -28,8 +30,7 @@ class Class_cardComponent extends StatelessWidget {
               spreadRadius: 2,
               offset: Offset(0, 4),
             ),
-          ]
-          ),
+          ]),
       child: Padding(
         padding: EdgeInsets.all(20),
         child: Column(
@@ -37,13 +38,22 @@ class Class_cardComponent extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                    child: Obx(
-                        () => Text(state.time.value >= 0 ? "下一课程:" : "当前课程"))),
+                    child: Obx(() => Text(
+                          state.time.value >= 0 ? "下一课程:" : "当前课程",
+                          style: TextStyle(
+                              fontSize:
+                                  (FontType.DES.size + Global.font.value) *
+                                      1.0),
+                        ))),
                 Expanded(
                     child: Obx(() => Text(
                           state.time.value >= 0
                               ? "${logic.formatTime(state.time.value)} 后上课"
                               : "正在上课中",
+                          style: TextStyle(
+                              fontSize:
+                                  (FontType.DES.size + Global.font.value) *
+                                      1.0),
                           textAlign: TextAlign.right,
                         )))
               ],
@@ -58,9 +68,10 @@ class Class_cardComponent extends StatelessWidget {
                           state.className.value,
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 30,
-                          ),
+                              fontWeight: FontWeight.bold,
+                              fontSize: (FontType.CARD_TITLE.size +
+                                      Global.font.value) *
+                                  1.0),
                         )))
               ],
             ),
@@ -78,6 +89,10 @@ class Class_cardComponent extends StatelessWidget {
                     child: Obx(() => Text(
                           state.placeName.value,
                           textAlign: TextAlign.right,
+                          style: TextStyle(
+                              fontSize:
+                                  (FontType.DES.size + Global.font.value) *
+                                      1.0),
                         )))
               ],
             )

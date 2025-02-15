@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:swust_link/components/acg_background/view.dart';
 import 'package:swust_link/components/g_p_a/view.dart';
 
+import '../../../../common/global.dart';
+import '../../../../common/model/font_size_model.dart';
 import 'logic.dart';
 import 'state.dart';
 
@@ -14,7 +16,9 @@ class ClassScorePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AcgBackgroundComponent(title: Text("成绩查询"),actions: [IconButton(onPressed: logic.getScore, icon: Icon(Icons.refresh))],child: Obx((){
+    return AcgBackgroundComponent(title: Text("成绩查询",style: TextStyle(
+        fontSize:
+        (FontType.TOP_NAV_FONT.size + Global.font.value) * 1.0)),actions: [IconButton(onPressed: logic.getScore, icon: Icon(Icons.refresh))],child: Obx((){
 
       if (state.isLoading.value) {
         // 显示加载占位符

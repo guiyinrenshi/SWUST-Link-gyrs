@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../common/global.dart';
+import '../../common/model/font_size_model.dart';
 import 'logic.dart';
 
 class NoticeCardComponent extends StatelessWidget {
@@ -38,7 +40,9 @@ class NoticeCardComponent extends StatelessWidget {
                       child: Text(
                     "公告",
                     style:
-                        TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                        TextStyle(fontSize:
+                        (FontType.CARD_TITLE.size + Global.font.value) *
+                            1.0, fontWeight: FontWeight.bold),
                   )),
                 ],
               ),
@@ -48,6 +52,10 @@ class NoticeCardComponent extends StatelessWidget {
               Obx(() => Text(
                     logic.notice.value,
                     softWrap: true,
+                style: TextStyle(
+                    fontSize:
+                    (FontType.DES.size + Global.font.value) *
+                        1.0),
                   ))
             ],
           ),

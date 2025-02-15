@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:swust_link/common/model/font_size_model.dart';
 
 
 import '../utils/local_sttorage.dart';
@@ -21,9 +22,13 @@ class Global {
     isAnime.value = prefs.getBool("isAnime") ?? false;
     isUploadBg.value = prefs.getBool("isUploadBg") ?? false;
     uploadBg.value = prefs.getString("uploadBgPath") ?? "";
-    Logger().i(uploadBg.value);
-    Logger().i(isUploadBg.value);
+    font.value = prefs.getInt("fontSettingSize") ?? 0;
   }
 
+  static int getFontSize(FontType ft){
+    int size = ft.size + font.value;
+    font.refresh();
+    return size;
+  }
 
 }

@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:swust_link/components/acg_background/view.dart';
 
+import '../../../../common/global.dart';
+import '../../../../common/model/font_size_model.dart';
 import 'logic.dart';
 import 'state.dart';
 
@@ -22,8 +24,10 @@ class GydbPage extends StatelessWidget {
             },
             icon: Icon(Icons.refresh))
       ],
-      title: const Text("舍先生",
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+      title: Text("舍先生",
+          style: TextStyle(
+              fontSize: (FontType.TOP_NAV_FONT.size + Global.font.value) * 1.0,
+              fontWeight: FontWeight.bold)),
       child: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
         child: Column(

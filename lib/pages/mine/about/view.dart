@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:swust_link/components/acg_background/view.dart';
 
+import '../../../common/global.dart';
+import '../../../common/model/font_size_model.dart';
 import 'logic.dart';
 import 'state.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -15,7 +17,9 @@ class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AcgBackgroundComponent(
-        title: Text('关于我们'),
+        title: Text('关于我们',style: TextStyle(
+            fontSize:
+            (FontType.TOP_NAV_FONT.size + Global.font.value) * 1.0),),
         actions: [],
         child: SingleChildScrollView(
           child: Padding(

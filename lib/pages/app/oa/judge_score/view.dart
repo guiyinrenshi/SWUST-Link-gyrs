@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:swust_link/common/entity/oa/judge_score.dart';
 import 'package:swust_link/components/acg_background/view.dart';
 
+import '../../../../common/global.dart';
+import '../../../../common/model/font_size_model.dart';
 import 'logic.dart';
 import 'state.dart';
 
@@ -14,7 +16,9 @@ class JudgeScorePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AcgBackgroundComponent(title:  Text("综合测评"), child: Column(
+    return AcgBackgroundComponent(title:  Text("综合测评",style: TextStyle(
+    fontSize:
+    (FontType.TOP_NAV_FONT.size + Global.font.value) * 1.0)), child: Column(
       children: [
         // 学年下拉菜单
         Obx(() {

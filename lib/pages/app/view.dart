@@ -53,7 +53,7 @@ class AppPage extends StatelessWidget {
                   ),
                   Obx(() { // 监听屏幕大小变化
                     double screenWidth = state.screenWidth.value; // 这里获取 Rx 变量的值
-                    int crossAxisCount = (screenWidth / 80).floor(); // 限制最少1列，最多6列
+                    int crossAxisCount = (screenWidth / 100).floor(); // 限制最少1列，最多6列
 
                     return GridView.builder(
                       shrinkWrap: true,
@@ -71,8 +71,6 @@ class AppPage extends StatelessWidget {
                               Get.toNamed(app['route'] as String);
                             },
                             child: SizedBox(
-                              width: 120,
-                              height: 120,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [

@@ -3,6 +3,8 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:get/get.dart';
 import 'package:swust_link/components/acg_background/view.dart';
 
+import '../../../common/global.dart';
+import '../../../common/model/font_size_model.dart';
 import 'logic.dart';
 import 'state.dart';
 
@@ -20,7 +22,9 @@ class MarkdownTemplePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AcgBackgroundComponent(
-        title: Text(state.title.value),
+        title: Text(state.title.value,style: TextStyle(
+            fontSize:
+            (FontType.TOP_NAV_FONT.size + Global.font.value) * 1.0),),
         actions: [],
         child: Padding(
             padding: EdgeInsets.all(16.0),

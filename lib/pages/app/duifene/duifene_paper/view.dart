@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:swust_link/components/acg_background/view.dart';
 
+import '../../../../common/global.dart';
+import '../../../../common/model/font_size_model.dart';
 import 'logic.dart';
 import 'state.dart';
 
@@ -14,7 +16,9 @@ class DuifenePaperPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AcgBackgroundComponent(
-      title: Text("对分易练习"),
+      title: Text("对分易练习",style: TextStyle(
+      fontSize:
+      (FontType.TOP_NAV_FONT.size + Global.font.value) * 1.0)),
       actions: [
         Text("筛选"),
         Obx(() => Switch(
