@@ -9,6 +9,7 @@ import 'package:swust_link/pages/app/oa/exam/view.dart';
 import 'package:swust_link/pages/app/oa/judge_score/view.dart';
 import 'package:swust_link/pages/app/oa/leave_application/view.dart';
 import 'package:swust_link/pages/app/oa/leave_info/view.dart';
+import 'package:swust_link/pages/app/oa/sjjx_select_class/view.dart';
 import 'package:swust_link/pages/app/tool_app/club_page/view.dart';
 import 'package:swust_link/pages/app/tool_app/gydb/view.dart';
 import 'package:swust_link/pages/common/app_settings/view.dart';
@@ -67,6 +68,7 @@ class AppPages {
       GetPage(name: AppRoutes.LEAVE_INFO_PAGE, page: () => LeaveInfoPage()),
       GetPage(name: AppRoutes.ABOUT, page: () => AboutPage()),
       GetPage(name: AppRoutes.COMING_SOON, page: () => ComingSoonPage()),
+      GetPage(name: AppRoutes.COURSE_FRAME, page: () => SJJXSelectClassPage()),
 
       GetPage(name: AppRoutes.APP_SETTING, page: () => AppSettingsPage()),
       GetPage(

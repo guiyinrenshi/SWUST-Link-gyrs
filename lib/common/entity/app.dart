@@ -1,13 +1,18 @@
 import 'package:swust_link/common/model/entity_model.dart';
 import 'package:swust_link/pages/app/state.dart';
 
-class App  extends JsonSerializable{
+class App extends JsonSerializable {
   final route;
   final text;
-  App({this.route, this.text});
+  final icon;
+
+  App({this.route, this.text, this.icon});
 
   factory App.fromJson(Map<String, dynamic> json) {
-    return App(route: json['route'], text: json['text']);
+    return App(
+        route: json['route'],
+        text: json['text'],
+        icon: json.containsKey("icon") ? json['icon'] : null);
   }
 
   // Course 对象转 JSON

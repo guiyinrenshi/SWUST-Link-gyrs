@@ -38,12 +38,22 @@ class LoginLogic extends GetxController {
 
     state.account = Account(state.username.value, state.password.value,
         state.currentPlatform.value);
-
+    Get.dialog(
+      WillPopScope(
+        onWillPop: () async => false,
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      ),
+      barrierDismissible: false, // 禁止点击外部关闭
+    );
     var res = await state.account.testLogin();
+    Get.back();
     Get.dialog(
       AlertDialog(
         title: Text(res['key'] ? "登录成功" : "登录失败"),
         content: Text(res['key'] ? "测试登录成功!保存信息后即代表您同意了隐私与协议!" : res['message']),
+
         actions: [
           res['key']
               ? TextButton(

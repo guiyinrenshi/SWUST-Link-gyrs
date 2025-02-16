@@ -27,4 +27,5 @@ abstract class AppRoutes {
   static const APP_SETTING = "/app/setting";
   static const CLUB_NAV = "/app/club/nav";
   static const FONT_SIZE_SETTING = "/mine/font/size";
+  static const COURSE_FRAME = "/app/course/frame";
 }

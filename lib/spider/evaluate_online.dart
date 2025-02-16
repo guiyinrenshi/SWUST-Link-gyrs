@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:html/parser.dart';
 import 'package:logger/logger.dart';
 import 'package:swust_link/common/entity/oa/evaluation_paper.dart';
-import 'package:swust_link/common/global.dart';
 import 'package:swust_link/spider/oa_auth.dart';
 import 'package:dio/dio.dart';
 

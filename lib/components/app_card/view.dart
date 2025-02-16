@@ -87,12 +87,21 @@ class AppCardComponent extends StatelessWidget {
                                     height: 48,
                                     width: 48,
                                     decoration: BoxDecoration(
-                                      color: Color(
-                                          (app.text.hashCode) | 0xFF000000),
-                                      borderRadius: BorderRadius.circular(8.r),
+                                      color: app.icon!=null
+                                          ? Colors.white
+                                          : Color((app.text.hashCode) |
+                                      0xFF000000),
+                                      borderRadius:
+                                      BorderRadius.circular(8.r),
                                     ),
                                     alignment: Alignment.center,
-                                    child: Text(
+                                    child: app.icon != null
+                                        ? Image.asset(
+                                      "assets/icons/${app.icon}.png",
+                                      width: 36,
+                                      height: 36,
+                                    )
+                                        : Text(
                                       app.text[0], // 使用文字的首字母作为图标
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(

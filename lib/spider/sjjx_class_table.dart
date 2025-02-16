@@ -1,8 +1,11 @@
 import 'package:dio/dio.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' as g;
+import 'package:get/get_core/src/get_main.dart';
+
 import 'package:html/dom.dart';
 import 'package:html/parser.dart';
 import 'package:logger/logger.dart';
+import 'package:swust_link/common/entity/sjjx/course_frame.dart';
 import 'package:swust_link/common/global.dart';
 
 import '../common/entity/oa/course.dart';
@@ -148,9 +151,147 @@ class SJJXTable {
     return courses;
   }
 
+  Future<List<CourseFrame>> getCourseFrameList() async {
+    await sjjxOa.dio.get(
+      'https://sjjx.dean.swust.edu.cn/teachn/teachnAction/index.action',
+      options: Options(
+        headers: {
+          "accept":
+              "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+          "accept-language": "zh-CN,zh;q=0.9",
+          "priority": "u=0, i",
+          "referer":
+              "https://sjjx.dean.swust.edu.cn/teachn/teachnAction/selCourse.action",
+          "sec-ch-ua":
+              "\"Not(A:Brand\";v=\"99\", \"Google Chrome\";v=\"133\", \"Chromium\";v=\"133\"",
+          "sec-ch-ua-mobile": "?0",
+          "sec-ch-ua-platform": "\"Windows\"",
+          "sec-fetch-dest": "iframe",
+          "sec-fetch-mode": "navigate",
+          "sec-fetch-site": "same-origin",
+          "upgrade-insecure-requests": "1",
+          "user-agent":
+              "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
+        },
+      ),
+    );
+    var res = await sjjxOa.dio.get(
+      'https://sjjx.dean.swust.edu.cn/teachn/teachnAction/teachn/teachnAction/courseFrame.action',
+      options: Options(
+        headers: {
+          "accept":
+              "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+          "accept-language": "zh-CN,zh;q=0.9",
+          "priority": "u=0, i",
+          "referer":
+              "https://sjjx.dean.swust.edu.cn/teachn/teachnAction/selCourse.action",
+          "sec-ch-ua":
+              "\"Not(A:Brand\";v=\"99\", \"Google Chrome\";v=\"133\", \"Chromium\";v=\"133\"",
+          "sec-ch-ua-mobile": "?0",
+          "sec-ch-ua-platform": "\"Windows\"",
+          "sec-fetch-dest": "iframe",
+          "sec-fetch-mode": "navigate",
+          "sec-fetch-site": "same-origin",
+          "upgrade-insecure-requests": "1",
+          "user-agent":
+              "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
+        },
+      ),
+    );
+
+    Logger().i(res.data);
+    return CourseFrame.fromHtml(res.data);
+  }
+
+  Future<List<Experiment>> getExperimentList(id, exp) async {
+    var res = await sjjxOa.dio.get(
+      'https://sjjx.dean.swust.edu.cn/teachn/teachnAction/expFrame.action?expid=$exp&week=&day=&teach_course_code=$id',
+      options: Options(
+        headers: {
+          "accept":
+              "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+          "accept-language": "zh-CN,zh;q=0.9",
+          "priority": "u=0, i",
+          "referer":
+              "https://sjjx.dean.swust.edu.cn/teachn/teachnAction/selCourse.action",
+          "sec-ch-ua":
+              "\"Not(A:Brand\";v=\"99\", \"Google Chrome\";v=\"133\", \"Chromium\";v=\"133\"",
+          "sec-ch-ua-mobile": "?0",
+          "sec-ch-ua-platform": "\"Windows\"",
+          "sec-fetch-dest": "iframe",
+          "sec-fetch-mode": "navigate",
+          "sec-fetch-site": "same-origin",
+          "upgrade-insecure-requests": "1",
+          "user-agent":
+              "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
+        },
+      ),
+    );
+    return Experiment.fromHtml(res.data);
+  }
+
+  Future<List<ExperimentProject>> getCourseProject(id) async {
+    var res = await sjjxOa.dio.get(
+      'https://sjjx.dean.swust.edu.cn/teachn/teachnAction/expFrame.action?teach_course_code=$id',
+      options: Options(
+        headers: {
+          "accept":
+              "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+          "accept-language": "zh-CN,zh;q=0.9",
+          "priority": "u=0, i",
+          "referer":
+              "https://sjjx.dean.swust.edu.cn/teachn/teachnAction/selCourse.action",
+          "sec-ch-ua":
+              "\"Not(A:Brand\";v=\"99\", \"Google Chrome\";v=\"133\", \"Chromium\";v=\"133\"",
+          "sec-ch-ua-mobile": "?0",
+          "sec-ch-ua-platform": "\"Windows\"",
+          "sec-fetch-dest": "iframe",
+          "sec-fetch-mode": "navigate",
+          "sec-fetch-site": "same-origin",
+          "upgrade-insecure-requests": "1",
+          "user-agent":
+              "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
+        },
+      ),
+    );
+    Logger().i(res.data);
+    return ExperimentProject.fromHtml(res.data);
+  }
+
+  Future<String> selectClass(id, cId) async {
+    var data = {"ids": id, "teachCourseCode": cId, "isPackage": 0};
+    var res = await sjjxOa.dio.post(
+        'https://sjjx.dean.swust.edu.cn/teachn/teachnAction/bookFram.action',
+        options: Options(
+          headers: {
+            "accept":
+                "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+            "accept-language": "zh-CN,zh;q=0.9",
+            "priority": "u=0, i",
+            "referer":
+                "https://sjjx.dean.swust.edu.cn/teachn/teachnAction/selCourse.action",
+            "sec-ch-ua":
+                "\"Not(A:Brand\";v=\"99\", \"Google Chrome\";v=\"133\", \"Chromium\";v=\"133\"",
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": "\"Windows\"",
+            "sec-fetch-dest": "iframe",
+            "sec-fetch-mode": "navigate",
+            "sec-fetch-site": "same-origin",
+            "upgrade-insecure-requests": "1",
+            "user-agent":
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
+          },
+        ),
+        data: FormData.fromMap(data));
+    var messageMatch =
+        RegExp(r"alert\('(.+?)'\);").firstMatch(res.data)?.group(1) ?? "失败";
+    Logger().i(res.data);
+    return messageMatch;
+  }
+
   static SJJXTable? sjjxTable;
 
- static Future<SJJXTable?> getInstance() async {
+  static Future<SJJXTable?> getInstance() async {
     if (sjjxTable == null) {
       String? username = Global.prefs.getString("0username");
       String? password = Global.prefs.getString("0password");
@@ -161,12 +302,11 @@ class SJJXTable {
             password: password);
         if (await sjjxOa.login()) {
           sjjxTable = SJJXTable(sjjxOa);
-        } else{
-          Get.snackbar("登录失效", "请尝试刷新或检查账号密码是否正确!");
+        } else {
+          g.Get.snackbar("登录失效", "请尝试刷新或检查账号密码是否正确!");
         }
       }
     }
     return sjjxTable;
   }
-
 }

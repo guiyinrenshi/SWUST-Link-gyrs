@@ -37,6 +37,8 @@ class ClassTableLogic extends GetxController {
         await Global.localStorageService
             .saveToLocal(data, "${state.title.value}-courses");
         state.courses.value = data;
+        Get.snackbar("获取成功", "刷新本地课表缓存成功! ");
+
       }
     } catch (e) {
       Get.snackbar("获取失败", "请刷新重试或检查网络连接! ");

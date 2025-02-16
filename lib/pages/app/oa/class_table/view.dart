@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -28,6 +30,7 @@ class ClassTablePage extends StatelessWidget {
         ),
       ),
       actions: [
+        IconButton(onPressed: (){logic.loadClassTable();}, icon: Icon(Icons.refresh)),
         Obx(
               () => DropdownButton<int>(
             value: state.currentWeek.value,

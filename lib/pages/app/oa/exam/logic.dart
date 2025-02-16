@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 import 'package:swust_link/common/entity/oa/exam.dart';
 import 'package:swust_link/common/global.dart';
 import 'package:swust_link/spider/matrix_oa.dart';
@@ -34,6 +35,7 @@ class ExamLogic extends GetxController {
   Future<void> initExams() async {
     state.exams.value = await Global.localStorageService
         .loadFromLocal("exams", (json) => FinalExam.fromJson(json));
+    Logger().i(state.exams);
     state.isLoading.value = false;
     state.exams.value = await getExams();
   }
